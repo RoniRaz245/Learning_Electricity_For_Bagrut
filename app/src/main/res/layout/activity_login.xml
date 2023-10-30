@@ -11,7 +11,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    android:context=".LoginActivity">
+    tools:context=".LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#FFFFFF"
         android:hint="Enter your Email"
+        android:inputType="textEmailAddress"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000"
         android:autofillHints="emailAddress"/>
@@ -35,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Enter your Password"
+        android:autofillHints="password"
         android:inputType="textPassword"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 

@@ -15,10 +15,10 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailTextView, passwordTextView;
-
     private final Button TakeToSignUp = findViewById(R.id.TakeToSignUp);
-
+    private EditText emailTextView = findViewById(R.id.email);
+    private EditText passwordTextView = findViewById(R.id.password);
+    Button login = findViewById(R.id.login);
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,12 +27,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         // taking instance of FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
-
-        // initialising all views through id defined above
-        emailTextView = findViewById(R.id.email);
-        passwordTextView = findViewById(R.id.password);
-        Button login = findViewById(R.id.login);
-
         // Set on Click Listener on Sign-in button
         login.setOnClickListener(v -> loginUserAccount());
     }
@@ -47,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // validations for input email and password
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(),
+            Toast.makeText(this,
                             "Please enter email!!",
                             Toast.LENGTH_LONG)
                     .show();
@@ -55,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(),
+            Toast.makeText(this,
                             "Please enter password!!",
                             Toast.LENGTH_LONG)
                     .show();
@@ -70,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                                     @NonNull Task<AuthResult> task)
                             {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(),
+                                    Toast.makeText(LoginActivity.this,
                                                     "Login successful!!",
                                                     Toast.LENGTH_LONG)
                                             .show();
@@ -86,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                                 else {
 
                                     // sign-in failed
-                                    Toast.makeText(getApplicationContext(),
+                                    Toast.makeText(LoginActivity.this,
                                                     "Login failed!!",
                                                     Toast.LENGTH_LONG)
                                             .show();

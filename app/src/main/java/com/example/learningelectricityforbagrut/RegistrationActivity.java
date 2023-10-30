@@ -75,7 +75,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(),
+                            Toast.makeText(RegistrationActivity.this,
                                             "Registration successful!",
                                             Toast.LENGTH_LONG)
                                     .show();
@@ -90,7 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                             // Registration failed
                             Toast.makeText(
-                                            getApplicationContext(),
+                                            RegistrationActivity.this,
                                             "Registration failed!!"
                                                     + " Please try again later",
                                             Toast.LENGTH_LONG)
