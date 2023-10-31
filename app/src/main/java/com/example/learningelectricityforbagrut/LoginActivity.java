@@ -15,19 +15,21 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private final Button TakeToSignUp = findViewById(R.id.TakeToSignUp);
-    private EditText emailTextView = findViewById(R.id.email);
-    private EditText passwordTextView = findViewById(R.id.password);
-    Button login = findViewById(R.id.login);
+    private Button TakeToSignUp ;
+    private EditText emailTextView ;
+    private EditText passwordTextView ;
+    private Button login ;
     private FirebaseAuth mAuth;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // taking instance of FirebaseAuth
+        login = findViewById(R.id.login);
+        emailTextView = findViewById(R.id.email);
+        passwordTextView = findViewById(R.id.password);
+        TakeToSignUp = findViewById(R.id.TakeToSignUp);
+        TakeToSignUp.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
         mAuth = FirebaseAuth.getInstance();
-        // Set on Click Listener on Sign-in button
         login.setOnClickListener(v -> loginUserAccount());
     }
 
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // validations for input email and password
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this,
+            Toast.makeText(LoginActivity.this,
                             "Please enter email!!",
                             Toast.LENGTH_LONG)
                     .show();
@@ -49,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this,
+            Toast.makeText(LoginActivity.this,
                             "Please enter password!!",
                             Toast.LENGTH_LONG)
                     .show();
@@ -88,6 +90,8 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
+                        TakeToSignUp = findViewById(R.id.TakeToSignUp);
                         TakeToSignUp.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, MainActivity.class)));
     }
 }
