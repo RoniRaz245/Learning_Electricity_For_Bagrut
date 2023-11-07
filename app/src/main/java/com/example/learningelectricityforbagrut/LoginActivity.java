@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.Button;
@@ -27,8 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.password);
-        TakeToSignUp = findViewById(R.id.TakeToSignUp);
-        TakeToSignUp.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegistrationActivity.class)));
         mAuth = FirebaseAuth.getInstance();
         login.setOnClickListener(v -> loginUserAccount());
     }
@@ -43,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // validations for input email and password
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(LoginActivity.this,
+            Toast.makeText(login.getContext(),
                             "Please enter email!!",
                             Toast.LENGTH_LONG)
                     .show();
@@ -51,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(LoginActivity.this,
+            Toast.makeText(login.getContext(),
                             "Please enter password!!",
                             Toast.LENGTH_LONG)
                     .show();
@@ -66,23 +65,23 @@ public class LoginActivity extends AppCompatActivity {
                                     @NonNull Task<AuthResult> task)
                             {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this,
+                                    Toast.makeText(login.getContext(),
                                                     "Login successful!!",
                                                     Toast.LENGTH_LONG)
                                             .show();
 
                                     // if sign-in is successful
                                     // intent to home activity
-                                    Intent intent
-                                            = new Intent(LoginActivity.this,
-                                            MainActivity.class);
-                                    startActivity(intent);
+                                    Intent goHome
+                                            = new Intent(login.getContext(),
+                                            HomeActivity.class);
+                                    login.getContext().startActivity(goHome);
                                 }
 
                                 else {
 
                                     // sign-in failed
-                                    Toast.makeText(LoginActivity.this,
+                                    Toast.makeText(login.getContext(),
                                                     "Login failed!!",
                                                     Toast.LENGTH_LONG)
                                             .show();
@@ -92,6 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                         });
 
                         TakeToSignUp = findViewById(R.id.TakeToSignUp);
-                        TakeToSignUp.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, MainActivity.class)));
+                        TakeToSignUp.setOnClickListener(v -> login.getContext().startActivity(new Intent(TakeToSignUp.getContext(), HomeActivity.class)));
     }
 }

@@ -19,6 +19,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private EditText emailTextView, passwordTextView;
     private FirebaseAuth mAuth;
+    private Button Btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,14 +53,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
         // Validations for input email and password
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(),
+            Toast.makeText(Btn.getContext(),
                             "Please enter email!!",
                             Toast.LENGTH_LONG)
                     .show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(),
+            Toast.makeText(Btn.getContext(),
                             "Please enter password!!",
                             Toast.LENGTH_LONG)
                     .show();
@@ -75,22 +76,21 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
                         if (task.isSuccessful()) {
-                            Toast.makeText(RegistrationActivity.this,
+                            Toast.makeText(Btn.getContext(),
                                             "Registration successful!",
                                             Toast.LENGTH_LONG)
                                     .show();
 
-                            // if the user created intent to login activity
                             Intent intent
-                                    = new Intent(RegistrationActivity.this,
-                                    MainActivity.class);
-                            startActivity(intent);
+                                    = new Intent(Btn.getContext(),
+                                    HomeActivity.class);
+                            Btn.getContext().startActivity(intent);
                         }
                         else {
 
                             // Registration failed
                             Toast.makeText(
-                                            RegistrationActivity.this,
+                                            Btn.getContext(),
                                             "Registration failed!!"
                                                     + " Please try again later",
                                             Toast.LENGTH_LONG)
