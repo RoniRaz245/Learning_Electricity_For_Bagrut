@@ -28,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.password);
+        TakeToSignUp = findViewById(R.id.TakeToSignUp);
+        TakeToSignUp.setOnClickListener(v -> TakeToSignUp.getContext().startActivity(new Intent(TakeToSignUp.getContext(), RegistrationActivity.class)));
         mAuth = FirebaseAuth.getInstance();
         login.setOnClickListener(v -> loginUserAccount());
     }
@@ -89,8 +91,5 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
-                        TakeToSignUp = findViewById(R.id.TakeToSignUp);
-                        TakeToSignUp.setOnClickListener(v -> TakeToSignUp.getContext().startActivity(new Intent(TakeToSignUp.getContext(), HomeActivity.class)));
     }
 }
