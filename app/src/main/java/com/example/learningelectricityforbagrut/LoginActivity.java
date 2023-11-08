@@ -37,12 +37,10 @@ public class LoginActivity extends AppCompatActivity {
     private void loginUserAccount()
     {
 
-        // Take the value of two edit texts in Strings
         String email, password;
         email = emailTextView.getText().toString();
         password = passwordTextView.getText().toString();
 
-        // validations for input email and password
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(login.getContext(),
                             "Please enter email!!",
@@ -72,8 +70,6 @@ public class LoginActivity extends AppCompatActivity {
                                                     Toast.LENGTH_LONG)
                                             .show();
 
-                                    // if sign-in is successful
-                                    // intent to home activity
                                     Intent goHome
                                             = new Intent(login.getContext(),
                                             HomeActivity.class);
@@ -82,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                 else {
 
-                                    // sign-in failed
                                     Toast.makeText(login.getContext(),
                                                     "Login failed!!",
                                                     Toast.LENGTH_LONG)

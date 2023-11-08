@@ -23,17 +23,16 @@
         android:layout_below="@id/timePicker"
         android:layout_centerInParent="true"
         android:hint="בחר טקסט שיופיע בהתראה"
+        android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <Button
+        android:id="@+id/makeNotif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textForNotif"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="77dp"
         android:layout_marginTop="46dp"
-        android:layout_marginEnd="76dp"
+        android:layout_centerInParent="true"
         android:text="צור התראה"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
@@ -45,6 +44,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="319dp"
         android:layout_marginBottom="11dp"
+        android:contentDescription= "Home Button"
         app:srcCompat="@mipmap/home_widget_purple_round" />
 
 </RelativeLayout>

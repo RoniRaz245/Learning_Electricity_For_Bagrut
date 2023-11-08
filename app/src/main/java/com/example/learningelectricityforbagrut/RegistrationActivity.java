@@ -26,15 +26,10 @@ public class RegistrationActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
-        // taking FirebaseAuth instance
         mAuth = FirebaseAuth.getInstance();
-
-        // initialising all views through id defined above
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.passwd);
         Button Btn = findViewById(R.id.btnregister);
-        // Set on Click Listener on Registration button
         Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -51,7 +46,6 @@ public class RegistrationActivity extends AppCompatActivity {
         email = emailTextView.getText().toString();
         password = passwordTextView.getText().toString();
 
-        // Validations for input email and password
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(Btn.getContext(),
                             "Please enter email!!",
@@ -67,7 +61,6 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
 
-        // create new user or register new user
         mAuth
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -88,7 +81,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                         else {
 
-                            // Registration failed
                             Toast.makeText(
                                             Btn.getContext(),
                                             "Registration failed!!"
