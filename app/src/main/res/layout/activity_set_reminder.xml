@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SetReminderActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="1dp"
+        android:timePickerMode="clock" />
+
+    <EditText
+        android:id="@+id/textForNotif"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timePicker"
+        android:layout_centerInParent="true"
+        android:hint="בחר טקסט שיופיע בהתראה"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textForNotif"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="76dp"
+        android:text="צור התראה"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <ImageButton
+        android:id="@+id/goHome"
+        android:layout_width="83dp"
+        android:layout_height="83dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="319dp"
+        android:layout_marginBottom="11dp"
+        app:srcCompat="@mipmap/home_widget_purple_round" />
+
+</RelativeLayout>

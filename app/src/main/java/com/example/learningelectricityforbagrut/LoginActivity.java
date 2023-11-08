@@ -91,6 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                         });
 
                         TakeToSignUp = findViewById(R.id.TakeToSignUp);
-                        TakeToSignUp.setOnClickListener(v -> login.getContext().startActivity(new Intent(TakeToSignUp.getContext(), HomeActivity.class)));
+                        TakeToSignUp.setOnClickListener(v -> TakeToSignUp.getContext().startActivity(new Intent(TakeToSignUp.getContext(), HomeActivity.class)));
     }
 }
