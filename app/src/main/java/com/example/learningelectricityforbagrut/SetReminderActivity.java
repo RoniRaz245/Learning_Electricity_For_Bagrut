@@ -52,7 +52,7 @@ public class SetReminderActivity extends AppCompatActivity {
                 createNotificationChannel();
                 int currentid=id;
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                Intent intent = new Intent();
+                Intent intent = new Intent(getApplicationContext(), makeNotification.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 id++;
