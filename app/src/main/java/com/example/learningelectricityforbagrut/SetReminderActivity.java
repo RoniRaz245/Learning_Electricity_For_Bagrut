@@ -5,6 +5,7 @@ import static android.view.View.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -43,6 +44,7 @@ public class SetReminderActivity extends AppCompatActivity {
         homeButton.setOnClickListener(v -> homeButton.getContext().startActivity(new Intent(homeButton.getContext(), HomeActivity.class)));
         makeNotif.setOnClickListener(v -> createNotif());
     }
+    @SuppressLint("ScheduleExactAlarm")
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void createNotif(){
         String CHANNEL_ID="MYCHANNEL";
@@ -56,12 +58,12 @@ public class SetReminderActivity extends AppCompatActivity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(getApplicationContext(), Notification.class);
-        intent.putExtra("titleExtra", "Dynamic Title");
-        intent.putExtra("textExtra", "Dynamic Text Body");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
+        calendar.set(Calendar.MINUTE, timePicker.getMinute());
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        Toast.makeText(getApplicationContext(), "Scheduled ", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "התראה נקבעה", Toast.LENGTH_LONG).show();
     }
 
 }
