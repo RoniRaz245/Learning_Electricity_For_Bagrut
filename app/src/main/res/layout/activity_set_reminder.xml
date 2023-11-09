@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="1dp"
-        android:timePickerMode="clock" />
+        android:timePickerMode="spinner"/>
 
     <EditText
         android:id="@+id/textForNotif"
