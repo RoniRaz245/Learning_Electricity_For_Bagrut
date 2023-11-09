@@ -49,14 +49,19 @@ public class SetReminderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
+                calendar.set(calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH),
+                        timePicker.getHour(), timePicker.getMinute());
                 createNotificationChannel();
                 int currentid=id;
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                Intent intent = new Intent(getApplicationContext(), makeNotification.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                Intent intent = new Intent(makeNotif.getContext(), makeNotification.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(makeNotif.getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                
                 id++;
-                Toast.makeText(getApplicationContext(), "Scheduled ", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "ההתראה נקבעה", Toast.LENGTH_LONG).show();
             }
         });
     }
