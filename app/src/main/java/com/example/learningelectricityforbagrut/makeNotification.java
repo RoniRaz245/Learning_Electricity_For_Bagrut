@@ -11,6 +11,7 @@ import androidx.core.app.NotificationManagerCompat;
 public class makeNotification extends SetReminderActivity {
     public void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
+            Toast.makeText(getApplicationContext(), "notif being made", Toast.LENGTH_LONG).show();
             Notification notif = new NotificationCompat.Builder(this, channelid)
                 .setSmallIcon(R.drawable.electricity_icon)
                 .setContentTitle(getResources().getString(R.string.app_name_hebrew))

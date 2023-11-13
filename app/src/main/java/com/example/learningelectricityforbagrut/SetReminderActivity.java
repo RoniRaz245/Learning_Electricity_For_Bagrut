@@ -58,8 +58,9 @@ public class SetReminderActivity extends AppCompatActivity {
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 Intent intent = new Intent(makeNotif.getContext(), makeNotification.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(makeNotif.getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-                
+                long time=calendar.getTimeInMillis();
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+
                 id++;
                 Toast.makeText(getApplicationContext(), "ההתראה נקבעה", Toast.LENGTH_LONG).show();
             }
@@ -69,11 +70,13 @@ public class SetReminderActivity extends AppCompatActivity {
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= 26) {
             channelid = "channelID";
-            String name = "Alerts";
+            CharSequence name = "Alerts";
+            String description= "channel for studying reminders";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(channelid, name, importance);
+            channel.setDescription(description);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            NotificationManagerCompat.from(this).createNotificationChannel(channel);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }
