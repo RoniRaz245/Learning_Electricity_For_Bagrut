@@ -15,7 +15,6 @@ public class makeNotification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context.getApplicationContext(), "notif being made", Toast.LENGTH_LONG).show();
         Notification notif = new NotificationCompat.Builder(context.getApplicationContext(), channelid)
                 .setSmallIcon(R.drawable.electricity_icon)
                 .setContentTitle(context.getString(R.string.app_name_hebrew))
@@ -23,7 +22,7 @@ public class makeNotification extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setChannelId(channelid)
                 .build();
-        NotificationManager manager = (NotificationManager) context.getSystemService(NotificationManager.class);
+        NotificationManager manager = context.getSystemService(NotificationManager.class);
         manager.notify(currentid, notif);
     }
 }

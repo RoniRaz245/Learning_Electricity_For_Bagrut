@@ -53,7 +53,9 @@ public class SetReminderActivity extends AppCompatActivity {
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH),
                         timePicker.getHour(), timePicker.getMinute());
+
                 createNotificationChannel();
+
                 int currentid=id;
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 Intent intent = new Intent(makeNotif.getContext(), makeNotification.class);
@@ -62,6 +64,7 @@ public class SetReminderActivity extends AppCompatActivity {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
 
                 id++;
+                //letting user know scheduling was successful
                 Toast.makeText(getApplicationContext(), "ההתראה נקבעה", Toast.LENGTH_LONG).show();
             }
         });
