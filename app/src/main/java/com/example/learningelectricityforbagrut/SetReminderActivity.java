@@ -26,7 +26,7 @@ import java.util.Calendar;
 
 public class SetReminderActivity extends AppCompatActivity {
     TimePicker timePicker;
-    EditText textForNotif;
+    static EditText textForNotif;
     Button makeNotif;
     ImageButton homeButton;
     int id=0;
@@ -59,7 +59,7 @@ public class SetReminderActivity extends AppCompatActivity {
                 Intent intent = new Intent(makeNotif.getContext(), makeNotification.class);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(makeNotif.getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
                 long time=calendar.getTimeInMillis();
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
 
                 id++;
                 Toast.makeText(getApplicationContext(), "ההתראה נקבעה", Toast.LENGTH_LONG).show();

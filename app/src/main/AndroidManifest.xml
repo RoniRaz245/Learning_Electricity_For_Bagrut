@@ -23,6 +23,12 @@
         android:theme="@style/Theme.LearningElectricityForBagrut"
         tools:targetApi="33"
         >
+        <receiver android:name=".makeNotification"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".SetReminderActivity"
             android:exported="true" />
