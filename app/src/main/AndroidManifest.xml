@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.learningelectricityforbagrut"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.learningelectricityforbagrut">
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -21,14 +20,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LearningElectricityForBagrut"
-        tools:targetApi="33"
-        >
-        <receiver android:name=".makeNotification"
+        tools:targetApi="33">
+        <activity
+            android:name=".QuestionActivity"
+            android:exported="false" />
+
+        <receiver
+            android:name=".makeNotification"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
         <activity
             android:name=".SetReminderActivity"
             android:exported="true" />
