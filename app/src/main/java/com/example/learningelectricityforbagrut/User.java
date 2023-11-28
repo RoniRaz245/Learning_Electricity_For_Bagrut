@@ -3,15 +3,13 @@ package com.example.learningelectricityforbagrut;
 public class User {
     private difficultyTypeLevel calcLevel,  memoryLevel;
     private subjectLevel electroStatic, magField, electroMagInsp;
-    private String UID;
 
-    public User(String _UID){
+    public User(){
         this.calcLevel= new difficultyTypeLevel();
         this.memoryLevel= new difficultyTypeLevel();
         this.electroStatic= new subjectLevel();
         this.magField= new subjectLevel();
         this.electroMagInsp= new subjectLevel();
-        this.UID=_UID;
     }
 
     public difficultyTypeLevel getCalcLevel() {
@@ -34,10 +32,6 @@ public class User {
         return magField;
     }
 
-    public String getUID() {
-        return UID;
-    }
-
     public void setCalcLevel(difficultyTypeLevel _calcLevel) {
         this.calcLevel = _calcLevel;
     }
@@ -58,7 +52,4 @@ public class User {
         this.memoryLevel = _memoryLevel;
     }
 
-    public void setUID(String _UID) {
-        this.UID = _UID;
-    }
 }
