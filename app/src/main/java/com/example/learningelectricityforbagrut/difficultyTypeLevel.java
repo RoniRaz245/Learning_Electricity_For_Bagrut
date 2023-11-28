@@ -50,13 +50,31 @@ public class difficultyTypeLevel {
         return overall;
     }
     public void updateOverall(){
-        double rank1Percentage= (double)successRank1/amountRank1;
-        double rank2Percentage= (double)successRank2/amountRank2;
-        double rank3Percentage= (double)successRank3/amountRank3;
-        double rank4Percentage= (double)successRank4/amountRank4;
-        double rank5Percentage= (double)successRank5/amountRank5;
+        //initializing each rank percentage to 0 in case user hasn't answered questions of that specific rank
+        double rank1Percentage=0; double rank2Percentage=0; double rank3Percentage=0; double rank4Percentage=0; double rank5Percentage=0;
+        int sum=0; //will hold sum to divide by for normalisation
+        if(amountRank1!=0) {
+            rank1Percentage= (double)successRank1/amountRank1;
+            sum+=1;
+        }
+        if(amountRank2!=0) {
+            rank2Percentage= (double)successRank2/amountRank2;
+            sum+=2;
+        }
+        if(amountRank3!=0) {
+            rank3Percentage= (double)successRank3/amountRank3;
+            sum+=3;
+        }
+        if(amountRank4!=0) {
+            rank4Percentage= (double)successRank4/amountRank4;
+            sum+=4;
+        }
+        if(amountRank5!=0) {
+            rank5Percentage= (double)successRank5/amountRank5;
+            sum+=5;
+        }
         double weightedSum= 1*rank1Percentage+2*rank2Percentage+3*rank3Percentage+4*rank4Percentage+5*rank5Percentage;
-        double normalisation=5/(1+2+3+4+5); //I want to end up with a ranking between 0 and 5
+        double normalisation=5.0/sum; //I want to end up with a ranking between 0 and 5
         overall= weightedSum*normalisation;
     }
 

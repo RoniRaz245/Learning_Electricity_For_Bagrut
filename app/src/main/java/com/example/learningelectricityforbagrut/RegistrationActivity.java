@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.EditText;
@@ -71,6 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     {
                         if (task.isSuccessful()) {
                             User user = new User();
+
                             FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
                             Toast.makeText(Btn.getContext(),
                                             "Registration successful!",

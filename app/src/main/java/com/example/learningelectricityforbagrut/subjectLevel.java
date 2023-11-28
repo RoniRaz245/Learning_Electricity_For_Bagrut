@@ -1,13 +1,13 @@
 package com.example.learningelectricityforbagrut;
 
 public class subjectLevel {
-    int amountAnswered;
-    int amountAnsweredCorrectly;
-    double percentage;
+    private int amountAnswered;
+    private int amountAnsweredCorrectly;
+    private double percentage;
     public subjectLevel(){
         this.amountAnswered=0;
         this.amountAnsweredCorrectly=0;
-        this.percentage=0;
+        this.percentage=0.0;
     }
 
     public void addAmountAnswered(int add) {
@@ -20,8 +20,13 @@ public class subjectLevel {
         this.amountAnsweredCorrectly += add;
     }
     public void updatePercentage(){
-        double modifier= 100.0/this.amountAnswered;
-        percentage= amountAnsweredCorrectly*modifier;
+        if (amountAnswered != 0) {
+            double modifier = 100.0 / this.amountAnswered;
+            percentage = amountAnsweredCorrectly * modifier;
+        }
+        else{
+            percentage=0.0;
+        }
     }
 
     public double getPercentage() {
