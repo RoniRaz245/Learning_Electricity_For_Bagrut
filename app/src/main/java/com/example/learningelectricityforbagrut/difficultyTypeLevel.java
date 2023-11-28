@@ -74,8 +74,13 @@ public class difficultyTypeLevel {
             sum+=5;
         }
         double weightedSum= 1*rank1Percentage+2*rank2Percentage+3*rank3Percentage+4*rank4Percentage+5*rank5Percentage;
-        double normalisation=5.0/sum; //I want to end up with a ranking between 0 and 5
-        overall= weightedSum*normalisation;
+        if (sum!=0) {
+            double normalisation = 5.0 / sum; //I want to end up with a ranking between 0 and 5
+            overall = weightedSum * normalisation;
+        }
+        else {
+            overall = 0;
+        }
     }
 
     public int getAmountRank1() {
