@@ -22,7 +22,7 @@ public class subjectLevel {
     public void updatePercentage(){
         if (amountAnswered != 0) {
             double modifier = 100.0 / this.amountAnswered;
-            percentage = amountAnsweredCorrectly * modifier;
+            percentage = this.amountAnsweredCorrectly * modifier;
         }
         else{
             percentage=0.0;
