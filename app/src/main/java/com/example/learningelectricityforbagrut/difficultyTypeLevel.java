@@ -73,8 +73,8 @@ public class difficultyTypeLevel {
             rank5Percentage= (double)successRank5/amountRank5;
             sum+=5;
         }
-        double weightedSum= 1*rank1Percentage+2*rank2Percentage+3*rank3Percentage+4*rank4Percentage+5*rank5Percentage;
         if (sum!=0) {
+            double weightedSum= 1*rank1Percentage+2*rank2Percentage+3*rank3Percentage+4*rank4Percentage+5*rank5Percentage;
             double normalisation = 5.0 / sum; //I want to end up with a ranking between 0 and 5
             overall = weightedSum * normalisation;
         }
