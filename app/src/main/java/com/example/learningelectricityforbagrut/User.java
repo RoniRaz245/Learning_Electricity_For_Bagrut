@@ -2,9 +2,15 @@ package com.example.learningelectricityforbagrut;
 
 public class User {
     private int level;
+    private boolean isTeacher;
 
     public User(){
         this.level=3;
+        this.isTeacher=false;
+    }
+    public User(boolean _isTeacher){
+        this.level=3;
+        this.isTeacher=_isTeacher;
     }
 
     public int getLevel() {

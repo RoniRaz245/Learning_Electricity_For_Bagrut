@@ -14,9 +14,10 @@ public class Question {
 
 
 
-    public Question(String _questionBody, String _image, String[] _answers, int _correctAnswer)
+    public Question(String _questionBody, String _image, String[] _answers, int _correctAnswer, int _questionLevel)
     {
         this.questionBody=_questionBody;
+        this.questionLevel=_questionLevel;
         this.image=_image;
         this.answers=_answers;
         this.correctAnswer=_correctAnswer;
