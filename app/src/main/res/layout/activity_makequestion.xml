@@ -8,26 +8,73 @@
     <EditText
         android:id="@+id/questionBody"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="165dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="521dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="91dp"
+        android:layout_marginEnd="32dp"
         android:hint="question body"
-        android:text="הכניסו את גוף השאלה" />
+        android:text="הכניסו את גוף השאלה"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
     <EditText
-        android:id=""
+        android:id="@+id/firstAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/secondAnswer"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="174dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="490dp"
+        android:hint="first option for an answer"
+        android:text="תשובה 1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-        />
+    <EditText
+        android:id="@+id/secondAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/thirdAnswer"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="287dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="390dp"
+        android:hint="second option for an answer"
+        android:text="תשובה 2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
+    <EditText
+        android:id="@+id/thirdAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_above="@+id/fourthAnswer"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="282dp"
+        android:hint="third option for an answer"
+        android:text="תשובה 3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <EditText
+        android:id="@+id/fourthAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="169dp"
+        android:hint="fourth option for an answer"
+        android:text="תשובה 4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 </RelativeLayout>
