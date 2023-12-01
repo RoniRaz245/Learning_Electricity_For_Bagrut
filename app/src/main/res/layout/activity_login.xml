@@ -52,6 +52,6 @@
         android:id="@+id/TakeToSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="don't have an account yet?"
+        android:text="I don't have an account yet"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 </LinearLayout>

@@ -77,4 +77,5 @@
         android:hint="fourth option for an answer"
         android:text="תשובה 4"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
 </RelativeLayout>
