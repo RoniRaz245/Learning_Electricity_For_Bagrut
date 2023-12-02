@@ -24,4 +24,8 @@ public class User {
         //if user got low grade take him down levels, if got a high grade take up levels
         //TODO: decide on grade ranges later
     }
+
+    public boolean isTeacher() {
+        return isTeacher;
+    }
 }
