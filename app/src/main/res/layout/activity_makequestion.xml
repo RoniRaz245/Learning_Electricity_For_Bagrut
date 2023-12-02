@@ -7,75 +7,147 @@
 
     <EditText
         android:id="@+id/questionBody"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_width="305dp"
+        android:layout_height="59dp"
+        android:layout_above="@+id/firstAnswer"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="91dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
         android:hint="question body"
         android:text="הכניסו את גוף השאלה"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <EditText
         android:id="@+id/firstAnswer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
         android:layout_above="@+id/secondAnswer"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="174dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="490dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
         android:hint="first option for an answer"
         android:text="תשובה 1"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <EditText
         android:id="@+id/secondAnswer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
         android:layout_above="@+id/thirdAnswer"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="287dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="390dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
         android:hint="second option for an answer"
         android:text="תשובה 2"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <EditText
         android:id="@+id/thirdAnswer"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
         android:layout_above="@+id/fourthAnswer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="282dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
         android:hint="third option for an answer"
         android:text="תשובה 3"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
+
     <EditText
         android:id="@+id/fourthAnswer"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_above="@+id/correctAnswer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="169dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="20dp"
         android:hint="fourth option for an answer"
         android:text="תשובה 4"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
+    <RadioGroup
+        android:id="@+id/correctAnswer"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="150dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/firstCorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="תשובה 1 נכונה" />
+        <RadioButton
+            android:id="@+id/secondCorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="תשובה 2 נכונה" />
+
+        <RadioButton
+            android:id="@+id/thirdCorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="תשובה 3 נכונה" />
+
+        <RadioButton
+            android:id="@+id/fourthCorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="תשובה 4 נכונה" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rank"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="101dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rank1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="השאלה ברמה 1" />
+
+        <RadioButton
+            android:id="@+id/rank2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="השאלה ברמה 2" />
+
+        <RadioButton
+            android:id="@+id/rank3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="השאלה ברמה 3" />
+
+        <RadioButton
+            android:id="@+id/rank4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="השאלה ברמה 4" />
+
+        <RadioButton
+            android:id="@+id/rank5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="השאלה ברמה 5" />
+    </RadioGroup>
 </RelativeLayout>
