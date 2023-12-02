@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
@@ -14,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="20dp"
         android:hint="question body"
@@ -28,8 +29,8 @@
         android:layout_above="@+id/secondAnswer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="63dp"
         android:layout_marginBottom="20dp"
         android:hint="first option for an answer"
         android:text="תשובה 1"
@@ -42,12 +43,13 @@
         android:layout_above="@+id/thirdAnswer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginEnd="62dp"
         android:layout_marginBottom="20dp"
         android:hint="second option for an answer"
         android:text="תשובה 2"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
 
     <EditText
         android:id="@+id/thirdAnswer"
@@ -56,98 +58,93 @@
         android:layout_above="@+id/fourthAnswer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="59dp"
         android:layout_marginBottom="20dp"
         android:hint="third option for an answer"
         android:text="תשובה 3"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-
     <EditText
         android:id="@+id/fourthAnswer"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_above="@+id/correctAnswer"
+        android:layout_above="@+id/levelTitle"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginEnd="63dp"
         android:layout_marginBottom="20dp"
         android:hint="fourth option for an answer"
         android:text="תשובה 4"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-    <RadioGroup
-        android:id="@+id/correctAnswer"
-        android:layout_width="100dp"
+    <TextView
+        android:id="@+id/levelTitle"
+        android:layout_width="146dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="150dp"
-        android:orientation="vertical">
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="300dp"
+        android:layout_above="@+id/levelPicker"
+        android:text="בחר רמת קושי"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+    <NumberPicker
+        android:id="@+id/levelPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="100dp" />
 
-        <RadioButton
-            android:id="@+id/firstCorrect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="תשובה 1 נכונה" />
-        <RadioButton
-            android:id="@+id/secondCorrect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="תשובה 2 נכונה" />
+    <TextView
+        android:id="@+id/correctAnswerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/levelPicker"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="300dp"
+        android:text="בחר מספר תשובה נכונה"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-        <RadioButton
-            android:id="@+id/thirdCorrect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="תשובה 3 נכונה" />
-
-        <RadioButton
-            android:id="@+id/fourthCorrect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="תשובה 4 נכונה" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/rank"
-        android:layout_width="100dp"
+    <NumberPicker
+        android:id="@+id/correctAnswerPicker"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="101dp"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="100dp" />
 
-        <RadioButton
-            android:id="@+id/rank1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="השאלה ברמה 1" />
+    <Button
+        android:id="@+id/uploadQuestion"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/fourthAnswer"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="120dp"
+        android:text="העלה שאלה" />
 
-        <RadioButton
-            android:id="@+id/rank2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="השאלה ברמה 2" />
+    <ImageButton
+        android:id="@+id/goHome"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="4dp"
+        android:contentDescription="Home Button"
+        app:srcCompat="@mipmap/home_widget_purple_round" />
 
-        <RadioButton
-            android:id="@+id/rank3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="השאלה ברמה 3" />
-
-        <RadioButton
-            android:id="@+id/rank4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="השאלה ברמה 4" />
-
-        <RadioButton
-            android:id="@+id/rank5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="השאלה ברמה 5" />
-    </RadioGroup>
 </RelativeLayout>
