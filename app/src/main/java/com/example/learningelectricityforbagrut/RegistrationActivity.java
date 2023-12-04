@@ -21,7 +21,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private EditText emailTextView, passwordTextView;
     private FirebaseAuth mAuth;
-    private Button Btn;
+    private Button Btn, isTeacherCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,6 +31,7 @@ public class RegistrationActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.passwd);
+        isTeacherCheck=findViewById(R.id.isTeacherCheck);
         Btn = findViewById(R.id.btnregister);
         Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +73,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     {
                         if (task.isSuccessful()) {
                             User user = new User();
+                            user.setIsTeacher(isTeacherCheck.isActivated());
 
                             FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
                             Toast.makeText(Btn.getContext(),

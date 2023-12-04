@@ -20,6 +20,9 @@ public class User {
     public void setLevel(int level) {
         this.level = level;
     }
+    public void setIsTeacher(boolean _isTeacher){
+        this.isTeacher=_isTeacher;
+    }
     public void updateLevel(double grade){
         //if user got low grade take him down levels, if got a high grade take up levels
         //TODO: decide on grade ranges later

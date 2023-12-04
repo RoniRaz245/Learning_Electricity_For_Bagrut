@@ -11,10 +11,10 @@
     tools:context=".RegistrationActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="384dp"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:text="הרשמה"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
     <EditText
         android:id="@+id/email"
@@ -33,10 +33,17 @@
         android:inputType="textPassword"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
+    <RadioButton
+        android:id="@+id/isTeacherCheck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="אני מורה"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
     <Button
         android:id="@+id/btnregister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="קביעת פרטים וסיום הרשמה"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 </LinearLayout>
