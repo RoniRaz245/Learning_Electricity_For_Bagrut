@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -33,7 +34,9 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User currentUser = dataSnapshot.getValue(User.class);
-                        boolean isTeacher=currentUser.isTeacher();
+                        assert currentUser != null;
+                        boolean isTeacher=currentUser.getIsTeacher();
+                        Log.d("Check", "isTeacher: " +isTeacher);
                         if(isTeacher==true) {
                             uploadQuestion.setOnClickListener(v -> uploadQuestion.getContext().startActivity(new Intent(uploadQuestion.getContext(), MakeQuestionActivity.class)));
                         }

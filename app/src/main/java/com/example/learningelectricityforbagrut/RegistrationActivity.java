@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.Button;
@@ -21,7 +22,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private EditText emailTextView, passwordTextView;
     private FirebaseAuth mAuth;
-    private Button Btn, isTeacherCheck;
+    private Button Btn;
+    private RadioButton isTeacherCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,9 +74,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task)
                     {
                         if (task.isSuccessful()) {
-                            User user = new User();
-                            user.setIsTeacher(isTeacherCheck.isActivated());
-
+                            //make a user with given+default parameters and upload to firebase
+                            User user = new User(isTeacherCheck.isChecked());
                             FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
                             Toast.makeText(Btn.getContext(),
                                             "Registration successful!",

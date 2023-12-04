@@ -23,6 +23,9 @@ public class User {
     public void setIsTeacher(boolean _isTeacher){
         this.isTeacher=_isTeacher;
     }
+    public boolean getIsTeacher(){
+        return isTeacher;
+    }
     public void updateLevel(double grade){
         //if user got low grade take him down levels, if got a high grade take up levels
         //TODO: decide on grade ranges later
