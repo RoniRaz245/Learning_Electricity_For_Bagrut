@@ -51,6 +51,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
         int correctAnswer=correctAnswerPicker.getValue();
         int answerIndex=correctAnswer-1;
 
-        
+
     }
 }
