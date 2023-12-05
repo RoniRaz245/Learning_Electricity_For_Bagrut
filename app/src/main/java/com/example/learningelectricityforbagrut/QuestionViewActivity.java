@@ -23,8 +23,7 @@ public class QuestionViewActivity extends AppCompatActivity implements TextToSpe
         setContentView(R.layout.activity_question_view);
         textView=findViewById(R.id.textView);
         ttsButton=findViewById(R.id.ttsButton);
-
-        TextToSpeech tts= new TextToSpeech(this.getApplicationContext(),this);
+        tts= new TextToSpeech(this,this);;
 
         ttsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +42,11 @@ public class QuestionViewActivity extends AppCompatActivity implements TextToSpe
         if (status == TextToSpeech.SUCCESS) {
             Locale Hebrew= new Locale("he");
             int result= tts.setLanguage(Hebrew);
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+
+            if (result == TextToSpeech.LANG_MISSING_DATA ) {
+                Log.e("error", "download info");
+            }
+            else if(result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 //if tts is initialized but hebrew isn't supported
                 Log.e("error", "This Language is not supported");
             }

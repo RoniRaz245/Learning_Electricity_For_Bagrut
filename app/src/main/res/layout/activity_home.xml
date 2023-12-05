@@ -49,4 +49,16 @@
         android:text="העלה שאלה(למורים בלבד!)"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
+    <Button
+        android:id="@+id/startQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/makeQuestion"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="309dp"
+        android:text="התחל בוחן!" />
+
 </RelativeLayout>

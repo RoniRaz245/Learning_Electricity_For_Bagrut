@@ -23,7 +23,7 @@
         tools:targetApi="33">
         <activity
             android:name=".QuestionViewActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MakeQuestionActivity"
             android:exported="false" />
@@ -54,11 +54,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <queries>
-            <intent>
-                <action android:name="android.intent.action.TTS_SERVICE" />
-            </intent>
-        </queries>
     </application>
 
 </manifest>
