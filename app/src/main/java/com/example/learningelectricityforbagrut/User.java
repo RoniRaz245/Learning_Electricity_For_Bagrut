@@ -2,15 +2,15 @@ package com.example.learningelectricityforbagrut;
 
 public class User {
     private int level;
-    private boolean isTeacher;
+    private boolean teacher;
 
     public User(){
         this.level=3;
-        this.isTeacher=false;
+        this.teacher=false;
     }
     public User(boolean _isTeacher){
         this.level=3;
-        this.isTeacher=_isTeacher;
+        this.teacher=_isTeacher;
     }
 
     public int getLevel() {
@@ -20,18 +20,14 @@ public class User {
     public void setLevel(int level) {
         this.level = level;
     }
-    public void setIsTeacher(boolean _isTeacher){
-        this.isTeacher=_isTeacher;
+    public void setTeacher(boolean _isTeacher){
+        this.teacher=_isTeacher;
     }
-    public boolean getIsTeacher(){
-        return isTeacher;
+    public boolean getTeacher(){
+        return teacher;
     }
     public void updateLevel(double grade){
         //if user got low grade take him down levels, if got a high grade take up levels
         //TODO: decide on grade ranges later
-    }
-
-    public boolean isTeacher() {
-        return isTeacher;
     }
 }

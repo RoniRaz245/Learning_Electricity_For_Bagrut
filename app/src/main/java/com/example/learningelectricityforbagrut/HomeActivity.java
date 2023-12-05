@@ -29,14 +29,14 @@ public class HomeActivity extends AppCompatActivity {
         addReminder.setOnClickListener(v-> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
+
         database.child("users").child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User currentUser = dataSnapshot.getValue(User.class);
                         assert currentUser != null;
-                        boolean isTeacher=currentUser.getIsTeacher();
-                        Log.d("Check", "isTeacher: " +   isTeacher);
+                        boolean isTeacher=currentUser.getTeacher();
                         if(isTeacher==true) {
                             uploadQuestion.setOnClickListener(v -> uploadQuestion.getContext().startActivity(new Intent(uploadQuestion.getContext(), MakeQuestionActivity.class)));
                         }
