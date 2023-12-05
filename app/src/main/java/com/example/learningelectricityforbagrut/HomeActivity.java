@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
                         User currentUser = dataSnapshot.getValue(User.class);
                         assert currentUser != null;
                         boolean isTeacher=currentUser.getIsTeacher();
-                        Log.d("Check", "isTeacher: " +isTeacher);
+                        Log.d("Check", "isTeacher: " +   isTeacher);
                         if(isTeacher==true) {
                             uploadQuestion.setOnClickListener(v -> uploadQuestion.getContext().startActivity(new Intent(uploadQuestion.getContext(), MakeQuestionActivity.class)));
                         }
