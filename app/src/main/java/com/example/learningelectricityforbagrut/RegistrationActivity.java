@@ -51,16 +51,17 @@ public class RegistrationActivity extends AppCompatActivity {
         email = emailTextView.getText().toString();
         password = passwordTextView.getText().toString();
 
+        //make sure user put in parameters
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(Btn.getContext(),
-                            "Please enter email!!",
+                            "מייל בבקשה!",
                             Toast.LENGTH_LONG)
                     .show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(Btn.getContext(),
-                            "Please enter password!!",
+                            "סיסמה בבקשה!",
                             Toast.LENGTH_LONG)
                     .show();
             return;
@@ -78,7 +79,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             User user = new User(isTeacherCheck.isChecked());
                             FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
                             Toast.makeText(Btn.getContext(),
-                                            "Registration successful!",
+                                            "נרשמת בהצלחה!",
                                             Toast.LENGTH_LONG)
                                     .show();
 
@@ -88,11 +89,11 @@ public class RegistrationActivity extends AppCompatActivity {
                             Btn.getContext().startActivity(intent);
                         }
                         else {
+                            //generic error message
 
                             Toast.makeText(
                                             Btn.getContext(),
-                                            "Registration failed!!"
-                                                    + " Please try again later",
+                                            "ההרשמה נכשלה. אנא נסה שוב מאוחר יותר",
                                             Toast.LENGTH_LONG)
                                     .show();
 
