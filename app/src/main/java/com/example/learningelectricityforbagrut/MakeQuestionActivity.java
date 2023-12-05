@@ -48,5 +48,9 @@ public class MakeQuestionActivity extends AppCompatActivity {
         String option3= option3TextView.getText().toString();
         String option4= option4TextView.getText().toString();
         int level=levelPicker.getValue();
+        int correctAnswer=correctAnswerPicker.getValue();
+        int answerIndex=correctAnswer-1;
+
+        
     }
 }
