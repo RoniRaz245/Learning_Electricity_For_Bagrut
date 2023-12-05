@@ -23,7 +23,7 @@
         tools:targetApi="33">
         <activity
             android:name=".QuestionViewActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MakeQuestionActivity"
             android:exported="false" />
