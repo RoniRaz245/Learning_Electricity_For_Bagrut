@@ -18,7 +18,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
     private EditText bodyTextView, option1TextView, option2TextView, option3TextView, option4TextView;
     private ImageButton goHome;
     private NumberPicker levelPicker, correctAnswerPicker;
-    private Button upload;
+    private Button upload, uploadImage;
     DatabaseReference mDatabase;
 
     @Override
@@ -35,13 +35,15 @@ public class MakeQuestionActivity extends AppCompatActivity {
         levelPicker=findViewById(R.id.levelPicker);
         correctAnswerPicker=findViewById(R.id.correctAnswerPicker);
         upload=findViewById(R.id.uploadQuestion);
+        uploadImage=findViewById(R.id.uploadImage);
+
         mDatabase= FirebaseDatabase.getInstance().getReference();
 
-        upload.setOnClickListener(v -> uploadGivenQuestion());
-
+        upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
         goHome.setOnClickListener(v -> this.getApplicationContext().startActivity(new Intent(this.getApplicationContext(), HomeActivity.class)));
     }
     private void uploadGivenQuestion(){
+        //TODO: add cases for empty fields
         String body=bodyTextView.getText().toString();
         String option1= option1TextView.getText().toString();
         String option2= option2TextView.getText().toString();
