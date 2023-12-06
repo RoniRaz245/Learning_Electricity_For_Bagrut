@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,7 +44,10 @@ public class MakeQuestionActivity extends AppCompatActivity {
         goHome.setOnClickListener(v -> this.getApplicationContext().startActivity(new Intent(this.getApplicationContext(), HomeActivity.class)));
     }
     private void uploadGivenQuestion(){
-        //TODO: add cases for empty fields
+        if(levelPicker.getValue()==0) {
+            Toast.makeText(this.getApplicationContext(),"בבקשה תכניס רמה!", Toast.LENGTH_LONG);
+        }//TODO: add other fail cases
+
         String body=bodyTextView.getText().toString();
         String option1= option1TextView.getText().toString();
         String option2= option2TextView.getText().toString();
