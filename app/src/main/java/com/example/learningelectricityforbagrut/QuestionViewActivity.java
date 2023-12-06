@@ -12,17 +12,18 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-public class QuestionViewActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+public class QuestionViewActivity extends AppCompatActivity /*implements TextToSpeech.OnInitListener*/ {
     protected TextToSpeech tts;
     protected TextView textView; //temporary text to check TTS
     protected Button ttsButton;
     protected String text;
+    //TTS not in use till further notice
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_view);
         textView=findViewById(R.id.textView);
-        ttsButton=findViewById(R.id.ttsButton);
+        /* ttsButton=findViewById(R.id.ttsButton);
         tts= new TextToSpeech(this,this);;
 
         ttsButton.setOnClickListener(new View.OnClickListener() {
@@ -30,9 +31,9 @@ public class QuestionViewActivity extends AppCompatActivity implements TextToSpe
             public void onClick(View v) {
                 textToSpeak(); //calls function that reads out text
             }
-        });
+        });*/
     }
-    private void textToSpeak(){
+    /* private void textToSpeak(){
         text=textView.getText().toString();
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
     }
@@ -54,5 +55,5 @@ public class QuestionViewActivity extends AppCompatActivity implements TextToSpe
         else {
             Log.e("error", "Failed to Initialize");
         }
-    }
+    }*/
 }
