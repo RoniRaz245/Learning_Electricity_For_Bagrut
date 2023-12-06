@@ -90,17 +90,18 @@
         android:layout_above="@+id/levelPicker"
         android:text="בחר רמת קושי"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
     <NumberPicker
         android:id="@+id/levelPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:min="1"
-        android:max="5"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="100dp" />
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="119dp"
+        android:max="5"
+        android:min="1" />
 
     <TextView
         android:id="@+id/correctAnswerTitle"
@@ -118,26 +119,38 @@
         android:id="@+id/correctAnswerPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:min="1"
-        android:max="4"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="100dp" />
+        android:layout_marginStart="65dp"
+        android:layout_marginBottom="121dp"
+        android:max="4"
+        android:min="1" />
+
+    <Button
+        android:id="@+id/uploadImage"
+        android:layout_width="97dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fourthAnswer"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="69dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="182dp"
+        android:layout_toStartOf="@+id/levelPicker"
+        android:layout_toEndOf="@+id/correctAnswerPicker"
+        android:text="בחר תמונה מהגלריה" />
 
     <Button
         android:id="@+id/uploadQuestion"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/fourthAnswer"
+        android:layout_width="198dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginBottom="49dp"
         android:text="העלה שאלה" />
 
     <ImageButton
@@ -147,7 +160,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="3dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="3dp"
         android:contentDescription="Home Button"
         app:srcCompat="@mipmap/home_widget_purple_round" />
 
