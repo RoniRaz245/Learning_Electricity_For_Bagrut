@@ -55,11 +55,15 @@ public class MakeQuestionActivity extends AppCompatActivity {
     }
     private void uploadImage(){
         String uploadedImage = UUID.randomUUID().toString();
-        StorageReference imageRef = storageRef.child("images/");
-        // Defining Implicit Intent to mobile gallery
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        StorageReference imageRef = storageRef.child("images/"+uploadedImage);
+        
+        try{
+            Intent i = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, RESULT_LOAD_IMAGE);
+        }catch(Exception exp){
+            Log.i("Error",exp.toString());
+        }
 
 
     }
