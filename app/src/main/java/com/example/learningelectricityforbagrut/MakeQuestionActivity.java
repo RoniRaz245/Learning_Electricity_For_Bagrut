@@ -54,9 +54,9 @@ public class MakeQuestionActivity extends AppCompatActivity {
         goHome.setOnClickListener(v -> this.getApplicationContext().startActivity(new Intent(this.getApplicationContext(), HomeActivity.class)));
     }
     private void uploadImage(){
-        String uploadedImage = UUID.randomUUID().toString();
+        String uploadedImage = UUID.randomUUID().toString(); //generating unique ID for image
         StorageReference imageRef = storageRef.child("images/"+uploadedImage);
-        
+
         try{
             Intent i = new Intent(Intent.ACTION_PICK,
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
