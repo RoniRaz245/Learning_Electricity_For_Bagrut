@@ -40,6 +40,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
 
         mDatabase= FirebaseDatabase.getInstance().getReference();
 
+        uploadImage.setOnClickListener(v -> );
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
         goHome.setOnClickListener(v -> this.getApplicationContext().startActivity(new Intent(this.getApplicationContext(), HomeActivity.class)));
     }
