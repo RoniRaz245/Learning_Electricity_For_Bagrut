@@ -1,9 +1,14 @@
 package com.example.learningelectricityforbagrut;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,16 +16,24 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.Toast;
+import java.util.UUID;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class MakeQuestionActivity extends AppCompatActivity {
     private EditText bodyTextView, option1TextView, option2TextView, option3TextView, option4TextView;
     private ImageButton goHome;
     private NumberPicker levelPicker, correctAnswerPicker;
+    private String imageUrl;
     private Button upload, uploadImage;
-    DatabaseReference mDatabase;
+    protected DatabaseReference mDatabase;
+    protected StorageReference mStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +53,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
 
         mDatabase= FirebaseDatabase.getInstance().getReference();
 
-        uploadImage.setOnClickListener(v -> );
+        uploadImage.setOnClickListener(v -> getImageFromUser());
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
         goHome.setOnClickListener(v -> this.getApplicationContext().startActivity(new Intent(this.getApplicationContext(), HomeActivity.class)));
     }
@@ -54,10 +67,41 @@ public class MakeQuestionActivity extends AppCompatActivity {
         String option2= option2TextView.getText().toString();
         String option3= option3TextView.getText().toString();
         String option4= option4TextView.getText().toString();
+        String[] options= {option1,option2,option3,option4};
         int level=levelPicker.getValue();
         int correctAnswer=correctAnswerPicker.getValue();
         int answerIndex=correctAnswer-1;
+        String image=imageUrl;
+        Question newQuestion= new Question(body, image, options, answerIndex, level);
+        mDatabase.child("questions").push().setValue(newQuestion);
+    }
+    private void getImageFromUser(){
+        ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
+                registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+                    // Callback is invoked after the user selects a media item or closes the photo picker
+                    if (uri != null) {
+                        imageUrl=UUID.randomUUID().toString(); //generate random address for this image
+                        mStorage=FirebaseStorage.getInstance().getReference();
+                        StorageReference path=mStorage.child("Images").child(imageUrl);
+                        path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                    else{
+                        Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
+                    }
+                });
 
-
+        pickMedia.launch(new PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                .build());
     }
 }
