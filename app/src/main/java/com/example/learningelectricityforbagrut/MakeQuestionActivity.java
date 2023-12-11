@@ -34,6 +34,31 @@ public class MakeQuestionActivity extends AppCompatActivity {
     private Button upload, uploadImage;
     protected DatabaseReference mDatabase;
     protected StorageReference mStorage;
+    //create the photo picker to launch if user so requests
+    protected ActivityResultLauncher<PickVisualMediaRequest>
+            pickMedia =
+            registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+                // Callback is invoked after the user selects a media item or closes the photo picker
+                if (uri != null) {
+                    imageUrl=UUID.randomUUID().toString(); //generate random address for this image
+                    mStorage=FirebaseStorage.getInstance().getReference();
+                    StorageReference path=mStorage.child("Images").child(imageUrl);
+                    path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else{
+                    Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +75,7 @@ public class MakeQuestionActivity extends AppCompatActivity {
         correctAnswerPicker=findViewById(R.id.correctAnswerPicker);
         upload=findViewById(R.id.uploadQuestion);
         uploadImage=findViewById(R.id.uploadImage);
+
 
         mDatabase= FirebaseDatabase.getInstance().getReference();
 
@@ -76,30 +102,6 @@ public class MakeQuestionActivity extends AppCompatActivity {
         mDatabase.child("questions").push().setValue(newQuestion);
     }
     private void getImageFromUser(){
-        ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
-                registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
-                    // Callback is invoked after the user selects a media item or closes the photo picker
-                    if (uri != null) {
-                        imageUrl=UUID.randomUUID().toString(); //generate random address for this image
-                        mStorage=FirebaseStorage.getInstance().getReference();
-                        StorageReference path=mStorage.child("Images").child(imageUrl);
-                        path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                    else{
-                        Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
-                    }
-                });
-
         pickMedia.launch(new PickVisualMediaRequest.Builder()
                 .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                 .build());
