@@ -22,6 +22,10 @@
         android:theme="@style/Theme.LearningElectricityForBagrut"
         tools:targetApi="33">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_settings" />
+        <activity
             android:name=".QuestionViewActivity"
             android:exported="false" />
         <activity

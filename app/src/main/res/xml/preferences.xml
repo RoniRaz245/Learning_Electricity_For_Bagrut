@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        app:key="theme"
+        app:entries="@array/themes_entries"
+        app:entryValues="@array/themes_values"
+        app:defaultValue="@string/system_default"
+        app:title="פלטת הצבעים של האפליקציה" />
+
+    <SeekBarPreference
+        app:key="volume"
+        app:defaultValue="5"
+        android:max="10"
+        app:title="ווליום- עבור המשתמשים ב-TTS"/>
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="compressImage"
+        android:title="דחוס תמונות לתצוגה" />
+</PreferenceScreen>
