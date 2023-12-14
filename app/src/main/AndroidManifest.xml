@@ -12,6 +12,7 @@
 
     <application
         android:name="myApp"
+        android:theme="@style/light_mode"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"

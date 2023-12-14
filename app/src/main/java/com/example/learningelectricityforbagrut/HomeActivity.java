@@ -20,20 +20,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class HomeActivity extends AppCompatActivity {
-    private Button addReminder;
-    private Button uploadQuestion;
-    private Button startQuiz;
+    private Button addReminder, uploadQuestion, startQuiz, openSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setting all buttons
         setContentView(R.layout.activity_home);
         addReminder=findViewById(R.id.addReminder);
         uploadQuestion=findViewById(R.id.makeQuestion);
         startQuiz=findViewById(R.id.startQuiz);
+        openSettings=findViewById(R.id.openSettings);
+
 
         //set intents for buttons that open other activities
         addReminder.setOnClickListener(v-> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
         startQuiz.setOnClickListener(v -> startQuiz.getContext().startActivity(new Intent(startQuiz.getContext(), QuestionViewActivity.class)));
+        addReminder.setOnClickListener(v-> openSettings.getContext().startActivity(new Intent(openSettings.getContext(), SettingsActivity.class)));
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
