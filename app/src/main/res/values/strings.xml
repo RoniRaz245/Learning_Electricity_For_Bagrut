@@ -3,9 +3,6 @@
     <string name="app_name_hebrew">תרגול חשמל לקראת בגרות</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="dark_mode">"מצב כהה"</string>
-    <string name="light_mode">"מצב בהיר"</string>
-    <string name="system_default">"המצב המוגדר במערכת"</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
