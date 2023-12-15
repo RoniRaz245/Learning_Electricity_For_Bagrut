@@ -15,11 +15,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
+        SharedPreferences prefs= getPreferenceManager().getSharedPreferences();
         Context context = getPreferenceManager().getContext();
         findPreference("darkTheme").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-                SharedPreferences prefs= preference.getSharedPreferences();
                 assert prefs != null;
                 prefs.edit().putBoolean("darkTheme",(boolean)newValue).apply();
                 myApp app=(myApp)context.getApplicationContext();
@@ -31,6 +31,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         findPreference("volume").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                assert prefs != null;
+                prefs.edit().putInt("volume",(int)newValue).apply();
                 Toast.makeText(context, "הווליום שונה!", Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -38,11 +40,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         findPreference("compressImage").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                assert prefs != null;
+                prefs.edit().putBoolean("compressImage",(boolean)newValue).apply();
                 Toast.makeText(context, "העדפות איכות תמונה שונו!", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
     }
-
-
 }
