@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         //set intents for buttons that open other activities
         addReminder.setOnClickListener(v-> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
         startQuiz.setOnClickListener(v -> startQuiz.getContext().startActivity(new Intent(startQuiz.getContext(), QuestionViewActivity.class)));
-        addReminder.setOnClickListener(v-> openSettings.getContext().startActivity(new Intent(openSettings.getContext(), SettingsActivity.class)));
+        openSettings.setOnClickListener(v-> openSettings.getContext().startActivity(new Intent(openSettings.getContext(), SettingsActivity.class)));
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
