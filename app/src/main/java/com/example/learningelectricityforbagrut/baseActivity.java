@@ -1,6 +1,7 @@
 package com.example.learningelectricityforbagrut;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -9,15 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuProvider;
 
-public class baseActivity extends AppCompatActivity implements MenuProvider {
+public class baseActivity extends AppCompatActivity {
     @Override
-    public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
-        MenuInflater inflater = new MenuInflater(this);
-        inflater.inflate(R.menu.bar, menu);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bar, menu);
+        return true;
     }
 
     @Override
-    public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem menuItem) {
         int id=menuItem.getItemId();
         if (id==R.id.goHome) {
             this.startActivity(new Intent(this,

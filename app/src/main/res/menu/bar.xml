@@ -8,5 +8,6 @@
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/openSettings"
         android:icon="@drawable/ic_purple_settings"
+        app:showAsAction="ifRoom"
         android:title="הגדרות" />
 </menu>
