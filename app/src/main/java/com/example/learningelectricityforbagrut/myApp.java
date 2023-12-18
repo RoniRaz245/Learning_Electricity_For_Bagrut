@@ -2,6 +2,8 @@ package com.example.learningelectricityforbagrut;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;

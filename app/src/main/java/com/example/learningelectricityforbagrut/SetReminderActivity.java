@@ -24,7 +24,7 @@ import android.content.Context;
 import androidx.core.app.NotificationManagerCompat;
 import java.util.Calendar;
 
-public class SetReminderActivity extends AppCompatActivity {
+public class SetReminderActivity extends baseActivity {
     TimePicker timePicker;
     static EditText textForNotif;
     Button makeNotif;

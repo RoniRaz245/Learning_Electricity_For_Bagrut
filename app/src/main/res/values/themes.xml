@@ -5,5 +5,6 @@
         <item name="colorPrimary">@color/purple</item>
         <item name="colorPrimaryDark">@color/darkPurple</item>
         <item name="colorAccent">@color/lightBlue</item>
+        <item name="android:itemBackground">@color/lightBlue</item>
     </style>
 </resources>

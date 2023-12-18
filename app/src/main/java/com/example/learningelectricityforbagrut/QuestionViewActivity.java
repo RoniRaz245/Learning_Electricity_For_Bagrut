@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-public class QuestionViewActivity extends AppCompatActivity /*implements TextToSpeech.OnInitListener*/ {
+public class QuestionViewActivity extends baseActivity /*implements TextToSpeech.OnInitListener*/ {
     protected TextToSpeech tts;
     protected TextView textView; //temporary text to check TTS
     protected Button ttsButton;

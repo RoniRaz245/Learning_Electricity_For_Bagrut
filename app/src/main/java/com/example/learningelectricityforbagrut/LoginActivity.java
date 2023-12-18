@@ -1,6 +1,7 @@
 package com.example.learningelectricityforbagrut;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -14,7 +15,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends baseActivity {
 
     private Button TakeToSignUp ;
     private EditText emailTextView ;
@@ -24,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar bar=getSupportActionBar();
+        if(bar!=null)
+            bar.hide();
         setContentView(R.layout.activity_login);
         login = findViewById(R.id.login);
         emailTextView = findViewById(R.id.email);

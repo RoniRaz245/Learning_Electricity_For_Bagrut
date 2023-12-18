@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends baseActivity {
     private Button addReminder, uploadQuestion, startQuiz, openSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -26,7 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class MakeQuestionActivity extends AppCompatActivity {
+public class MakeQuestionActivity extends baseActivity {
     private EditText bodyTextView, option1TextView, option2TextView, option3TextView, option4TextView;
     private ImageButton goHome;
     private NumberPicker levelPicker, correctAnswerPicker;

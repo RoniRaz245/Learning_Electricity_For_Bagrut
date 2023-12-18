@@ -3,6 +3,7 @@ package com.example.learningelectricityforbagrut;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -18,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends baseActivity {
 
     private EditText emailTextView, passwordTextView;
     private FirebaseAuth mAuth;
@@ -29,6 +30,9 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        ActionBar bar=getSupportActionBar();
+        if(bar!=null)
+            bar.hide();
         setContentView(R.layout.activity_registration);
         mAuth = FirebaseAuth.getInstance();
         emailTextView = findViewById(R.id.email);
