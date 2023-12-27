@@ -1,12 +1,12 @@
 package com.example.learningelectricityforbagrut;
 
 
-import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +32,7 @@ public class SetReminderActivity extends baseActivity {
         textForNotif = findViewById(R.id.textForNotif);
         makeNotif = findViewById(R.id.makeNotif);
         makeNotif.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ScheduleExactAlarm")
+
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
@@ -53,11 +53,19 @@ public class SetReminderActivity extends baseActivity {
 
                 long time=calendar.getTimeInMillis();
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
-
-                id++;
-                //letting user know scheduling was successful
-                Toast.makeText(getApplicationContext(), "ההתראה נקבעה", Toast.LENGTH_LONG).show();
+                boolean canSchedule=true;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    if(!alarmManager.canScheduleExactAlarms()) {
+                        Toast.makeText(getApplicationContext(), "בבקשה תן לאפליקציה הרשאות להתראות בהגדרות!", Toast.LENGTH_LONG).show();
+                        canSchedule=false;
+                    }
+                }
+                if(canSchedule) {
+                    id++;
+                    //letting user know scheduling was successful
+                    Toast.makeText(getApplicationContext(), "ההתראה נקבעה", Toast.LENGTH_LONG).show();
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent);
+                }
             }
         });
     }
