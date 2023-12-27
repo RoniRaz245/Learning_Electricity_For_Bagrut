@@ -4,16 +4,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 import java.util.UUID;
@@ -82,7 +77,7 @@ public class MakeQuestionActivity extends baseActivity {
          }
     private void uploadGivenQuestion(){
         if(levelPicker.getValue()==0) {
-            Toast.makeText(this.getApplicationContext(),"בבקשה תכניס רמה!", Toast.LENGTH_LONG);
+            Toast.makeText(this.getApplicationContext(),"בבקשה תכניס רמה!", Toast.LENGTH_LONG).show();
         }//TODO: add other fail cases
 
         String body=bodyTextView.getText().toString();
