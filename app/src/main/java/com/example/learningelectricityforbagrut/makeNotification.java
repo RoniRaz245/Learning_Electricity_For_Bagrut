@@ -16,7 +16,7 @@ public class makeNotification extends BroadcastReceiver {
         Notification notif = new NotificationCompat.Builder(context.getApplicationContext(), channelid)
                 .setSmallIcon(R.drawable.electricity_icon)
                 .setContentTitle(context.getString(R.string.app_name_hebrew))
-                .setContentText(SetReminderActivity.textForNotif.getText().toString())
+                .setContentText(intent.getStringExtra("text"))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setChannelId(channelid)
                 .build();

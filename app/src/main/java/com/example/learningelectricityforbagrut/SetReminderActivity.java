@@ -2,33 +2,26 @@ package com.example.learningelectricityforbagrut;
 
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Build;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.os.Bundle;
-import android.app.Notification;
 import android.widget.Toast;
-import android.content.Context;
-import androidx.core.app.NotificationManagerCompat;
 import java.util.Calendar;
 
 public class SetReminderActivity extends baseActivity {
     TimePicker timePicker;
-    static EditText textForNotif;
+    EditText textForNotif;
     Button makeNotif;
-    ImageButton homeButton;
     int id=0;
     static public int currentid;
     public static String channelid;
@@ -42,8 +35,6 @@ public class SetReminderActivity extends baseActivity {
         timePicker = findViewById(R.id.timePicker);
         textForNotif = findViewById(R.id.textForNotif);
         makeNotif = findViewById(R.id.makeNotif);
-        homeButton = findViewById(R.id.goHome);
-        homeButton.setOnClickListener(v -> homeButton.getContext().startActivity(new Intent(homeButton.getContext(), HomeActivity.class)));
         makeNotif.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ScheduleExactAlarm")
             @Override
@@ -58,8 +49,10 @@ public class SetReminderActivity extends baseActivity {
 
                 //puts relevant notification into pendingIntent to be handled by alarm manager
                 int currentid=id;
+                String textGiven=textForNotif.getText().toString();
                 Intent intent = new Intent(makeNotif.getContext(), makeNotification.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(makeNotif.getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+                intent.putExtra("text",textGiven);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(makeNotif.getContext(), currentid, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
                 long time=calendar.getTimeInMillis();
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);

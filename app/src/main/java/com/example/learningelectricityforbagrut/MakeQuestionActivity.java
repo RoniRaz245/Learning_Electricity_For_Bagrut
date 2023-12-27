@@ -28,7 +28,6 @@ import com.google.firebase.storage.UploadTask;
 
 public class MakeQuestionActivity extends baseActivity {
     private EditText bodyTextView, option1TextView, option2TextView, option3TextView, option4TextView;
-    private ImageButton goHome;
     private NumberPicker levelPicker, correctAnswerPicker;
     private String imageUrl;
     private Button upload, uploadImage;
@@ -65,7 +64,6 @@ public class MakeQuestionActivity extends baseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makequestion);
 
-        goHome=findViewById(R.id.goHome);
         bodyTextView=findViewById(R.id.questionBody);
         option1TextView=findViewById(R.id.firstAnswer);
         option2TextView=findViewById(R.id.secondAnswer);
@@ -81,8 +79,7 @@ public class MakeQuestionActivity extends baseActivity {
 
         uploadImage.setOnClickListener(v -> getImageFromUser());
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
-        goHome.setOnClickListener(v -> this.getApplicationContext().startActivity(new Intent(this.getApplicationContext(), HomeActivity.class)));
-    }
+         }
     private void uploadGivenQuestion(){
         if(levelPicker.getValue()==0) {
             Toast.makeText(this.getApplicationContext(),"בבקשה תכניס רמה!", Toast.LENGTH_LONG);
