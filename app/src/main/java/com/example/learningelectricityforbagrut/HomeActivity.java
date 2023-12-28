@@ -29,14 +29,13 @@ public class HomeActivity extends baseActivity {
         addReminder=findViewById(R.id.addReminder);
         uploadQuestion=findViewById(R.id.makeQuestion);
         startQuiz=findViewById(R.id.startQuiz);
-        openSettings=findViewById(R.id.openSettings);
 
 
         //set intents for buttons that open other activities
         addReminder.setOnClickListener(v-> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
         startQuiz.setOnClickListener(v -> startQuiz.getContext().startActivity(new Intent(startQuiz.getContext(), QuestionViewActivity.class)));
-        openSettings.setOnClickListener(v-> openSettings.getContext().startActivity(new Intent(openSettings.getContext(), SettingsActivity.class)));
 
+        //check if user is a teacher and set the "make question" button to only have use if they are
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
 
