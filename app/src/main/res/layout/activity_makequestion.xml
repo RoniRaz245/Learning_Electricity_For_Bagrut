@@ -81,7 +81,7 @@
 
     <TextView
         android:id="@+id/levelTitle"
-        android:layout_width="157dp"
+        android:layout_width="65dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/levelPicker"
         android:layout_alignParentEnd="true"
@@ -158,5 +158,15 @@
         android:layout_marginBottom="49dp"
         android:text="העלה שאלה"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <ImageButton
+        android:id="@+id/levelInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="383dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toStartOf="@+id/levelTitle"
+        app:srcCompat="@android:drawable/ic_menu_help" />
 
 </RelativeLayout>

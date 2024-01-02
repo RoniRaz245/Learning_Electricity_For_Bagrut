@@ -4,17 +4,24 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.UUID;
+import android.app.Dialog;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -26,6 +33,7 @@ public class MakeQuestionActivity extends baseActivity {
     private NumberPicker levelPicker, correctAnswerPicker;
     private String imageUrl;
     private Button upload, uploadImage;
+    private ImageButton levelInfo;
     protected DatabaseReference mDatabase;
     protected StorageReference mStorage;
     //create the photo picker to launch if user so requests
@@ -34,7 +42,7 @@ public class MakeQuestionActivity extends baseActivity {
             registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
                 // Callback is invoked after the user selects a media item or closes the photo picker
                 if (uri != null) {
-                    imageUrl=UUID.randomUUID().toString(); //generate random address for this image
+                    imageUrl=UUID.randomUUID().toString(); //generate random ID for this image
                     mStorage=FirebaseStorage.getInstance().getReference();
                     StorageReference path=mStorage.child("Images").child(imageUrl);
                     path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -65,16 +73,33 @@ public class MakeQuestionActivity extends baseActivity {
         option3TextView=findViewById(R.id.thirdAnswer);
         option4TextView=findViewById(R.id.fourthAnswer);
         levelPicker=findViewById(R.id.levelPicker);
+        levelInfo=findViewById(R.id.levelInfo);
         correctAnswerPicker=findViewById(R.id.correctAnswerPicker);
         upload=findViewById(R.id.uploadQuestion);
         uploadImage=findViewById(R.id.uploadImage);
 
 
         mDatabase= FirebaseDatabase.getInstance().getReference();
+        levelInfo.setOnClickListener(v->giveInfo());
 
         uploadImage.setOnClickListener(v -> getImageFromUser());
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
          }
+    private void giveInfo(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MakeQuestionActivity.this);
+        AlertDialog dialog = builder.create();
+        dialog.setContentView(R.layout.level_info);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+
+        TextView okay_text = dialog.findViewById(R.id.okay_text);
+        okay_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
     private void uploadGivenQuestion(){
         if(levelPicker.getValue()==0) {
             Toast.makeText(this.getApplicationContext(),"בבקשה תכניס רמה!", Toast.LENGTH_LONG).show();
@@ -89,8 +114,12 @@ public class MakeQuestionActivity extends baseActivity {
         int level=levelPicker.getValue();
         int correctAnswer=correctAnswerPicker.getValue();
         int answerIndex=correctAnswer-1;
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth mAuth= FirebaseAuth.getInstance();
+
+        String UID= String.valueOf(database.child("users").child(mAuth.getCurrentUser().getUid()));
         String image=imageUrl;
-        Question newQuestion= new Question(body, image, options, answerIndex, level);
+        Question newQuestion= new Question(body, image, options, answerIndex, level, UID);
         mDatabase.child("questions").push().setValue(newQuestion);
     }
     private void getImageFromUser(){
