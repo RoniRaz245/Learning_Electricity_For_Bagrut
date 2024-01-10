@@ -5,10 +5,10 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,7 +17,6 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.UUID;
-import android.app.Dialog;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -86,19 +85,8 @@ public class MakeQuestionActivity extends baseActivity {
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
          }
     private void giveInfo(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MakeQuestionActivity.this);
-        AlertDialog dialog = builder.create();
-        dialog.setContentView(R.layout.level_info);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.setCancelable(false);
-
-        TextView okay_text = dialog.findViewById(R.id.okay_text);
-        okay_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        DialogFragment newFragment = new infoFragment();
+        newFragment.show(getSupportFragmentManager(), "info");
     }
     private void uploadGivenQuestion(){
         if(levelPicker.getValue()==0) {
