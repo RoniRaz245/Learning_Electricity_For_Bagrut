@@ -5,17 +5,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
-import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 public class infoFragment extends DialogFragment {
-    private Dialog alert;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

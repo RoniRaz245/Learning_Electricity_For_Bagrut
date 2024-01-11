@@ -1,14 +1,22 @@
 package com.example.learningelectricityforbagrut;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentResultListener;
 
 
+import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +68,36 @@ public class MakeQuestionActivity extends baseActivity {
                     Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
                 }
             });
+    ActivityResultLauncher<Intent> startCamera = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        imageUrl=UUID.randomUUID().toString(); //generate random ID for this image
+                        mStorage=FirebaseStorage.getInstance().getReference();
+                        StorageReference path=mStorage.child("Images").child(imageUrl);
+                        Uri file=("file");
+                        path.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                    else{
+                        Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
+
+                    }
+                }
+            }
+    );
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +123,8 @@ public class MakeQuestionActivity extends baseActivity {
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
          }
     private void giveInfo(){
-        DialogFragment newFragment = new infoFragment();
-        newFragment.show(getSupportFragmentManager(), "info");
+        DialogFragment info = new infoFragment();
+        info.show(getSupportFragmentManager(), "info");
     }
     private void uploadGivenQuestion(){
         if(levelPicker.getValue()==0) {
@@ -110,9 +148,29 @@ public class MakeQuestionActivity extends baseActivity {
         Question newQuestion= new Question(body, image, options, answerIndex, level, UID);
         mDatabase.child("questions").push().setValue(newQuestion);
     }
-    private void getImageFromUser(){
-        pickMedia.launch(new PickVisualMediaRequest.Builder()
-                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                .build());
+    private void getImageFromUser() {
+        DialogFragment imageSource = new imageSourceFragment();
+        imageSource.show(getSupportFragmentManager(), "source for image");
+        FragmentResultListener listener=new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                CharSequence source = result.getCharSequence("source");
+                if (source != null) {
+                    if (source == "gallery") {
+                        pickMedia.launch(new PickVisualMediaRequest.Builder()
+                                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                                .build());
+                    }
+                    else if(source == "camera"){
+                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        Uri cam_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                        cameraIntent.putExtra("file", cam_uri);
+                        startCamera.launch(cameraIntent);
+                        }
+                    }
+                }
+            };
+
+        getSupportFragmentManager().setFragmentResultListener("image source", imageSource.getViewLifecycleOwner(), );
     }
 }
