@@ -47,7 +47,7 @@ public class LoginActivity extends baseActivity {
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(login.getContext(),
-                            "Please enter email!!",
+                            "מייל בבקשה!",
                             Toast.LENGTH_LONG)
                     .show();
             return;
@@ -55,7 +55,7 @@ public class LoginActivity extends baseActivity {
 
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(login.getContext(),
-                            "Please enter password!!",
+                            "סיסמה בבקשה!",
                             Toast.LENGTH_LONG)
                     .show();
             return;
@@ -69,11 +69,7 @@ public class LoginActivity extends baseActivity {
                                     @NonNull Task<AuthResult> task)
                             {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(login.getContext(),
-                                                    "Login successful!!",
-                                                    Toast.LENGTH_LONG)
-                                            .show();
-
+                                    //take user to homescreen since login was successful
                                     Intent goHome
                                             = new Intent(login.getContext(),
                                             HomeActivity.class);
@@ -81,9 +77,9 @@ public class LoginActivity extends baseActivity {
                                 }
 
                                 else {
-
+                                    //generic error message
                                     Toast.makeText(login.getContext(),
-                                                    "Login failed!!",
+                                                    "ההתחברות נכשלה, אנא נסו שוב",
                                                     Toast.LENGTH_LONG)
                                             .show();
 

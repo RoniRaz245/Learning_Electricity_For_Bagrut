@@ -24,7 +24,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 prefs.edit().putBoolean("darkTheme",(boolean)newValue).apply();
                 myApp app=(myApp)context.getApplicationContext();
                 app.setMyTheme();
-                Toast.makeText(context, "פלטת הצבעים שונתה!", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -33,7 +32,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
                 assert prefs != null;
                 prefs.edit().putInt("volume",(int)newValue).apply();
-                Toast.makeText(context, "הווליום שונה!", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -42,7 +40,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
                 assert prefs != null;
                 prefs.edit().putBoolean("compressImage",(boolean)newValue).apply();
-                Toast.makeText(context, "העדפות איכות תמונה שונו!", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

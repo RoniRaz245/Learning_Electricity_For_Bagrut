@@ -82,11 +82,8 @@ public class RegistrationActivity extends baseActivity {
                             //make a user with given+default parameters and upload to firebase
                             User user = new User(isTeacherCheck.isChecked());
                             FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
-                            Toast.makeText(Btn.getContext(),
-                                            "נרשמת בהצלחה!",
-                                            Toast.LENGTH_LONG)
-                                    .show();
 
+                            //take user to home screen
                             Intent intent
                                     = new Intent(Btn.getContext(),
                                     HomeActivity.class);
