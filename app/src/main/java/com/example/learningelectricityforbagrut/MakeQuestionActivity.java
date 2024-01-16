@@ -71,7 +71,7 @@ public class MakeQuestionActivity extends baseActivity {
                     Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
                 }
             });
-m    protected ActivityResultLauncher<Uri> startCamera= registerForActivityResult(
+    protected ActivityResultLauncher<Uri> startCamera= registerForActivityResult(
                                 new ActivityResultContracts.TakePicture(),
                                 new ActivityResultCallback<Boolean>() {
         @Override
