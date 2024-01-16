@@ -71,7 +71,34 @@ public class MakeQuestionActivity extends baseActivity {
                     Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
                 }
             });
-    protected ActivityResultLauncher<Uri> startCamera;
+m    protected ActivityResultLauncher<Uri> startCamera= registerForActivityResult(
+                                new ActivityResultContracts.TakePicture(),
+                                new ActivityResultCallback<Boolean>() {
+        @Override
+        public void onActivityResult(Boolean result) {
+            if (result == true) {
+                imageUrl=UUID.randomUUID().toString(); //generate random ID for this image
+                mStorage=FirebaseStorage.getInstance().getReference();
+                StorageReference path=mStorage.child("Images").child(imageUrl);
+                path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+            else{
+                Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
+
+            }
+        }
+    }
+                        );
 
 
     @Override
@@ -139,34 +166,7 @@ public class MakeQuestionActivity extends baseActivity {
                     }
                     else if(source == "camera"){
                         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                        startCamera = registerForActivityResult(
-                                new ActivityResultContracts.TakePicture(),
-                                new ActivityResultCallback<Boolean>() {
-                                    @Override
-                                    public void onActivityResult(Boolean result) {
-                                        if (result == true) {
-                                            imageUrl=UUID.randomUUID().toString(); //generate random ID for this image
-                                            mStorage=FirebaseStorage.getInstance().getReference();
-                                            StorageReference path=mStorage.child("Images").child(imageUrl);
-                                            path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                                @Override
-                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                    Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
-                                                }
-                                            });
-                                        }
-                                        else{
-                                            Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
 
-                                        }
-                                    }
-                                }
-                        );
                         startCamera.launch(uri);
                         }
                     }
