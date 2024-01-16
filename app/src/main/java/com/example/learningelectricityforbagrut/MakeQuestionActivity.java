@@ -7,6 +7,7 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentResultListener;
 
@@ -24,6 +25,8 @@ import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 import java.util.UUID;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -68,35 +71,7 @@ public class MakeQuestionActivity extends baseActivity {
                     Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
                 }
             });
-    ActivityResultLauncher<Intent> startCamera = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == RESULT_OK) {
-                        imageUrl=UUID.randomUUID().toString(); //generate random ID for this image
-                        mStorage=FirebaseStorage.getInstance().getReference();
-                        StorageReference path=mStorage.child("Images").child(imageUrl);
-                        Uri file=("file");
-                        path.putFile(file).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                    else{
-                        Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
-
-                    }
-                }
-            }
-    );
+    protected ActivityResultLauncher<Uri> startCamera;
 
 
     @Override
@@ -150,7 +125,8 @@ public class MakeQuestionActivity extends baseActivity {
     }
     private void getImageFromUser() {
         DialogFragment imageSource = new imageSourceFragment();
-        imageSource.show(getSupportFragmentManager(), "source for image");
+        imageSource.show(getSupportFragmentManager(), imageSourceFragment.TAG);
+
         FragmentResultListener listener=new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
@@ -162,15 +138,41 @@ public class MakeQuestionActivity extends baseActivity {
                                 .build());
                     }
                     else if(source == "camera"){
-                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        Uri cam_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                        cameraIntent.putExtra("file", cam_uri);
-                        startCamera.launch(cameraIntent);
+                        Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                        startCamera = registerForActivityResult(
+                                new ActivityResultContracts.TakePicture(),
+                                new ActivityResultCallback<Boolean>() {
+                                    @Override
+                                    public void onActivityResult(Boolean result) {
+                                        if (result == true) {
+                                            imageUrl=UUID.randomUUID().toString(); //generate random ID for this image
+                                            mStorage=FirebaseStorage.getInstance().getReference();
+                                            StorageReference path=mStorage.child("Images").child(imageUrl);
+                                            path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                @Override
+                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                    Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                        }
+                                        else{
+                                            Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
+
+                                        }
+                                    }
+                                }
+                        );
+                        startCamera.launch(uri);
                         }
                     }
                 }
             };
 
-        getSupportFragmentManager().setFragmentResultListener("image source", imageSource.getViewLifecycleOwner(), );
+        getSupportFragmentManager().setFragmentResultListener("image source", imageSource, listener);
     }
 }

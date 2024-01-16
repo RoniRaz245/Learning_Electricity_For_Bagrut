@@ -14,7 +14,7 @@ public class imageSourceFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
         builder.setTitle("מקור התמונה");
-        builder.setNeutralButton("גלריה", new DialogInterface.OnClickListener(){
+        builder.setPositiveButton("גלריה", new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which){
                 result.putCharSequence("source","gallery");
@@ -32,4 +32,5 @@ public class imageSourceFragment extends DialogFragment {
 
         return builder.create();
     }
+    public static String TAG = "source for image";
 }
