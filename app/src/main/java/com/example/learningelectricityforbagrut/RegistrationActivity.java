@@ -21,7 +21,7 @@ import com.google.android.gms.tasks.Task;
 
 public class RegistrationActivity extends baseActivity {
 
-    private EditText emailTextView, passwordTextView;
+    private EditText emailTextView, passwordTextView, nameTextView;
     private FirebaseAuth mAuth;
     private Button Btn;
     private RadioButton isTeacherCheck;
@@ -37,6 +37,7 @@ public class RegistrationActivity extends baseActivity {
         mAuth = FirebaseAuth.getInstance();
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.passwd);
+        nameTextView=findViewById(R.id.name);
         isTeacherCheck=findViewById(R.id.isTeacherCheck);
         Btn = findViewById(R.id.btnregister);
         Btn.setOnClickListener(new View.OnClickListener() {
@@ -50,10 +51,11 @@ public class RegistrationActivity extends baseActivity {
 
     private void registerNewUser()
     {
-        // Take the value of two edit texts in Strings
-        String email, password;
+        // Take the value of edit texts
+        String email, password, name;
         email = emailTextView.getText().toString();
         password = passwordTextView.getText().toString();
+        name= nameTextView.getText().toString();
 
         //make sure user put in parameters
         if (TextUtils.isEmpty(email)) {
@@ -70,6 +72,13 @@ public class RegistrationActivity extends baseActivity {
                     .show();
             return;
         }
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(Btn.getContext(),
+                            "שם בבקשה!",
+                            Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
 
         mAuth
                 .createUserWithEmailAndPassword(email, password)
@@ -80,8 +89,9 @@ public class RegistrationActivity extends baseActivity {
                     {
                         if (task.isSuccessful()) {
                             //make a user with given+default parameters and upload to firebase
-                            User user = new User(isTeacherCheck.isChecked());
-                            FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
+                            String UID=mAuth.getCurrentUser().getUid();
+                            User user = new User(isTeacherCheck.isChecked(),name, UID);
+                            FirebaseDatabase.getInstance().getReference().child("users").child(UID).setValue(user);
 
                             //take user to home screen
                             Intent intent
