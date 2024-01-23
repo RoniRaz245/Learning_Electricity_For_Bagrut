@@ -32,8 +32,11 @@ import java.util.UUID;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -145,10 +148,28 @@ public class MakeQuestionActivity extends baseActivity {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
 
-        String UID= String.valueOf(database.child("users").child(mAuth.getCurrentUser().getUid()));
-        String image=imageUrl;
-        Question newQuestion= new Question(body, image, options, answerIndex, level, UID);
-        mDatabase.child("questions").push().setValue(newQuestion);
+        database.child("questions").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long serialNum;
+                if (snapshot.hasChild(String.valueOf(level))) {
+                    serialNum = snapshot.child(String.valueOf(level)).getChildrenCount();
+                }
+                else{
+                    serialNum = 1;
+                }
+                String UID= mAuth.getCurrentUser().getUid();
+                String image=imageUrl;
+                Question newQuestion= new Question(body, image, options, answerIndex, level, UID, serialNum);
+                mDatabase.child("questions").child(String.valueOf(level)).push().setValue(newQuestion);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(),"אנא נסו שוב", Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
     private void getImageFromUser() {
         DialogFragment imageSource = new imageSourceFragment();
