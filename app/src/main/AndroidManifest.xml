@@ -27,6 +27,15 @@
         android:roundIcon="@drawable/electricity_icon"
         android:supportsRtl="true"
         tools:targetApi="33">
+        <provider
+            android:name="com.example.learningelectricityforbagrut.MyFileProvider"
+            android:authorities="com.mydomain.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <activity
             android:name=".SettingsActivity"
             android:exported="false"

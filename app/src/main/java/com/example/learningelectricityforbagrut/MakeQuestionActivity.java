@@ -1,5 +1,7 @@
 package com.example.learningelectricityforbagrut;
 
+import static androidx.core.content.FileProvider.getUriForFile;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -49,6 +51,7 @@ public class MakeQuestionActivity extends baseActivity {
     private ImageButton levelInfo;
     protected DatabaseReference mDatabase;
     protected StorageReference mStorage;
+    private Uri uri;
     //create the photo picker to launch if user so requests
     protected ActivityResultLauncher<PickVisualMediaRequest>
             pickMedia =
@@ -186,10 +189,11 @@ public class MakeQuestionActivity extends baseActivity {
                                 .build());
                     }
                     else if(source == "camera"){
-                        Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-
+                        File imagePath = new File(getFilesDir(), "camera_images");
+                        File newFile = new File(imagePath, "image.jpg");
+                        uri = getUriForFile(getApplicationContext(), "com.mydomain.fileprovider", newFile);
                         startCamera.launch(uri);
-                        }
+                    }
                     }
                 }
             };
