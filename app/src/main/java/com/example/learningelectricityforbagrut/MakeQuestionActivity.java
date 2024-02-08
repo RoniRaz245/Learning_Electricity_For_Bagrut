@@ -189,7 +189,7 @@ public class MakeQuestionActivity extends baseActivity {
                                 .build());
                     }
                     else if(source == "camera"){
-                        File imagePath = new File(getFilesDir(), "camera_images");
+                        File imagePath = new File(getApplicationContext().getFilesDir(), "images");
                         File newFile = new File(imagePath, "image.jpg");
                         uri = getUriForFile(getApplicationContext(), "com.mydomain.fileprovider", newFile);
                         startCamera.launch(uri);
