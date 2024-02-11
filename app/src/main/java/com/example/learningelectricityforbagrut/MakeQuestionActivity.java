@@ -189,10 +189,19 @@ public class MakeQuestionActivity extends baseActivity {
                                 .build());
                     }
                     else if(source == "camera"){
+                        //make a uri to store photo that will be taken in
                         File imagePath = new File(getApplicationContext().getFilesDir(), "images");
-                        File newFile = new File(imagePath, "image.jpg");
+                        File newFile = new File(imagePath, imageUrl=UUID.randomUUID().toString()+".jpg");
                         uri = getUriForFile(getApplicationContext(), "com.mydomain.fileprovider", newFile);
-                        startCamera.launch(uri);
+                        //make sure image directory exists- create it if not
+                        boolean pathCreated=true;
+                        if(!imagePath.exists())
+                            pathCreated=imagePath.mkdirs();
+                        
+                        if(pathCreated)
+                            startCamera.launch(uri);
+                        else
+                            Toast.makeText(getApplicationContext(),"אנא נסו שוב מאוחר יותר", Toast.LENGTH_LONG).show();
                     }
                     }
                 }
