@@ -190,9 +190,9 @@ public class MakeQuestionActivity extends baseActivity {
                     }
                     else if(source == "camera"){
                         //make a uri to store photo that will be taken in
-                        File imagePath = new File(getApplicationContext().getFilesDir(), "images");
+                        File imagePath = new File(getApplicationContext().getFilesDir(), "camera_images");
                         File newFile = new File(imagePath, imageUrl=UUID.randomUUID().toString()+".jpg");
-                        uri = getUriForFile(getApplicationContext(), "com.mydomain.fileprovider", newFile);
+                        uri = getUriForFile(getApplicationContext(), "com.example.learningelectricityforbagrut.fileprovider", newFile);
                         //make sure image directory exists- create it if not
                         boolean pathCreated=true;
                         if(!imagePath.exists())

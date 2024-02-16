@@ -28,8 +28,8 @@
         android:supportsRtl="true"
         tools:targetApi="33">
         <provider
-            android:name="com.example.learningelectricityforbagrut.MyFileProvider"
-            android:authorities="com.mydomain.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.learningelectricityforbagrut.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
