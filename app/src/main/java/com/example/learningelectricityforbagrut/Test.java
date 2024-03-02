@@ -1,11 +1,12 @@
 package com.example.learningelectricityforbagrut;
 
 public class Test {
-    String UID;
-    Question[] questions;
-    boolean[] correctAnswerGiven;
-    int[] timers;
-    String timeTaken;
+    private String UID;
+    private Question[] questions;
+    private boolean[] correctAnswerGiven;
+    private int[] timers;
+    private String timeTaken;
+
     //constructors
     public Test(){
         this.UID=null;
