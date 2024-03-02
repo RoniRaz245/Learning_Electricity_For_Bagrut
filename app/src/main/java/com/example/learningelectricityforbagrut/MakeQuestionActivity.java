@@ -136,10 +136,7 @@ public class MakeQuestionActivity extends baseActivity {
         info.show(getSupportFragmentManager(), "info");
     }
     private void uploadGivenQuestion(){
-        if(levelPicker.getValue()==0) {
-            Toast.makeText(this.getApplicationContext(),"בבקשה תכניס רמה!", Toast.LENGTH_LONG).show();
-        }//TODO: add other fail cases
-
+        //get details of question
         String body=bodyTextView.getText().toString();
         String option1= option1TextView.getText().toString();
         String option2= option2TextView.getText().toString();
@@ -148,6 +145,25 @@ public class MakeQuestionActivity extends baseActivity {
         String[] options= {option1,option2,option3,option4};
         int level=levelPicker.getValue();
         int correctAnswer=correctAnswerPicker.getValue();
+
+        //fail cases in case part of given question is invalid
+        if(level==0) {
+            Toast.makeText(this.getApplicationContext(),"דרושה רמה לשאלה", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(correctAnswer==0) {
+            Toast.makeText(this.getApplicationContext(),"דרוש מספר התשובה הנכונה", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(body.isEmpty()){
+            Toast.makeText(this.getApplicationContext(),"דרוש גוף לשאלה", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(option1.isEmpty()||option2.isEmpty()||option3.isEmpty()||option4.isEmpty()){
+            Toast.makeText(this.getApplicationContext(),"דרושות ארבע אפשרויות לתשובות", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         int answerIndex=correctAnswer-1;
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
