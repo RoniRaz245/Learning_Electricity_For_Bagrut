@@ -13,16 +13,16 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class QuestionViewActivity extends baseActivity /*implements TextToSpeech.OnInitListener*/ {
-    protected TextToSpeech tts;
-    protected TextView textView; //temporary text to check TTS
-    protected Button ttsButton;
-    protected String text;
+    private TextView questionBody;
+
+    /*private TextToSpeech tts;
+    private Button ttsButton;*/
     //TTS not in use till further notice
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_view);
-        textView=findViewById(R.id.textView);
+        questionBody=findViewById(R.id.questionBody);
         /* ttsButton=findViewById(R.id.ttsButton);
         tts= new TextToSpeech(this,this);;
 
