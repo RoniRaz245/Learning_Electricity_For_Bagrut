@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pause"
+        android:enabled="true"
+        android:title="עצור טיימר"
+        />
+    <item
+        android:id="@+id/back"
+        android:enabled="true"
+        android:title="שאלה קודמת" />
+</menu>
