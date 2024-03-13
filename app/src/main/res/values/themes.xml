@@ -13,6 +13,5 @@
     <style name="ThemeOverlay.App.BottomNavigationView" parent="">
         <item name="colorSurface">@color/darkPurple</item>
         <item name="colorOnSurfaceVariant">@color/lightBlue</item>
-        <item name="colorOnSurface">@color/white</item>
     </style>
 </resources>

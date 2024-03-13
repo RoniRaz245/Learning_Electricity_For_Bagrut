@@ -3,13 +3,16 @@
     <item
         android:id="@+id/next"
         android:enabled="true"
-        android:title="שאלה הבאה" />
+        android:title="שאלה הבאה"
+        android:icon="@drawable/left_arrow"/>
     <item
         android:id="@+id/pause"
         android:enabled="true"
-        android:title="עצור טיימר" />
+        android:title="עצור טיימר"
+        android:icon="@drawable/clock"/>
     <item
         android:id="@+id/back"
         android:enabled="true"
-        android:title="שאלה קודמת" />
+        android:title="שאלה קודמת"
+        android:icon="@drawable/right_arrow"/>
 </menu>
