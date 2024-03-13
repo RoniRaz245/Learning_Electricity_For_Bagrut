@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:text="בדיקה"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
@@ -21,38 +21,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/questionBody"/>
+        android:layout_below="@id/questionBody"
+        android:layout_above="@id/answers"/>
 
     <RadioGroup
         android:id="@+id/answers"
-        android:layout_below="@id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_above="@id/bottom_navigation">
 
         <RadioButton
             android:id="@+id/firstAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            />
+            android:gravity="right" />
+
         <RadioButton
             android:id="@+id/secondAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            />
+            android:gravity="right"/>
+
         <RadioButton
             android:id="@+id/thirdAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            />
+            android:gravity="right" />
+
         <RadioButton
             android:id="@+id/fourthAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            />
+            android:gravity="right"/>
     </RadioGroup>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
