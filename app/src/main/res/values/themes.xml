@@ -1,10 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="light_mode" parent="Theme.Material3.DayNight">
-        <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/purple</item>
         <item name="colorPrimaryDark">@color/darkPurple</item>
         <item name="colorAccent">@color/lightBlue</item>
         <item name="android:itemBackground">@color/lightBlue</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+    </style>
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorSurface">@color/darkPurple</item>
+        <item name="colorOnSurfaceVariant">@color/lightBlue</item>
+        <item name="colorOnSurface">@color/white</item>
     </style>
 </resources>
