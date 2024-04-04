@@ -5,18 +5,24 @@ public class User {
     private boolean isTeacher;
     private String name;
     private String UID;
+    private long license;
+    private int phoneNum;
 
     public User(){
         this.level=3;
         this.isTeacher =false;
         this.name=null;
         this.UID=null;
+        license=0;
+        phoneNum=0;
     }
-    public User(boolean _isTeacher, String _name, String _UID){
+    public User(boolean _isTeacher, String _name, String _UID, long _license, int _phoneNum){
         this.level=3;
         this.isTeacher =_isTeacher;
         this.name=_name;
         this.UID=_UID;
+        this.license=_license;
+        this.phoneNum=_phoneNum;
     }
 
 

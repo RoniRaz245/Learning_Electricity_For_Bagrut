@@ -66,6 +66,29 @@ public class RegistrationActivity extends baseActivity {
         email = emailTextView.getText().toString();
         password = passwordTextView.getText().toString();
         name= nameTextView.getText().toString();
+        long ID=0;
+        int phoneNumber=0;
+            if (isTeacherCheck.isChecked()){
+                try {
+                    ID = Long.parseLong(enterId.getText().toString());
+                } catch (Exception e) {
+                    Toast.makeText(enterId.getContext(),
+                                    "מספר רישוי כרצף מספרים בבקשה!",
+                                    Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+            try {
+                phoneNumber = Integer.parseInt(enterId.getText().toString());
+            } catch (Exception e) {
+                Toast.makeText(enterId.getContext(),
+                                "טלפון כרצף מספרים בבקשה!",
+                                Toast.LENGTH_LONG)
+                        .show();
+                return;
+            }
+        }
+
 
         //make sure user put in parameters
         if (TextUtils.isEmpty(email)) {
@@ -90,6 +113,8 @@ public class RegistrationActivity extends baseActivity {
             return;
         }
 
+        long finalID = ID;
+        int finalPhoneNumber = phoneNumber;
         mAuth
                 .createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -100,7 +125,7 @@ public class RegistrationActivity extends baseActivity {
                         if (task.isSuccessful()) {
                             //make a user with given+default parameters and upload to firebase
                             String UID=mAuth.getCurrentUser().getUid();
-                            User user = new User(isTeacherCheck.isChecked(),name, UID);
+                            User user = new User(isTeacherCheck.isChecked(),name, UID, finalID, finalPhoneNumber);
                             FirebaseDatabase.getInstance().getReference().child("users").child(UID).setValue(user);
 
                             //take user to home screen
