@@ -34,6 +34,9 @@ public class User {
     }
     public void setName(String name) { this.name = name; }
     public void setUID(String UID) { this.UID = UID; }
+    public void setLicense(long license) { this.license = license; }
+    public void setPhoneNum(int phoneNum) { this.phoneNum = phoneNum; }
+
     public int getLevel() {
         return level;
     }
@@ -42,6 +45,8 @@ public class User {
     }
     public String getName() { return name; }
     public String getUID() { return UID; }
+    public long getLicense() { return license; }
+    public int getPhoneNum() { return phoneNum; }
 
     public void updateLevel(double grade){
         //if user got low grade take him down levels, if got a high grade take up levels
