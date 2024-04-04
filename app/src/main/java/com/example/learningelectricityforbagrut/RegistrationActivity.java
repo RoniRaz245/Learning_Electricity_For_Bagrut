@@ -21,7 +21,7 @@ import com.google.android.gms.tasks.Task;
 
 public class RegistrationActivity extends baseActivity {
 
-    private EditText emailTextView, passwordTextView, nameTextView;
+    private EditText emailTextView, passwordTextView, nameTextView, enterId, enterPhoneNum;
     private FirebaseAuth mAuth;
     private Button Btn;
     private RadioButton isTeacherCheck;
@@ -39,12 +39,22 @@ public class RegistrationActivity extends baseActivity {
         passwordTextView = findViewById(R.id.passwd);
         nameTextView=findViewById(R.id.name);
         isTeacherCheck=findViewById(R.id.isTeacherCheck);
+        enterId=findViewById(R.id.teacherLicense);
+        enterPhoneNum=findViewById(R.id.phoneNumber);
         Btn = findViewById(R.id.btnregister);
+
         Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 registerNewUser();
+            }
+        });
+        isTeacherCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterId.setVisibility(passwordTextView.VISIBLE);
+                enterPhoneNum.setVisibility(passwordTextView.VISIBLE);
             }
         });
     }

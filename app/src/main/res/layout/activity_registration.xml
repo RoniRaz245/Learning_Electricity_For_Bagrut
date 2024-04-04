@@ -20,6 +20,7 @@
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ems="10"
         android:hint="Enter your Email"
         android:autofillHints="emailAddress"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
@@ -28,6 +29,7 @@
         android:id="@+id/passwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ems="10"
         android:hint="Enter your Password"
         android:autofillHints="password"
         android:inputType="textPassword"
@@ -47,6 +49,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="אני מורה"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/teacherLicense"
+        android:inputType="number"
+        android:hint="הכנס מספר תעודת הוראה"
+        android:visibility="gone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneNumber"
+        android:inputType="number"
+        android:hint="הכנס מספר טלפון"
+        android:visibility="gone"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <Button
