@@ -167,9 +167,8 @@ public class MakeQuestionActivity extends baseActivity {
         int answerIndex=correctAnswer-1;
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
-        String levelChild=String.join("level_",String.valueOf(level)); //the firebase branch the question will be under
 
-        database.child("questions").child(levelChild).addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child("questions").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long serialNum;
