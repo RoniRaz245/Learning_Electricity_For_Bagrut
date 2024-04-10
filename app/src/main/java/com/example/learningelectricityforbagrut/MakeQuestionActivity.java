@@ -167,13 +167,14 @@ public class MakeQuestionActivity extends baseActivity {
         int answerIndex=correctAnswer-1;
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
+        String levelChild=String.join("_","level", String.valueOf(level)); //name of branch of questions branch for this level of question
 
         database.child("questions").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long serialNum;
                 if (snapshot.hasChild(String.valueOf(level))) {
-                    serialNum = snapshot.child(String.valueOf(level)).getChildrenCount();
+                    serialNum = snapshot.child(levelChild).getChildrenCount()+1;
                 }
                 else{
                     serialNum = 1;
@@ -181,7 +182,7 @@ public class MakeQuestionActivity extends baseActivity {
                 String UID= mAuth.getCurrentUser().getUid();
                 String image=imageUrl;
                 Question newQuestion= new Question(body, image, options, answerIndex, level, UID, serialNum);
-                mDatabase.child("questions").child(String.valueOf(level)).push().setValue(newQuestion);
+                mDatabase.child("questions").child(levelChild).push().setValue(newQuestion);
             }
 
             @Override
