@@ -182,7 +182,7 @@ public class MakeQuestionActivity extends baseActivity {
                 String UID= mAuth.getCurrentUser().getUid();
                 String image=imageUrl;
                 Question newQuestion= new Question(body, image, options, answerIndex, level, UID, serialNum);
-                mDatabase.child("questions").child(levelChild).push().setValue(newQuestion);
+                mDatabase.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
             }
 
             @Override
