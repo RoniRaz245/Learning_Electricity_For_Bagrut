@@ -43,5 +43,14 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
+
+        findPreference("keepLoggedIn").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
+                assert prefs != null;
+                prefs.edit().putBoolean("keepLoggedIn", (boolean)newValue).apply();
+                return true;
+            }
+        });
     }
 }

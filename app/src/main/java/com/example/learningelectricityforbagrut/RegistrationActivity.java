@@ -1,5 +1,9 @@
 package com.example.learningelectricityforbagrut;
 
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -24,7 +28,7 @@ public class RegistrationActivity extends baseActivity {
     private EditText emailTextView, passwordTextView, nameTextView, enterId, enterPhoneNum;
     private FirebaseAuth mAuth;
     private Button Btn;
-    private RadioButton isTeacherCheck;
+    private RadioButton isTeacherCheck, keepLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,6 +45,7 @@ public class RegistrationActivity extends baseActivity {
         isTeacherCheck=findViewById(R.id.isTeacherCheck);
         enterId=findViewById(R.id.teacherLicense);
         enterPhoneNum=findViewById(R.id.phoneNumber);
+        keepLoggedIn=findViewById(R.id.keepLoggedIn);
         Btn = findViewById(R.id.btnregister);
 
         Btn.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +60,12 @@ public class RegistrationActivity extends baseActivity {
             public void onClick(View v) {
                 enterId.setVisibility(passwordTextView.VISIBLE);
                 enterPhoneNum.setVisibility(passwordTextView.VISIBLE);
+            }
+        });
+        keepLoggedIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
@@ -127,6 +138,12 @@ public class RegistrationActivity extends baseActivity {
                             String UID=mAuth.getCurrentUser().getUid();
                             User user = new User(isTeacherCheck.isChecked(),name, UID, finalID, finalPhoneNumber);
                             FirebaseDatabase.getInstance().getReference().child("users").child(UID).setValue(user);
+
+                            //save user prefs to sharedPreferences
+                            SharedPreferences prefs= getPreferences(Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("UID", UID);
+                            editor.apply();
 
                             //take user to home screen
                             Intent intent

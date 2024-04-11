@@ -45,6 +45,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <RadioButton
+        android:id="@+id/keepLoggedIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="השאר אותי מחובר/ת"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+
+    <RadioButton
         android:id="@+id/isTeacherCheck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
