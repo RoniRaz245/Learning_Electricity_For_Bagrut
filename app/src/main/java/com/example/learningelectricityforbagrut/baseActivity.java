@@ -9,8 +9,9 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuProvider;
+import androidx.fragment.app.FragmentActivity;
 
-public class baseActivity extends AppCompatActivity {
+public class baseActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

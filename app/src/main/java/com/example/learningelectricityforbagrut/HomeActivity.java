@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.fragment.app.DialogFragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,7 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class HomeActivity extends baseActivity {
+public class HomeActivity extends baseActivity
+        implements questionAmountForTest.NoticeDialogListener {
     private Button addReminder, uploadQuestion, startQuiz, openSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,13 @@ public class HomeActivity extends baseActivity {
 
         //set intents for buttons that open other activities
         addReminder.setOnClickListener(v-> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
-        startQuiz.setOnClickListener(v -> startQuiz.getContext().startActivity(new Intent(startQuiz.getContext(), QuestionViewActivity.class)));
+        startQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //make test based on user
+                showAmountDialog();
+            }
+        });
 
         //check if user is a teacher and set the "make question" button to only have use if they are
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -65,5 +74,14 @@ public class HomeActivity extends baseActivity {
                     }
                 });
     }
+    public void showAmountDialog() {
+        // Create an instance of the dialog fragment and show it.
+        DialogFragment dialog = new questionAmountForTest();
+        dialog.show(getSupportFragmentManager(), "questionAmountFragment");
+    }
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        // User taps the dialog's positive button.
 
+    }
 }
