@@ -172,13 +172,7 @@ public class MakeQuestionActivity extends baseActivity {
         database.child("questions").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                long serialNum;
-                if (snapshot.hasChild(String.valueOf(level))) {
-                    serialNum = snapshot.child(levelChild).getChildrenCount()+1;
-                }
-                else{
-                    serialNum = 1;
-                }
+                long serialNum = snapshot.getChildrenCount()+1;
                 String UID= mAuth.getCurrentUser().getUid();
                 String image=imageUrl;
                 Question newQuestion= new Question(body, image, options, answerIndex, level, UID, serialNum);
