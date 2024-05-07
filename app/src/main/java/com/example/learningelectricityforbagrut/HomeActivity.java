@@ -80,7 +80,7 @@ public class HomeActivity extends baseActivity
         dialog.show(getSupportFragmentManager(), "questionAmountFragment");
     }
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
+    public void onDialogPositiveClick(int amount) {
         // User taps the dialog's positive button.
 
     }
