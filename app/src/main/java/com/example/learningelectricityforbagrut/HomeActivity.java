@@ -6,14 +6,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import java.util.Date;
 
 public class HomeActivity extends baseActivity
         implements questionAmountForTest.NoticeDialogListener {
@@ -33,7 +37,7 @@ public class HomeActivity extends baseActivity
         startQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //make test based on user
+                //open fragment that lets user set test settings
                 showAmountDialog();
             }
         });
@@ -45,8 +49,8 @@ public class HomeActivity extends baseActivity
         database.child("users").child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        User currentUser = dataSnapshot.getValue(User.class);
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User currentUser = snapshot.getValue(User.class);
                         assert currentUser != null;
                         boolean isTeacher=currentUser.isTeacher();
                         if(isTeacher==true) {
@@ -81,7 +85,29 @@ public class HomeActivity extends baseActivity
     }
     @Override
     public void onDialogPositiveClick(int amount) {
-        // User taps the dialog's positive button.
+        //get what's needed to start creating test
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth mAuth= FirebaseAuth.getInstance();
+        database.child("users").child(mAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User currentUser = snapshot.getValue(User.class);
+                        assert currentUser != null;
+                        String UID=currentUser.getUID();
+                        int level=currentUser.getLevel();
+                        makeTest(UID, level, amount);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(startQuiz.getContext(), "הייתה שגיאה, נסה שוב מאוחר יותר", Toast.LENGTH_LONG).show();
+                    }
+        });
+    }
+    public void makeTest(String UID, int level, int questionAmount){
 
     }
 }
