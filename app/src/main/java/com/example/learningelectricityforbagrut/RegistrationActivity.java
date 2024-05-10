@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
@@ -65,7 +67,10 @@ public class RegistrationActivity extends baseActivity {
         keepLoggedIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(keepLoggedIn.getContext());
+                SharedPreferences.Editor edit=prefs.edit();
+                edit.putBoolean("keepLoggedIn", true);
+                edit.apply();
             }
         });
     }

@@ -3,6 +3,9 @@ package com.example.learningelectricityforbagrut;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
@@ -36,6 +39,25 @@ public class LoginActivity extends baseActivity {
         TakeToSignUp.setOnClickListener(v -> TakeToSignUp.getContext().startActivity(new Intent(TakeToSignUp.getContext(), RegistrationActivity.class)));
         mAuth = FirebaseAuth.getInstance();
         login.setOnClickListener(v -> loginUserAccount());
+
+        //take user to homescreen if asked to be kept logged in
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        if(prefs.getBoolean("keepLoggedIn", false)){
+            if(mAuth.getCurrentUser()!=null) {
+                Intent goHome
+                        = new Intent(login.getContext(),
+                        HomeActivity.class);
+                login.getContext().startActivity(goHome);
+            }
+            else{
+                Toast.makeText(login.getContext(),
+                                "הייתה שגיאה, אנא היכנס ידנית",
+                                Toast.LENGTH_LONG)
+                        .show();
+            }
+        }
+
+
     }
 
     private void loginUserAccount()
