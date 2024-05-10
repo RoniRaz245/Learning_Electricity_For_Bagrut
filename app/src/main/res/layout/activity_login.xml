@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFFFFF"
-        android:hint="Enter your Email"
+        android:hint="אימייל"
         android:inputType="textEmailAddress"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:autofillHints="emailAddress"/>
@@ -34,7 +34,7 @@
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter your Password"
+        android:hint="סיסמה"
         android:autofillHints="password"
         android:inputType="textPassword"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
@@ -44,13 +44,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Login"
+        android:text="כניסה"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <Button
         android:id="@+id/TakeToSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="I don't have an account yet"
+        android:text="הרשמה"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 </LinearLayout>

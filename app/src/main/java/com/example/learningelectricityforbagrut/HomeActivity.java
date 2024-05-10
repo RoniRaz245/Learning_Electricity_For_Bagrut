@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Date;
 
 public class HomeActivity extends baseActivity
-        implements questionAmountForTest.NoticeDialogListener {
+        /*implements questionAmountForTest.NoticeDialogListener*/ {
     private Button addReminder, uploadQuestion, startQuiz, openSettings;
 
     @Override
@@ -35,13 +35,13 @@ public class HomeActivity extends baseActivity
 
         //set intents for buttons that open other activities
         addReminder.setOnClickListener(v -> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
-        startQuiz.setOnClickListener(new View.OnClickListener() {
+        /*startQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //open fragment that lets user set test settings
                 showAmountDialog();
             }
-        });
+        });*/
 
         //check if user is a teacher and set the "make question" button to only have use if they are
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -77,7 +77,7 @@ public class HomeActivity extends baseActivity
         });
     }
 
-        public void showAmountDialog () {
+        /*public void showAmountDialog () {
             // Create an instance of the dialog fragment and show it.
             DialogFragment dialog = new questionAmountForTest();
             dialog.show(getSupportFragmentManager(), "questionAmountFragment");
@@ -99,12 +99,20 @@ public class HomeActivity extends baseActivity
                                 assert currentUser != null;
                                 String UID = currentUser.getUID();
                                 int level = currentUser.getLevel();
-                                makeTest(UID, level, amount);
+                                makeTest(UID, level, amount, database);
                             }
                         }
                     });
             }
-        public void makeTest (String UID,int level, int questionAmount){
-        }
+        public void makeTest (String UID, int level, int questionAmount, DatabaseReference database){
+            String levelName="level_"+level;
+            database.child("questions").child(levelName).get().addOnCompleteListener(
+                    new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
 
+                        }
+                    })
+
+        }*/
 }
