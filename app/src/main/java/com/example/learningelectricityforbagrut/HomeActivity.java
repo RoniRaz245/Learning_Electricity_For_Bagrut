@@ -17,7 +17,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class HomeActivity extends baseActivity
@@ -123,7 +127,14 @@ public class HomeActivity extends baseActivity
                                     Toast.makeText(startQuiz.getContext(), "יש רק" +questions.size() + "שאלות ברמה שלך, סליחה על חוסר הנוחות", Toast.LENGTH_LONG).show();
 
                                 else{
-
+                                    //access questions in random order to run
+                                    List keys = new ArrayList(questions.keySet());
+                                    Collections.shuffle(keys);
+                                    keys=keys.subList(0, questionAmount);
+                                    Question[] questionsForTest=new Question[questionAmount];
+                                    for (int i=0; i<questionAmount; i++) {
+                                        questionsForTest[i]=questions.get(keys.get(i));
+                                    }
                                 }
                             }
                         }
