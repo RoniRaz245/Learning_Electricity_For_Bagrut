@@ -18,9 +18,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.Date;
+import java.util.Map;
 
 public class HomeActivity extends baseActivity
-        /*implements questionAmountForTest.NoticeDialogListener*/ {
+        implements questionAmountForTest.NoticeDialogListener {
     private Button addReminder, uploadQuestion, startQuiz, openSettings;
 
     @Override
@@ -35,13 +36,13 @@ public class HomeActivity extends baseActivity
 
         //set intents for buttons that open other activities
         addReminder.setOnClickListener(v -> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
-        /*startQuiz.setOnClickListener(new View.OnClickListener() {
+        startQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //open fragment that lets user set test settings
                 showAmountDialog();
             }
-        });*/
+        });
 
         //check if user is a teacher and set the "make question" button to only have use if they are
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -77,7 +78,7 @@ public class HomeActivity extends baseActivity
         });
     }
 
-        /*public void showAmountDialog () {
+        public void showAmountDialog () {
             // Create an instance of the dialog fragment and show it.
             DialogFragment dialog = new questionAmountForTest();
             dialog.show(getSupportFragmentManager(), "questionAmountFragment");
@@ -110,9 +111,23 @@ public class HomeActivity extends baseActivity
                     new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if(!task.isSuccessful())
+                                Toast.makeText(startQuiz.getContext(), "הייתה שגיאה, נסה שוב מאוחר יותר", Toast.LENGTH_LONG).show();
 
+                            else {
+                                Map<String, Question> questions = (Map<String, Question>) task.getResult().getValue();
+                                if(questions==null)
+                                    Toast.makeText(startQuiz.getContext(),  "אין שאלות ברמתך כרגע, סליחה על חוסר הנוחות", Toast.LENGTH_LONG).show();
+
+                                else if(questions.size()<questionAmount)
+                                    Toast.makeText(startQuiz.getContext(), "יש רק" +questions.size() + "שאלות ברמה שלך, סליחה על חוסר הנוחות", Toast.LENGTH_LONG).show();
+
+                                else{
+
+                                }
+                            }
                         }
-                    })
+                    });
 
-        }*/
+        }
 }
