@@ -132,9 +132,19 @@ public class HomeActivity extends baseActivity
                                     Collections.shuffle(keys);
                                     keys=keys.subList(0, questionAmount);
                                     Question[] questionsForTest=new Question[questionAmount];
-                                    for (int i=0; i<questionAmount; i++) {
+                                    for (int i=0; i<questionAmount; i++)
                                         questionsForTest[i]=questions.get(keys.get(i));
-                                    }
+
+                                    //make array for timers
+                                    int[] timers=new int[questionAmount];
+
+                                    //get time test was taken to save test with
+                                    String timeTaken= String.valueOf(System.currentTimeMillis());
+
+                                    //array to put answers in
+                                    boolean[] correctAnswers=new boolean[questionAmount];
+
+                                    Test test=new Test(UID, questionsForTest, correctAnswers, timers, timeTaken);
                                 }
                             }
                         }
