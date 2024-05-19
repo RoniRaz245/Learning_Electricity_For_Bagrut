@@ -32,8 +32,10 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.UUID;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -171,23 +173,19 @@ public class MakeQuestionActivity extends baseActivity {
         FirebaseAuth mAuth= FirebaseAuth.getInstance();
         String levelChild=String.join("_","level", String.valueOf(level)); //name of branch of questions branch for this level of question
 
-        database.child("questions").addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child("questions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                long serialNum = snapshot.getChildrenCount()+1;
-                String UID= mAuth.getCurrentUser().getUid();
-                String image="0";
-                if(imageUploaded)
-                    image=imageUrl;
-                Question newQuestion= new Question(body, image, options, answerIndex, level, UID, serialNum);
-                mDatabase.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
-                imageUploaded=false;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(),"אנא נסו שוב", Toast.LENGTH_LONG).show();
-
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()) {
+                    long serialNum = task.getResult().getChildrenCount() + 1;
+                    String UID = mAuth.getCurrentUser().getUid();
+                    String image = "0";
+                    if (imageUploaded)
+                        image = imageUrl;
+                    Question newQuestion = new Question(body, image, options, answerIndex, level, UID, serialNum);
+                    mDatabase.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
+                }
+                imageUploaded = false; //rest check for next time question is uploaded
             }
         });
     }
