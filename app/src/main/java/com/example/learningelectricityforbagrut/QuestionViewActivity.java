@@ -1,5 +1,6 @@
 package com.example.learningelectricityforbagrut;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,15 +9,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Locale;
 
-public class QuestionViewActivity extends baseActivity /*implements TextToSpeech.OnInitListener*/ {
+public class QuestionViewActivity extends baseActivity  /*implements TextToSpeech.OnInitListener*/ {
     private TextView questionBody;
-
+    private RadioGroup answers;
+    private BottomNavigationView questionNav;
     /*private TextToSpeech tts;
     private Button ttsButton;*/
     //TTS not in use till further notice
@@ -26,8 +32,16 @@ public class QuestionViewActivity extends baseActivity /*implements TextToSpeech
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_view);
         questionBody=findViewById(R.id.questionBody);
+        answers=findViewById(R.id.answers);
+        questionNav=findViewById(R.id.bottom_navigation);
+
         Intent testIntent = getIntent();
         Test currTest=testIntent.getSerializableExtra("test", Test.class);
+        assert currTest != null;
+        int questionAmount=currTest.getQuestions().length;
+        int currQuestion=0;
+
+
         /* ttsButton=findViewById(R.id.ttsButton);
         tts= new TextToSpeech(this,this);;
 
@@ -37,6 +51,10 @@ public class QuestionViewActivity extends baseActivity /*implements TextToSpeech
                 textToSpeak(); //calls function that reads out text
             }
         });*/
+    }
+
+    private void setUpQuestion(int questionNum){
+
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();

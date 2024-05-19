@@ -52,6 +52,7 @@ public class MakeQuestionActivity extends baseActivity {
     private ImageButton levelInfo;
     protected DatabaseReference mDatabase;
     protected StorageReference mStorage;
+    private boolean imageUploaded;
     private Uri uri;
     //create the photo picker to launch if user so requests
     protected ActivityResultLauncher<PickVisualMediaRequest>
@@ -85,6 +86,7 @@ public class MakeQuestionActivity extends baseActivity {
         public void onActivityResult(Boolean result) {
             if (result == true) {
                 imageUrl=UUID.randomUUID().toString(); //generate random ID for this image
+                imageUploaded=true;
                 mStorage=FirebaseStorage.getInstance().getReference();
                 StorageReference path=mStorage.child("Images").child(imageUrl);
                 path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -174,9 +176,12 @@ public class MakeQuestionActivity extends baseActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 long serialNum = snapshot.getChildrenCount()+1;
                 String UID= mAuth.getCurrentUser().getUid();
-                String image=imageUrl;
+                String image="0";
+                if(imageUploaded)
+                    image=imageUrl;
                 Question newQuestion= new Question(body, image, options, answerIndex, level, UID, serialNum);
                 mDatabase.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
+                imageUploaded=false;
             }
 
             @Override
