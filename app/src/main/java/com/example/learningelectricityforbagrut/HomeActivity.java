@@ -145,6 +145,9 @@ public class HomeActivity extends baseActivity
                                     boolean[] correctAnswers=new boolean[questionAmount];
 
                                     Test test=new Test(UID, questionsForTest, correctAnswers, timers, timeTaken);
+                                    Intent startTest = new Intent(getApplicationContext(), QuestionViewActivity.class);
+                                    startTest.putExtra("test", test);
+                                    startActivity(startTest);
                                 }
                             }
                         }

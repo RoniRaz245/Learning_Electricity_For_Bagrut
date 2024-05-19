@@ -1,7 +1,9 @@
 package com.example.learningelectricityforbagrut;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -18,11 +20,14 @@ public class QuestionViewActivity extends baseActivity /*implements TextToSpeech
     /*private TextToSpeech tts;
     private Button ttsButton;*/
     //TTS not in use till further notice
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_view);
         questionBody=findViewById(R.id.questionBody);
+        Intent testIntent = getIntent();
+        Test currTest=testIntent.getSerializableExtra("test", Test.class);
         /* ttsButton=findViewById(R.id.ttsButton);
         tts= new TextToSpeech(this,this);;
 

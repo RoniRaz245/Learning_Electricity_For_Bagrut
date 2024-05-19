@@ -1,6 +1,8 @@
 package com.example.learningelectricityforbagrut;
 
-public class Test {
+import java.io.Serializable;
+
+public class Test implements Serializable {
     private String UID;
     private Question[] questions;
     private boolean[] correctAnswerGiven;
