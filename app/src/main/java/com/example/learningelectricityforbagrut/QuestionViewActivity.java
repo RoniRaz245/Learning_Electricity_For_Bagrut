@@ -5,6 +5,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -12,17 +14,27 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Locale;
+import java.util.Objects;
+import java.util.UUID;
 
 public class QuestionViewActivity extends baseActivity  /*implements TextToSpeech.OnInitListener*/ {
-    private TextView questionBody;
-    private RadioGroup answers;
-    private BottomNavigationView questionNav;
+    TextView questionBody;
+    RadioGroup answers;
+    RadioButton firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
+    ImageView imageView;
+    BottomNavigationView questionNav;
     /*private TextToSpeech tts;
     private Button ttsButton;*/
     //TTS not in use till further notice
@@ -33,6 +45,11 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         setContentView(R.layout.activity_question_view);
         questionBody=findViewById(R.id.questionBody);
         answers=findViewById(R.id.answers);
+        firstAnswer=findViewById(R.id.firstAnswer);
+        secondAnswer=findViewById(R.id.secondAnswer);
+        thirdAnswer=findViewById(R.id.thirdAnswer);
+        fourthAnswer=findViewById(R.id.fourthAnswer);
+        imageView=findViewById(R.id.imageView);
         questionNav=findViewById(R.id.bottom_navigation);
 
         Intent testIntent = getIntent();
@@ -53,7 +70,30 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         });*/
     }
 
-    private void setUpQuestion(int questionNum){
+    private void setUpQuestion(int questionNum, Test test){
+        Question question=test.getQuestions()[questionNum];
+        questionBody.setText(question.getQuestionBody());
+        firstAnswer.setText(question.getAnswers()[0]);
+        firstAnswer.setText(question.getAnswers()[1]);
+        firstAnswer.setText(question.getAnswers()[2]);
+        firstAnswer.setText(question.getAnswers()[3]);
+        String imageURL=question.getImageUrl();
+        if(!Objects.equals(imageURL, "0")){
+            StorageReference path=FirebaseStorage.getInstance().getReference().child("Images").child(imageURL);
+            path.getBytes(Long.MAX_VALUE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                    imageView.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+
+        }
 
     }
     /* private void textToSpeak(){
