@@ -68,6 +68,7 @@ public class MakeQuestionActivity extends baseActivity {
                     path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            imageUploaded=true;
                             Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -88,12 +89,12 @@ public class MakeQuestionActivity extends baseActivity {
         public void onActivityResult(Boolean result) {
             if (result == true) {
                 imageUrl=UUID.randomUUID().toString(); //generate random ID for this image
-                imageUploaded=true;
                 mStorage=FirebaseStorage.getInstance().getReference();
                 StorageReference path=mStorage.child("Images").child(imageUrl);
                 path.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        imageUploaded=true;
                         Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
