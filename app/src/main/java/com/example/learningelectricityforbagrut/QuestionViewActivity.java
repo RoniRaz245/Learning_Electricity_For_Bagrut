@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -35,6 +36,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
     RadioButton firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
     ImageView imageView;
     BottomNavigationView questionNav;
+    Chronometer[] chronometers;
     /*private TextToSpeech tts;
     private Button ttsButton;*/
     //TTS not in use till further notice
@@ -56,7 +58,13 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         Test currTest=testIntent.getSerializableExtra("test", Test.class);
         assert currTest != null;
         int questionAmount=currTest.getQuestions().length;
+        int[] currAnswers= new int[questionAmount]; //to save what answers user gives
         int currQuestion=0;
+
+        chronometers= new Chronometer[questionAmount];
+        for(int i=0;i<questionAmount;i++){
+            chronometers[i]=new Chronometer(getApplicationContext());
+        }
 
 
         /* ttsButton=findViewById(R.id.ttsButton);
@@ -92,9 +100,8 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                     // Handle any errors
                 }
             });
-
         }
-
+        chronometers[questionNum].start();
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();
