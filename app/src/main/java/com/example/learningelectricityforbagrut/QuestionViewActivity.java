@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -66,6 +67,17 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             chronometers[i]=new Chronometer(getApplicationContext());
         }
 
+        questionNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id=menuItem.getItemId();
+                if(id==R.id.next){
+
+                }
+                return true;
+            }
+        });
+
 
         /* ttsButton=findViewById(R.id.ttsButton);
         tts= new TextToSpeech(this,this);;
@@ -76,6 +88,18 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                 textToSpeak(); //calls function that reads out text
             }
         });*/
+    }
+    private void nextQuestion(int currQuestion, int nextQuestion, int[] currAnswers, Test test){
+        chronometers[currQuestion].stop();
+        int currAnswerID=answers.getCheckedRadioButtonId();
+        int currAnswer;
+        switch(currAnswerID){
+            case R.id.firstAnswer:
+                currAnswer=1;
+                break;
+
+        }
+        setUpQuestion(nextQuestion, test);
     }
 
     private void setUpQuestion(int questionNum, Test test){
