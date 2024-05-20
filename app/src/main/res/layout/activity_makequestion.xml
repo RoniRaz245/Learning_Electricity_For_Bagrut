@@ -97,7 +97,7 @@
 
     <TextView
         android:id="@+id/correctAnswerTitle"
-        android:layout_width="151dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/correctAnswerPicker"
         android:layout_alignParentStart="true"
