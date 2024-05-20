@@ -152,7 +152,7 @@ public class MakeQuestionActivity extends baseActivity {
         info.show(getSupportFragmentManager(), "info");
     }
     private void uploadGivenQuestion(){
-        Toast.makeText(this, "uploading...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "מעלה שאלה...", Toast.LENGTH_SHORT).show();
         //get details of question
         String body=bodyTextView.getText().toString();
         String option1= option1TextView.getText().toString();
