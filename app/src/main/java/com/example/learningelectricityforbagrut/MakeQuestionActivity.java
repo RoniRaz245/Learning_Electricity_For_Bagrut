@@ -129,6 +129,19 @@ public class MakeQuestionActivity extends baseActivity {
         upload=findViewById(R.id.uploadQuestion);
         uploadImage=findViewById(R.id.uploadImage);
 
+        levelPicker.setEnabled(true);
+        levelPicker.setMinValue(1);
+        levelPicker.setMaxValue(5);
+        String[] levels={"1","2","3","4","5"};
+        levelPicker.setDisplayedValues(levels);
+
+        correctAnswerPicker.setEnabled(true);
+        correctAnswerPicker.setMinValue(1);
+        correctAnswerPicker.setMaxValue(4);
+        String[] answers={"1","2","3","4","5"};
+        correctAnswerPicker.setDisplayedValues(answers);
+
+
 
         mDatabase= FirebaseDatabase.getInstance().getReference();
         levelInfo.setOnClickListener(v->giveInfo());
@@ -185,6 +198,7 @@ public class MakeQuestionActivity extends baseActivity {
                         image = imageUrl;
                     Question newQuestion = new Question(body, image, options, answerIndex, level, UID, serialNum);
                     mDatabase.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
+                    Toast.makeText(getApplicationContext(),"השאלה הועלתה!", Toast.LENGTH_LONG).show();
                 }
                 imageUploaded = false; //rest check for next time question is uploaded
             }
