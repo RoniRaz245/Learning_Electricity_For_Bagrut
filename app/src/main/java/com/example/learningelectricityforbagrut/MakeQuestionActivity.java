@@ -198,11 +198,11 @@ public class MakeQuestionActivity extends baseActivity {
                     Question newQuestion = new Question(body, image, options, answerIndex, level, UID, serialNum);
                     database.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
                     Toast.makeText(getApplicationContext(),"השאלה הועלתה!", Toast.LENGTH_LONG).show();
+                    imageUploaded = false; //rest check for next time question is uploaded
                 }
                 else{
                     Toast.makeText(MakeQuestionActivity.this, "הייתה שגיאה, אנא נסו שוב", Toast.LENGTH_SHORT).show();
                 }
-                imageUploaded = false; //rest check for next time question is uploaded
             }
         });
     }
