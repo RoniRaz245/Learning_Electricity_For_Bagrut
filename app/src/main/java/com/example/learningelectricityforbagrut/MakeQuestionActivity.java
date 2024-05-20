@@ -189,7 +189,9 @@ public class MakeQuestionActivity extends baseActivity {
         database.child("questions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(task.isSuccessful()) {
+                if(!task.isSuccessful())
+                    Toast.makeText(MakeQuestionActivity.this, "הייתה שגיאה, אנא נסו שוב", Toast.LENGTH_SHORT).show();
+                else{
                     long serialNum = task.getResult().child("level_1").getChildrenCount() + task.getResult().child("level_2").getChildrenCount() + task.getResult().child("level_3").getChildrenCount() + task.getResult().child("level_4").getChildrenCount()+task.getResult().child("level_5").getChildrenCount()+task.getResult().child("deleted_questions").getChildrenCount()-5;
                     String UID = mAuth.getCurrentUser().getUid();
                     String image = "0";
@@ -199,9 +201,6 @@ public class MakeQuestionActivity extends baseActivity {
                     database.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
                     Toast.makeText(getApplicationContext(),"השאלה הועלתה!", Toast.LENGTH_LONG).show();
                     imageUploaded = false; //rest check for next time question is uploaded
-                }
-                else{
-                    Toast.makeText(MakeQuestionActivity.this, "הייתה שגיאה, אנא נסו שוב", Toast.LENGTH_SHORT).show();
                 }
             }
         });
