@@ -71,9 +71,12 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id=menuItem.getItemId();
-                if(id==R.id.next){
-
-                }
+                if(id==R.id.next)
+                    moveQuestions(currQuestion, currQuestion+1, currAnswers, currTest);
+                else if(id==R.id.back)
+                    moveQuestions(currQuestion, currQuestion-1, currAnswers, currTest);
+                else if(id==R.id.pause)
+                    chronometers[currQuestion].stop();
                 return true;
             }
         });
@@ -89,16 +92,21 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             }
         });*/
     }
-    private void nextQuestion(int currQuestion, int nextQuestion, int[] currAnswers, Test test){
+    private void moveQuestions(int currQuestion, int nextQuestion, int[] currAnswers, Test test){
         chronometers[currQuestion].stop();
         int currAnswerID=answers.getCheckedRadioButtonId();
         int currAnswer;
-        switch(currAnswerID){
-            case R.id.firstAnswer:
-                currAnswer=1;
-                break;
-
-        }
+        if (currAnswerID == R.id.firstAnswer)
+            currAnswer = 1;
+        else if(currAnswerID==R.id.secondAnswer)
+            currAnswer=2;
+        else if (currAnswerID == R.id.thirdAnswer)
+            currAnswer = 3;
+        else if(currAnswerID==R.id.fourthAnswer)
+            currAnswer=4;
+        else
+            currAnswer=-1;
+        currAnswers[currQuestion]=currAnswer;
         setUpQuestion(nextQuestion, test);
     }
 
