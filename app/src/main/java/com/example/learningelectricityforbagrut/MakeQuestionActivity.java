@@ -52,7 +52,7 @@ public class MakeQuestionActivity extends baseActivity {
     private String imageUrl;
     private Button upload, uploadImage;
     private ImageButton levelInfo;
-    protected DatabaseReference mDatabase;
+    protected DatabaseReference database;
     protected StorageReference mStorage;
     private boolean imageUploaded;
     private Uri uri;
@@ -142,8 +142,6 @@ public class MakeQuestionActivity extends baseActivity {
         correctAnswerPicker.setDisplayedValues(answers);
 
 
-
-        mDatabase= FirebaseDatabase.getInstance().getReference();
         levelInfo.setOnClickListener(v->giveInfo());
 
         uploadImage.setOnClickListener(v -> getImageFromUser());
@@ -198,7 +196,7 @@ public class MakeQuestionActivity extends baseActivity {
                     if (imageUploaded)
                         image = imageUrl;
                     Question newQuestion = new Question(body, image, options, answerIndex, level, UID, serialNum);
-                    mDatabase.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
+                    database.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
                     Toast.makeText(getApplicationContext(),"השאלה הועלתה!", Toast.LENGTH_LONG).show();
                 }
                 else{
