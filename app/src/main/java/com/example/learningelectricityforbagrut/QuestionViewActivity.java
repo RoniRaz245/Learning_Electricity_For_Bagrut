@@ -61,7 +61,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         assert currTest != null;
         int questionAmount=currTest.getQuestions().length;
         int[] currAnswers= new int[questionAmount]; //to save what answers user gives
-        int currQuestion=0;
+        final int[] currQuestion = {0};
 
         chronometers= new Chronometer[questionAmount];
         for(int i=0;i<questionAmount;i++){
@@ -72,12 +72,20 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id=menuItem.getItemId();
-                if(id==R.id.next)
-                    moveQuestions(currQuestion, currQuestion+1, currAnswers, currTest);
+                if(id==R.id.next) {
+                    if(currQuestion[0] +1<questionAmount)
+                        moveQuestions(currQuestion, currQuestion[0]+1, currAnswers, currTest);
+
+                    else
+                        Toast.makeText(getApplicationContext(), "אין עוד שאלות במבחן!", Toast.LENGTH_LONG).show();
+                }
                 else if(id==R.id.back)
-                    moveQuestions(currQuestion, currQuestion-1, currAnswers, currTest);
+                    if(currQuestion[0] >0)//if this isn't the first question
+                        moveQuestions(currQuestion, currQuestion[0] -1, currAnswers, currTest);
+                    else
+                        Toast.makeText(getApplicationContext(), "זוהי השאלה הראשונה!", Toast.LENGTH_LONG).show();
                 else if(id==R.id.pause)
-                    chronometers[currQuestion].stop();
+                    chronometers[currQuestion[0]].stop();
                 return true;
             }
         });
@@ -93,8 +101,8 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             }
         });*/
     }
-    private void moveQuestions(int currQuestion, int nextQuestion, int[] currAnswers, Test test){
-        chronometers[currQuestion].stop();
+    private void moveQuestions(int[] currQuestion, int nextQuestion, int[] currAnswers, Test test){
+        chronometers[currQuestion[0]].stop();
         int currAnswerID=answers.getCheckedRadioButtonId();
         int currAnswer;
         if (currAnswerID == R.id.firstAnswer)
@@ -107,12 +115,13 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             currAnswer=4;
         else
             currAnswer=-1;
-        currAnswers[currQuestion]=currAnswer;
-        setUpQuestion(nextQuestion, test);
+        currAnswers[currQuestion[0]]=currAnswer;
+        currQuestion[0]=nextQuestion;
+        setUpQuestion(currQuestion, test);
     }
 
-    private void setUpQuestion(int questionNum, Test test){
-        Question question=test.getQuestions()[questionNum];
+    private void setUpQuestion(int[] questionNum, Test test){
+        Question question=test.getQuestions()[questionNum[0]];
         questionBody.setText(question.getQuestionBody());
         firstAnswer.setText(question.getAnswers()[0]);
         firstAnswer.setText(question.getAnswers()[1]);
@@ -134,7 +143,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                 }
             });
         }
-        chronometers[questionNum].start();
+        chronometers[questionNum[0]].start();
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();
