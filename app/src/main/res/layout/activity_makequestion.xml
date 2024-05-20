@@ -118,12 +118,13 @@
 
     <NumberPicker
         android:id="@+id/correctAnswerPicker"
-        android:layout_width="97dp"
-        android:layout_height="163dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
+        android:layout_toStartOf="@id/secondAnswer"
         android:layout_marginStart="37dp"
         android:layout_marginEnd="261dp"
         android:layout_marginBottom="338dp"
