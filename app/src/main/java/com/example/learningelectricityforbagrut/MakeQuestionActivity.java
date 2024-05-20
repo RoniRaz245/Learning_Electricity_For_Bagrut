@@ -154,6 +154,7 @@ public class MakeQuestionActivity extends baseActivity {
         info.show(getSupportFragmentManager(), "info");
     }
     private void uploadGivenQuestion(){
+        Toast.makeText(this, "uploading...", Toast.LENGTH_SHORT).show();
         //get details of question
         String body=bodyTextView.getText().toString();
         String option1= option1TextView.getText().toString();
@@ -199,6 +200,9 @@ public class MakeQuestionActivity extends baseActivity {
                     Question newQuestion = new Question(body, image, options, answerIndex, level, UID, serialNum);
                     mDatabase.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
                     Toast.makeText(getApplicationContext(),"השאלה הועלתה!", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(MakeQuestionActivity.this, "הייתה שגיאה, אנא נסו שוב", Toast.LENGTH_SHORT).show();
                 }
                 imageUploaded = false; //rest check for next time question is uploaded
             }
