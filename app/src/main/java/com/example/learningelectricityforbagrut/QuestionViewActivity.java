@@ -39,6 +39,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
     ImageView imageView;
     BottomNavigationView questionNav;
     Chronometer[] chronometers;
+    Chronometer chronoView;
     /*private TextToSpeech tts;
     private Button ttsButton;*/
     //TTS not in use till further notice
@@ -54,6 +55,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         thirdAnswer=findViewById(R.id.thirdAnswer);
         fourthAnswer=findViewById(R.id.fourthAnswer);
         imageView=findViewById(R.id.imageView);
+        chronoView=findViewById(R.id.chronometer);
         questionNav=findViewById(R.id.bottom_navigation);
 
         Intent testIntent = getIntent();
@@ -67,6 +69,8 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         for(int i=0;i<questionAmount;i++){
             chronometers[i]=new Chronometer(getApplicationContext());
         }
+
+        setUpQuestion(currQuestion, currTest);
 
         questionNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -143,7 +147,8 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                 }
             });
         }
-        chronometers[questionNum[0]].start();
+        chronoView=chronometers[questionNum[0]];
+        chronoView.start();
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();
