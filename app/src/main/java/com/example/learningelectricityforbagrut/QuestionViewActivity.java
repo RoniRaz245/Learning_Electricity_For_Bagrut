@@ -138,6 +138,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                 @Override
                 public void onSuccess(byte[] bytes) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                    imageView.setVisibility(View.VISIBLE);
                     imageView.setImageBitmap(bitmap);
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -150,8 +151,8 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         else{
             imageView.setVisibility(View.INVISIBLE);
         }
+        chronometers[questionNum[0]].start();
         chronoView=chronometers[questionNum[0]];
-        chronoView.start();
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();
