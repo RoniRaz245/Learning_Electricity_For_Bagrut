@@ -6,7 +6,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
     private String UID;
     private Question[] questions;
     private boolean[] correctAnswerGiven;
-    private double[] timers;
+    private int[] timers;
     private String timeTaken;
 
     //constructors
@@ -17,7 +17,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.timers=null;
         this.timeTaken=null;
     }
-    public Test(String _UID, Question[] _questions, boolean[] _correctAnswerGiven, double[] _timers, String _timeTaken){
+    public Test(String _UID, Question[] _questions, boolean[] _correctAnswerGiven, int[] _timers, String _timeTaken){
         this.UID=_UID;
         this.questions=_questions;
         this.correctAnswerGiven=_correctAnswerGiven;
@@ -30,7 +30,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
         return correctAnswerGiven;
     }
 
-    public double[] getTimers() {
+    public int[] getTimers() {
         return timers;
     }
 
@@ -54,7 +54,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.questions = questions;
     }
 
-    public void setTimers(double[] timers) {
+    public void setTimers(int[] timers) {
         this.timers = timers;
     }
 

@@ -84,20 +84,8 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                         Toast.makeText(getApplicationContext(), "זוהי השאלה הראשונה!", Toast.LENGTH_LONG).show();
                 else if(id==R.id.pause) {
                     chronoView.stop();
+                    //get current time on chronometer
 
-                    int stoppedMilliseconds = 0;
-                    String chronoText = chronoView.getText().toString();
-                    String array[] = chronoText.split(":");
-                    if (array.length == 2) {
-                        stoppedMilliseconds = Integer.parseInt(array[0]) * 60 * 1000
-                                + Integer.parseInt(array[1]) * 1000;
-                    } else if (array.length == 3) {
-                        stoppedMilliseconds = Integer.parseInt(array[0]) * 60 * 60 * 1000
-                                + Integer.parseInt(array[1]) * 60 * 1000
-                                + Integer.parseInt(array[2]) * 1000;
-                    }
-                    double[] timers=currTest.getTimers();
-                    timers
 
                 }
                 return true;
@@ -116,7 +104,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         });*/
     }
     private void moveQuestions(int[] currQuestion, int nextQuestion, int[] currAnswers, Test test){
-        chronometers[currQuestion[0]].stop();
+        chronoView.stop();
         int currAnswerID=answers.getCheckedRadioButtonId();
         int currAnswer;
         if (currAnswerID == R.id.firstAnswer)
@@ -179,8 +167,22 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         else{
             imageView.setVisibility(View.INVISIBLE);
         }
-        chronometers[questionNum[0]].start();
-        chronoView=chronometers[questionNum[0]];
+        chronoView.setBase(test.getTimers()[questionNum[0]]);
+        chronoView.start();
+    }
+    double getTimeFromChronometer(){
+        int timeOnChronometer = 0;
+        String chronoText = chronoView.getText().toString();
+        String[] array = chronoText.split(":");
+        if (array.length == 2) {
+            timeOnChronometer = Integer.parseInt(array[0]) * 60
+                    + Integer.parseInt(array[1]);
+        } else if (array.length == 3) {
+            timeOnChronometer = Integer.parseInt(array[0]) * 60 * 60
+                    + Integer.parseInt(array[1]) * 60
+                    + Integer.parseInt(array[2]) ;
+        }
+        return timeOnChronometer;
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();
