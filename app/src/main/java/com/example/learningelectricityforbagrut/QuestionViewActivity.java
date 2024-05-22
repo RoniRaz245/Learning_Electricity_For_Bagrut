@@ -147,6 +147,9 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                 }
             });
         }
+        else{
+            imageView.setVisibility(View.INVISIBLE);
+        }
         chronoView=chronometers[questionNum[0]];
         chronoView.start();
     }
