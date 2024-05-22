@@ -1,10 +1,12 @@
 package com.example.learningelectricityforbagrut;
 
 import android.graphics.Bitmap;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.lang.Double;
 
-public class Question {
+public class Question implements Serializable {
     private String questionBody;
     private String imageUrl;
     private ArrayList<String> answers;
