@@ -2,7 +2,7 @@ package com.example.learningelectricityforbagrut;
 
 import java.io.Serializable;
 
-public class Test implements Serializable {
+public class Test implements Serializable  { //serializable so it can be passed as an extra on the intent used to start quizz
     private String UID;
     private Question[] questions;
     private boolean[] correctAnswerGiven;
