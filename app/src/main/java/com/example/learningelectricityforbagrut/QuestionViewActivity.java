@@ -70,7 +70,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             chronometers[i]=new Chronometer(getApplicationContext());
         }
 
-        setUpQuestion(currQuestion, currTest);
+        setUpQuestion(currQuestion, currTest, currAnswers);
 
         questionNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -119,18 +119,36 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             currAnswer=4;
         else
             currAnswer=-1;
+        answers.clearCheck();
         currAnswers[currQuestion[0]]=currAnswer;
         currQuestion[0]=nextQuestion;
-        setUpQuestion(currQuestion, test);
+        setUpQuestion(currQuestion, test, currAnswers);
     }
 
-    private void setUpQuestion(int[] questionNum, Test test){
+    private void setUpQuestion(int[] questionNum, Test test, int[] currAnswers){
         Question question=test.getQuestions()[questionNum[0]];
         questionBody.setText(question.getQuestionBody());
         firstAnswer.setText(question.getAnswers().get(0));
         secondAnswer.setText(question.getAnswers().get(1));
         thirdAnswer.setText(question.getAnswers().get(2));
         fourthAnswer.setText(question.getAnswers().get(3));
+
+        switch (currAnswers[questionNum[0]]){
+            case(0): //means this question hasn't gotten an answer yet
+                break;
+            case(1):
+                firstAnswer.setChecked(true);
+                break;
+            case(2):
+                secondAnswer.setChecked(true);
+                break;
+            case(3):
+                thirdAnswer.setChecked(true);
+                break;
+            case(4):
+                fourthAnswer.setChecked(true);
+                break;
+        }
         String imageURL=question.getImageUrl();
         if(!Objects.equals(imageURL, "0")){
             StorageReference path=FirebaseStorage.getInstance().getReference().child("Images").child(imageURL);
