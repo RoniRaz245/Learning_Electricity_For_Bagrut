@@ -38,7 +38,6 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
     RadioButton firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
     ImageView imageView;
     BottomNavigationView questionNav;
-    Chronometer[] chronometers;
     Chronometer chronoView;
     /*private TextToSpeech tts;
     private Button ttsButton;*/
@@ -65,11 +64,6 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         int[] currAnswers= new int[questionAmount]; //to save what answers user gives
         final int[] currQuestion = {0};
 
-        chronometers= new Chronometer[questionAmount];
-        for(int i=0;i<questionAmount;i++){
-            chronometers[i]=new Chronometer(getApplicationContext());
-        }
-
         setUpQuestion(currQuestion, currTest, currAnswers);
 
         questionNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -88,8 +82,24 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                         moveQuestions(currQuestion, currQuestion[0] -1, currAnswers, currTest);
                     else
                         Toast.makeText(getApplicationContext(), "זוהי השאלה הראשונה!", Toast.LENGTH_LONG).show();
-                else if(id==R.id.pause)
-                    chronometers[currQuestion[0]].stop();
+                else if(id==R.id.pause) {
+                    chronoView.stop();
+
+                    int stoppedMilliseconds = 0;
+                    String chronoText = chronoView.getText().toString();
+                    String array[] = chronoText.split(":");
+                    if (array.length == 2) {
+                        stoppedMilliseconds = Integer.parseInt(array[0]) * 60 * 1000
+                                + Integer.parseInt(array[1]) * 1000;
+                    } else if (array.length == 3) {
+                        stoppedMilliseconds = Integer.parseInt(array[0]) * 60 * 60 * 1000
+                                + Integer.parseInt(array[1]) * 60 * 1000
+                                + Integer.parseInt(array[2]) * 1000;
+                    }
+                    double[] timers=currTest.getTimers();
+                    timers
+
+                }
                 return true;
             }
         });

@@ -140,7 +140,7 @@ public class HomeActivity extends baseActivity
                                         questionsForTest[i]=questions.get(keys.get(i));
 
                                     //make array for timers
-                                    int[] timers=new int[questionAmount];
+                                    double[] timers=new double[questionAmount];
 
                                     //get time test was taken to save test with
                                     String timeTaken= String.valueOf(System.currentTimeMillis());
