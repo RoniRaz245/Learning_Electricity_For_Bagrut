@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -159,7 +161,11 @@ public class MakeQuestionActivity extends baseActivity {
         String option2= option2TextView.getText().toString();
         String option3= option3TextView.getText().toString();
         String option4= option4TextView.getText().toString();
-        String[] options= {option1,option2,option3,option4};
+        ArrayList<String> options= new ArrayList<>(4);
+        options.add(option1);
+        options.add(option2);
+        options.add(option3);
+        options.add(option4);
         int level=levelPicker.getValue();
         int correctAnswer=correctAnswerPicker.getValue();
 

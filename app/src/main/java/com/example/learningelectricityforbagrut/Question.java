@@ -7,7 +7,7 @@ import java.lang.Double;
 public class Question {
     private String questionBody;
     private String imageUrl;
-    private String[] answers;
+    private ArrayList<String> answers;
     private int correctAnswer;
     private int questionLevel;
     private ArrayList<Double> times;
@@ -24,7 +24,7 @@ public class Question {
         this.teacher=null;
         this.serialNumber=0;
     }
-    public Question(String _questionBody, String _image, String[] _answers, int _correctAnswer, int _questionLevel, String UID, long num)
+    public Question(String _questionBody, String _image, ArrayList<String> _answers, int _correctAnswer, int _questionLevel, String UID, long num)
     {
         this.questionBody=_questionBody;
         this.questionLevel=_questionLevel;
@@ -65,11 +65,11 @@ public class Question {
         return teacher;
     }
 
-    public String[] getAnswers() {
+    public ArrayList<String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(String[] answers) {
+    public void setAnswers(ArrayList<String> answers) {
         this.answers = answers;
     }
 

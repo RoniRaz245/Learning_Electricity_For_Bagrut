@@ -123,10 +123,10 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
     private void setUpQuestion(int[] questionNum, Test test){
         Question question=test.getQuestions()[questionNum[0]];
         questionBody.setText(question.getQuestionBody());
-        firstAnswer.setText(question.getAnswers()[0]);
-        firstAnswer.setText(question.getAnswers()[1]);
-        firstAnswer.setText(question.getAnswers()[2]);
-        firstAnswer.setText(question.getAnswers()[3]);
+        firstAnswer.setText(question.getAnswers().get(0));
+        firstAnswer.setText(question.getAnswers().get(1));
+        firstAnswer.setText(question.getAnswers().get(2));
+        firstAnswer.setText(question.getAnswers().get(3));
         String imageURL=question.getImageUrl();
         if(!Objects.equals(imageURL, "0")){
             StorageReference path=FirebaseStorage.getInstance().getReference().child("Images").child(imageURL);
