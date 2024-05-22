@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,15 @@ public class questionAmountForTest extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.fragment_question_amount_for_test, null);
         builder.setView(dialogView);
-        NumberPicker questionAmount=getView().findViewById(R.id.questionAmountPicker);
+
+        NumberPicker questionAmount=dialogView.findViewById(R.id.questionAmountPicker);
+        questionAmount.setEnabled(true);
+        questionAmount.setMinValue(1);
+        questionAmount.setMaxValue(20);
+        String[] answers=new String[20];
+        for(int i=0; i<20; i++)
+            answers[i]= String.valueOf(i+1);
+        questionAmount.setDisplayedValues(answers);
 
         builder.setTitle("כמות שאלות")
                 .setNegativeButton("בטל", new DialogInterface.OnClickListener() {
