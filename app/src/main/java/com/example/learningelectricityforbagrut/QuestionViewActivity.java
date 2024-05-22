@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MenuItem;
@@ -65,6 +66,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         int[] currAnswers= new int[questionAmount]; //to save what answers user gives
         final int[] currQuestion = {0};
 
+        chronoIsRunning=true;
         setUpQuestion(currQuestion, currTest, currAnswers);
 
         questionNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -88,9 +90,14 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                         chronoView.stop();
                         menuItem.setTitle("המשך טיימר");
                         chronoIsRunning = false;
+                        int[] timers= currTest.getTimers();
+                        timers[currQuestion[0]]=getTimeFromChronometer();
+                        currTest.setTimers(timers);
                     }
                     else{
-                           chronoView.start();
+                        chronoView.setBase(SystemClock.elapsedRealtime() - currTest.getTimers()[currQuestion[0]]* 1000L);
+                        chronoIsRunning=true;
+                        chronoView.start();
                         }
 
                 }
@@ -160,6 +167,11 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                 fourthAnswer.setChecked(true);
                 break;
         }
+        //start fitting timer
+        chronoView.setBase(SystemClock.elapsedRealtime() - test.getTimers()[questionNum[0]]* 1000L);
+        chronoView.start();
+        chronoIsRunning=true;
+
         String imageURL=question.getImageUrl();
         if(!Objects.equals(imageURL, "0")){
             StorageReference path=FirebaseStorage.getInstance().getReference().child("Images").child(imageURL);
@@ -180,9 +192,6 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         else{
             imageView.setVisibility(View.INVISIBLE);
         }
-        chronoView.setBase(test.getTimers()[questionNum[0]]);
-        chronoView.start();
-        chronoIsRunning=true;
     }
     int getTimeFromChronometer(){
         int timeOnChronometer = 0;
