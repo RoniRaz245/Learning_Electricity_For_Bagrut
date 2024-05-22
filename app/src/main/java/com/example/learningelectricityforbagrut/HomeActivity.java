@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -119,7 +120,10 @@ public class HomeActivity extends baseActivity
                                 Toast.makeText(startQuiz.getContext(), "הייתה שגיאה, נסה שוב מאוחר יותר", Toast.LENGTH_LONG).show();
 
                             else {
-                                Map<String, Question> questions = (Map<String, Question>) task.getResult().getValue();
+                                HashMap<String, Question> questions = new HashMap<String,Question>();
+                                for(DataSnapshot question: task.getResult().getChildren()){
+                                    questions.put(question.getKey(), question.getValue(Question.class));
+                                }
                                 if(questions==null)
                                     Toast.makeText(startQuiz.getContext(),  "אין שאלות ברמתך כרגע, סליחה על חוסר הנוחות", Toast.LENGTH_LONG).show();
 
