@@ -20,11 +20,7 @@ public class questionAmountForTest extends DialogFragment {
         public void onDialogPositiveClick(int num);
     }
 
-    // Use this instance of the interface to deliver action events.
     NoticeDialogListener listener;
-
-    // Override the Fragment.onAttach() method to instantiate the
-    // NoticeDialogListener.
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
