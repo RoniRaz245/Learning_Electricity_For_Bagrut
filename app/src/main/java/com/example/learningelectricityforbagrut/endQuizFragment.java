@@ -1,6 +1,7 @@
 package com.example.learningelectricityforbagrut;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -14,6 +15,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class endQuizFragment extends DialogFragment {
+    public interface endQuizListener {
+        public void endQuiz();
+    }
+    endQuizListener listener;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // Verify that the host activity implements the callback interface.
+        try {
+            // Instantiate the NoticeDialogListener so you can send events to
+            // the host.
+            listener = (endQuizFragment.endQuizListener) context;
+        } catch (ClassCastException e) {
+            // The activity doesn't implement the interface. Throw exception.
+            throw new ClassCastException(" must implement NoticeDialogListener");
+        }
+    }
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -31,6 +49,7 @@ public class endQuizFragment extends DialogFragment {
                 }).setPositiveButton("כן", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                listener.endQuiz();
                                 dialog.cancel();
                             }
                         });

@@ -3,6 +3,7 @@ package com.example.learningelectricityforbagrut;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -78,7 +79,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                         moveQuestions(currQuestion, currQuestion[0]+1, currAnswers, currTest);
 
                     else
-                        Toast.makeText(getApplicationContext(), "אין עוד שאלות במבחן!", Toast.LENGTH_LONG).show();
+                        askIfQuizEnd();
                 }
                 else if(id==R.id.back)
                     if(currQuestion[0] >0)//if this isn't the first question
@@ -206,6 +207,10 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
                     + Integer.parseInt(array[2]) ;
         }
         return timeOnChronometer;
+    }
+    public void askIfQuizEnd(){
+        DialogFragment dialog=new endQuizFragment();
+        dialog.show(getSupportFragmentManager(), "questionAmountFragment");
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();
