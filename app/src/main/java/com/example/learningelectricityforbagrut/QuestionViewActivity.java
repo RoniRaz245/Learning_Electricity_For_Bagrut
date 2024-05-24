@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -227,6 +229,21 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         int[] answers= test.getAnswerGiven(); //to save what answers user gives
         final int[] currQuestion = {questionAmount-1};
         saveQuestionState(currQuestion,answers,test);
+
+        //save finished test to database
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("tests").add(test).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //TODO add intent to stats page here
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(QuestionViewActivity.this, "הייתה שגיאה, אנא נסו שוב", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();
