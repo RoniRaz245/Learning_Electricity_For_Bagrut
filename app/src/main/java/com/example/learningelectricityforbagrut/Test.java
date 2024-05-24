@@ -6,6 +6,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
     private String UID;
     private Question[] questions;
     private boolean[] correctAnswerGiven;
+    private int[] answerGiven;
     private int[] timers;
     private String timeTaken;
 
@@ -14,13 +15,15 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.UID=null;
         this.questions=null;
         this.correctAnswerGiven=null;
+        this.answerGiven=null;
         this.timers=null;
         this.timeTaken=null;
     }
-    public Test(String _UID, Question[] _questions, boolean[] _correctAnswerGiven, int[] _timers, String _timeTaken){
+    public Test(String _UID, Question[] _questions, boolean[] _correctAnswerGiven, int[] _answerGiven, int[] _timers, String _timeTaken){
         this.UID=_UID;
         this.questions=_questions;
         this.correctAnswerGiven=_correctAnswerGiven;
+        this.answerGiven=_answerGiven;
         this.timers=_timers;
         this.timeTaken=_timeTaken;
 
@@ -28,6 +31,10 @@ public class Test implements Serializable  { //serializable so it can be passed 
     //getting and setting functions
     public boolean[] getCorrectAnswerGiven() {
         return correctAnswerGiven;
+    }
+
+    public int[] getAnswerGiven() {
+        return answerGiven;
     }
 
     public int[] getTimers() {
@@ -48,6 +55,10 @@ public class Test implements Serializable  { //serializable so it can be passed 
 
     public void setCorrectAnswerGiven(boolean[] correctAnswerGiven) {
         this.correctAnswerGiven = correctAnswerGiven;
+    }
+
+    public void setAnswerGiven(int[] answerGiven) {
+        this.answerGiven = answerGiven;
     }
 
     public void setQuestions(Question[] questions) {

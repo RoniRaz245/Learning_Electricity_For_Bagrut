@@ -34,7 +34,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
 
-public class QuestionViewActivity extends baseActivity  /*implements TextToSpeech.OnInitListener*/ {
+public class QuestionViewActivity extends baseActivity  implements endQuizFragment.endQuizListener/*implements TextToSpeech.OnInitListener*/ {
     TextView questionBody;
     RadioGroup answers;
     RadioButton firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
@@ -64,7 +64,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
         Test currTest=testIntent.getSerializableExtra("test", Test.class);
         assert currTest != null;
         int questionAmount=currTest.getQuestions().length;
-        int[] currAnswers= new int[questionAmount]; //to save what answers user gives
+        int[] currAnswers= currTest.getAnswerGiven();
         final int[] currQuestion = {0};
 
         chronoIsRunning=true;
@@ -75,17 +75,23 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id=menuItem.getItemId();
                 if(id==R.id.next) {
-                    if(currQuestion[0] +1<questionAmount)
-                        moveQuestions(currQuestion, currQuestion[0]+1, currAnswers, currTest);
-
+                    if(currQuestion[0] +1<questionAmount) {
+                        saveQuestionState(currQuestion, currAnswers, currTest);
+                        currQuestion[0] += 1;
+                        setUpQuestion(currQuestion, currTest, currAnswers);
+                    }
                     else
-                        askIfQuizEnd();
+                        askIfQuizEnd(); //check if user wants to end quiz
                 }
-                else if(id==R.id.back)
-                    if(currQuestion[0] >0)//if this isn't the first question
-                        moveQuestions(currQuestion, currQuestion[0] -1, currAnswers, currTest);
+                else if(id==R.id.back) {
+                    if (currQuestion[0] > 0) {//if this isn't the first question
+                        saveQuestionState(currQuestion, currAnswers, currTest);
+                        currQuestion[0] -= 1;
+                        setUpQuestion(currQuestion, currTest, currAnswers);
+                    }
                     else
                         Toast.makeText(getApplicationContext(), "זוהי השאלה הראשונה!", Toast.LENGTH_LONG).show();
+                }
                 else if(id==R.id.pause) {
                     if(chronoIsRunning) {
                         chronoView.stop();
@@ -118,7 +124,7 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             }
         });*/
     }
-    private void moveQuestions(int[] currQuestion, int nextQuestion, int[] currAnswers, Test test){
+    private void saveQuestionState(int[] currQuestion, int[] currAnswers, Test test){
         //save state of timer
         chronoView.stop();
         int currTime=getTimeFromChronometer();
@@ -140,8 +146,6 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
             currAnswer=-1;
         answers.clearCheck();
         currAnswers[currQuestion[0]]=currAnswer;
-        currQuestion[0]=nextQuestion;
-        setUpQuestion(currQuestion, test, currAnswers);
     }
 
     private void setUpQuestion(int[] questionNum, Test test, int[] currAnswers){
@@ -211,6 +215,18 @@ public class QuestionViewActivity extends baseActivity  /*implements TextToSpeec
     public void askIfQuizEnd(){
         DialogFragment dialog=new endQuizFragment();
         dialog.show(getSupportFragmentManager(), "questionAmountFragment");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    @Override
+    public void endQuiz() {
+        Intent testIntent = getIntent();
+        Test test=testIntent.getSerializableExtra("test", Test.class);
+        assert test != null;
+        int questionAmount=test.getQuestions().length;
+        int[] answers= test.getAnswerGiven(); //to save what answers user gives
+        final int[] currQuestion = {questionAmount-1};
+        saveQuestionState(currQuestion,answers,test);
     }
     /* private void textToSpeak(){
         text=textView.getText().toString();

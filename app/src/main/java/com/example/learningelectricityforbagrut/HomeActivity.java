@@ -145,10 +145,13 @@ public class HomeActivity extends baseActivity
                                     //get time test was taken to save test with
                                     String timeTaken= String.valueOf(System.currentTimeMillis());
 
-                                    //array to put answers in
+                                    //array to put if answers were correct in
                                     boolean[] correctAnswers=new boolean[questionAmount];
 
-                                    Test test=new Test(UID, questionsForTest, correctAnswers, timers, timeTaken);
+                                    //array to put answers in
+                                    int[] answers=new int[questionAmount];
+
+                                    Test test=new Test(UID, questionsForTest, correctAnswers, answers, timers, timeTaken);
                                     Intent startTest = new Intent(getApplicationContext(), QuestionViewActivity.class);
                                     startTest.putExtra("test", test);
                                     startActivity(startTest);
