@@ -36,13 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/questionBody"
-        android:layout_above="@id/answers"
         android:contentDescription="image uploaded for this question" />
 
     <RadioGroup
         android:id="@+id/answers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/imageView"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="30dp"
         android:layout_above="@id/bottom_navigation">

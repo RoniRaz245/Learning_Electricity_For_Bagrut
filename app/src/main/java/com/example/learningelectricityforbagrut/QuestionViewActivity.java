@@ -235,7 +235,8 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         db.collection("tests").add(test).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        //TODO add intent to stats page here
+                        Intent stats=new Intent(getApplicationContext(), quizzStatsActivity.class);
+                        getApplicationContext().startActivity(stats);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
