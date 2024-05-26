@@ -63,14 +63,22 @@ public class User {
         //TODO: decide on grade ranges later
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("tests").whereEqualTo("UID", this.getUID()).whereEqualTo("level", this.level).orderBy().limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("tests").whereEqualTo("UID", this.getUID()).whereEqualTo("level", this.level).orderBy("timeTaken", Query.Direction.DESCENDING).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
-
+                    int amount=0;
+                    double sumLatest=0;
+                    double sumEarlierTests=0;
                     for (QueryDocumentSnapshot document : task.getResult()) {
-
+                        amount++;
+                        if(amount<=5)
+                            sumLatest+=document.toObject(Test.class).getGrade();
+                        else
+                            sumEarlierTests+=document.toObject(Test.class).getGrade();
                     }
+                    double latestAvg=sumLatest/5;
+                    double totalAvg=(sumLatest+sumEarlierTests)/(amount+5);
                 }
             }
         });
