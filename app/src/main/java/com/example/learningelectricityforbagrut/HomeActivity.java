@@ -151,7 +151,7 @@ public class HomeActivity extends baseActivity
                                     //array to put answers in
                                     int[] answers=new int[questionAmount];
 
-                                    Test test=new Test(UID, questionsForTest, correctAnswers, answers, timers, timeTaken);
+                                    Test test=new Test(level, UID, questionsForTest, correctAnswers, answers, timers, timeTaken);
                                     Intent startTest = new Intent(getApplicationContext(), QuestionViewActivity.class);
                                     startTest.putExtra("test", test);
                                     startActivity(startTest);

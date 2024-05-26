@@ -3,6 +3,7 @@ package com.example.learningelectricityforbagrut;
 import java.io.Serializable;
 
 public class Test implements Serializable  { //serializable so it can be passed as an extra on the intent used to start quizz
+    private int level;
     private String UID;
     private Question[] questions;
     private boolean[] correctAnswerGiven;
@@ -12,6 +13,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
 
     //constructors
     public Test(){
+        this.level=0;
         this.UID=null;
         this.questions=null;
         this.correctAnswerGiven=null;
@@ -19,7 +21,8 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.timers=null;
         this.timeTaken=null;
     }
-    public Test(String _UID, Question[] _questions, boolean[] _correctAnswerGiven, int[] _answerGiven, int[] _timers, String _timeTaken){
+    public Test(int _level, String _UID, Question[] _questions, boolean[] _correctAnswerGiven, int[] _answerGiven, int[] _timers, String _timeTaken){
+        this.level=_level;
         this.UID=_UID;
         this.questions=_questions;
         this.correctAnswerGiven=_correctAnswerGiven;
@@ -29,6 +32,11 @@ public class Test implements Serializable  { //serializable so it can be passed 
 
     }
     //getting and setting functions
+
+    public int getLevel() {
+        return level;
+    }
+
     public boolean[] getCorrectAnswerGiven() {
         return correctAnswerGiven;
     }
@@ -51,6 +59,10 @@ public class Test implements Serializable  { //serializable so it can be passed 
 
     public String getUID() {
         return UID;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public void setCorrectAnswerGiven(boolean[] correctAnswerGiven) {
