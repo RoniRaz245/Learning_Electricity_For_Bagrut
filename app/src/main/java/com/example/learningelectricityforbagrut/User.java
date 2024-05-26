@@ -63,7 +63,7 @@ public class User {
         //TODO: decide on grade ranges later
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("tests").whereEqualTo("UID", this.getUID()).orderBy("timeTaken", Query.Direction.DESCENDING).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("tests").whereEqualTo("UID", this.getUID()).whereEqualTo("level", this.level).orderBy().limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
