@@ -8,7 +8,13 @@
         <item name="android:itemBackground">@color/darkBlue</item>
         <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationViewDark</item>
     </style>
+
     <style name="Widget.App.BottomNavigationViewDark" parent="Widget.Material3.BottomNavigationView">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Base.light_mode" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>
