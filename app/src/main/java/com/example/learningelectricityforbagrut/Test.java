@@ -88,4 +88,14 @@ public class Test implements Serializable  { //serializable so it can be passed 
     public void setUID(String UID) {
         this.UID = UID;
     }
+    public double getGrade(){
+        int trueCount = 0;
+        boolean[] rightAnswer=this.getCorrectAnswerGiven();
+        for (int i = 0; i < rightAnswer.length; i++) {
+            if (rightAnswer[i])
+                trueCount++;
+        }
+        return ((double) trueCount /rightAnswer.length)*100;
+    }
+
 }
