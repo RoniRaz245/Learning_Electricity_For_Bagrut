@@ -106,44 +106,49 @@ public class QuestionViewAfterTestActivity extends baseActivity {
         thirdAnswer.setText(question.getAnswers().get(2));
         fourthAnswer.setText(question.getAnswers().get(3));
 
+        //erase color from prev screen
+        firstAnswer.setBackgroundColor(Color.TRANSPARENT);
+        secondAnswer.setBackgroundColor(Color.TRANSPARENT);
+        thirdAnswer.setBackgroundColor(Color.TRANSPARENT);
+        fourthAnswer.setBackgroundColor(Color.TRANSPARENT);
 
-        int correctAnswer=test.getQuestions().get(questionNum[0]).getCorrectAnswer()+1;
+        int correctAnswer=test.getQuestions().get(questionNum[0]).getCorrectAnswer();
         boolean correctAnswerGiven=test.getCorrectAnswerGiven().get(questionNum[0]);
         switch (test.getAnswerGiven().get(questionNum[0])){
-            case(-1): //means this question hadn't gotten an answer
+            case -1: //means this question hadn't gotten an answer
                 break;
-            case(0):
+            case 0:
                 firstAnswer.setChecked(true);
                 if(!correctAnswerGiven)
                     firstAnswer.setBackgroundColor(Color.RED);
                 break;
-            case(1):
+            case 1:
                 secondAnswer.setChecked(true);
                 if(!correctAnswerGiven)
                     secondAnswer.setBackgroundColor(Color.RED);
                 break;
-            case(2):
+            case 2:
                 thirdAnswer.setChecked(true);
                 if(!correctAnswerGiven)
                     thirdAnswer.setBackgroundColor(Color.RED);
                 break;
-            case(3):
+            case 3:
                 fourthAnswer.setChecked(true);
                 if(!correctAnswerGiven)
                     fourthAnswer.setBackgroundColor(Color.RED);
                 break;
         }
         switch(correctAnswer){
-            case(0):
+            case 0:
                 firstAnswer.setBackgroundColor(Color.GREEN);
                 break;
-            case(1):
+            case 1:
                 secondAnswer.setBackgroundColor(Color.GREEN);
                 break;
-            case(2):
+            case 2:
                 thirdAnswer.setBackgroundColor(Color.GREEN);
                 break;
-            case(3):
+            case 3:
                 fourthAnswer.setBackgroundColor(Color.GREEN);
         }
         chronoView.setBase(SystemClock.elapsedRealtime() - test.getTimers().get(questionNum[0])* 1000L);

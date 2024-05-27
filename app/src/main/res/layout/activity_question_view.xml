@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/chronometer"
-        android:layout_alignEnd="@+id/chronometer"
+        android:layout_alignStart="@+id/chronometer"
         android:text="הזמן שנלקח לשאלה זו" />
 
     <ImageView

@@ -90,14 +90,13 @@ public class quizzStatsActivity extends baseActivity {
                     User user=task.getResult().getValue(User.class);
                     int userLevel=user.getLevel();
                     int levelUpdated = user.updateLevel();
-                    switch(levelUpdated) {
-                        case 1: //went up a level
+                    if(levelUpdated>0) //went up a level
                             levelView.setText("בזאת, עלית לרמה " + userLevel + ", יפה מאוד!");
-                        case 0: //stayed in same level
+                    else if(levelUpdated==0) //stayed in same level
                             levelView.setText("נשארת ברמה "+userLevel);
-                        case -1:
+                    else
                             levelView.setText("ירדת לרמה "+userLevel+". אל דאגה, השקעתך לא תתבזבז, בהצלחה בבוחן הבא!");
-                    }
+
                 }
             }
         });

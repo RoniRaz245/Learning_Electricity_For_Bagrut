@@ -163,18 +163,18 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         fourthAnswer.setText(question.getAnswers().get(3));
 
         switch (currAnswers.get(questionNum[0])){
-            case(-1): //means this question hasn't gotten an answer yet
+            case -1 : //means this question hasn't gotten an answer yet
                 break;
-            case(0):
+            case 0 :
                 firstAnswer.setChecked(true);
                 break;
-            case(1):
+            case 1 :
                 secondAnswer.setChecked(true);
                 break;
-            case(2):
+            case 2 :
                 thirdAnswer.setChecked(true);
                 break;
-            case(3):
+            case 3 :
                 fourthAnswer.setChecked(true);
                 break;
         }

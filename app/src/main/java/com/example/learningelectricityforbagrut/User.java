@@ -90,11 +90,6 @@ public class User {
                 }
             }
         });
-        if(user.getLevel()>prevLevel)
-            return 1;
-        if(user.getLevel()<prevLevel)
-            return -1;
-        else
-            return 0;
+        return Integer.compare(user.getLevel(), prevLevel);
     }
 }
