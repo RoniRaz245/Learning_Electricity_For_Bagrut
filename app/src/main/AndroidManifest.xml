@@ -29,7 +29,7 @@
         <activity
             android:name=".QuestionViewAfterTestActivity"
             android:exported="false"
-            android:label="שאלות הבוחן שנעשה"/>
+            android:label="שאלות הבוחן שנעשה" />
         <activity
             android:name=".quizzStatsActivity"
             android:exported="false"
