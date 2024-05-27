@@ -27,9 +27,13 @@
         android:theme="@style/light_mode"
         tools:targetApi="33">
         <activity
+            android:name=".QuestionViewAfterTestActivity"
+            android:exported="false"
+            android:label="שאלות הבוחן שנעשה"/>
+        <activity
             android:name=".quizzStatsActivity"
             android:exported="false"
-            android:label="נתוני הבוחן"/>
+            android:label="נתוני הבוחן" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -48,7 +52,7 @@
         <activity
             android:name=".QuestionViewActivity"
             android:exported="false"
-            android:label="מבדק" />
+            android:label="בוחן" />
         <activity
             android:name=".MakeQuestionActivity"
             android:exported="false"

@@ -39,6 +39,13 @@
         />
 
     <TextView
+        android:id="@+id/updateOnLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        />
+
+    <TextView
         android:id="@+id/timeTaken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
