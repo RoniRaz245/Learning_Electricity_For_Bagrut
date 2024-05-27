@@ -149,10 +149,6 @@ public class MakeQuestionActivity extends baseActivity {
         uploadImage.setOnClickListener(v -> getImageFromUser());
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
          }
-    private void giveInfo(){
-        DialogFragment info = new infoFragment();
-        info.show(getSupportFragmentManager(), "info");
-    }
     private void uploadGivenQuestion(){
         Toast.makeText(this, "מעלה שאלה...", Toast.LENGTH_SHORT).show();
         //get details of question

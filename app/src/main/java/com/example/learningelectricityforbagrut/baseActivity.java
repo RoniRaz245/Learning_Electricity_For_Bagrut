@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuProvider;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 public class baseActivity extends AppCompatActivity {
@@ -39,6 +40,10 @@ public class baseActivity extends AppCompatActivity {
         else
             // The user's action isn't recognized.
             return false;
+    }
+    protected void giveInfo(){
+        DialogFragment info = new infoFragment();
+        info.show(getSupportFragmentManager(), "info");
     }
 }
 

@@ -34,7 +34,7 @@
         android:id="@+id/grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
 
@@ -42,6 +42,7 @@
         android:id="@+id/updateOnLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
 
@@ -49,7 +50,7 @@
         android:id="@+id/timeTaken"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         />
 
@@ -57,7 +58,7 @@
         android:id="@+id/viewQuestions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:text="צפייה בשאלות ובתשובות הנכונות להן" />
 
 </LinearLayout>

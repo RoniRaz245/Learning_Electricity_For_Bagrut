@@ -31,7 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 
-public class quizzStatsActivity extends AppCompatActivity {
+public class quizzStatsActivity extends baseActivity {
 
     TextView titleView, gradeView, levelView, timeTakenView;
     ImageButton levelInfo;
@@ -47,16 +47,18 @@ public class quizzStatsActivity extends AppCompatActivity {
         levelInfo=findViewById(R.id.levelInfo);
         viewQuestions=findViewById(R.id.viewQuestions);
 
+        levelInfo.setOnClickListener(v->giveInfo());
+
         Intent intent = getIntent();
         Test test=intent.getSerializableExtra("test", Test.class);
         assert test!=null;
 
 
         int testLevel= test.getLevel();
-        titleView.setText("כל הכבוד על השלמת בוחן ברמה"+testLevel+"!");
+        titleView.setText("כל הכבוד על השלמת בוחן ברמה "+testLevel+"!");
 
         double grade=test.getGrade();
-        gradeView.setText("ציונך הוא"+grade);
+        gradeView.setText("ציונך הוא "+grade);
 
         ArrayList<Integer> times=test.getTimers();
         int questionAmount=1;
@@ -68,7 +70,7 @@ public class quizzStatsActivity extends AppCompatActivity {
         int avgTime=totalTime/questionAmount;
         double totalTimeMinutes= (double) totalTime /60;
         double avgTimeMinutes= (double) avgTime /60;
-        timeTakenView.setText("הבוחן לקח לך"+totalTime+"שניות, כלומר"+totalTimeMinutes+"דקות. זה אומר שבממוצע, שאלה לוקחת לך"+avgTime+"שניות, כלומר"+avgTimeMinutes+"דקות.");
+        timeTakenView.setText("הבוחן לקח לך "+totalTime+" שניות, כלומר "+totalTimeMinutes+" דקות. זה אומר שבממוצע, שאלה לוקחת לך "+avgTime+" שניות, כלומר "+avgTimeMinutes+" דקות.");
 
         viewQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,11 +92,11 @@ public class quizzStatsActivity extends AppCompatActivity {
                     int levelUpdated = user.updateLevel();
                     switch(levelUpdated) {
                         case 1: //went up a level
-                            levelView.setText("בזאת, עלית לרמה" + userLevel + ", יפה מאוד!");
+                            levelView.setText("בזאת, עלית לרמה " + userLevel + ", יפה מאוד!");
                         case 0: //stayed in same level
-                            levelView.setText("נשארת ברמה"+userLevel);
+                            levelView.setText("נשארת ברמה "+userLevel);
                         case -1:
-                            levelView.setText("ירדת לרמה"+userLevel+". אל דאגה, השקעתך לא תתבזבז, בהצלחה בבוחן הבא!");
+                            levelView.setText("ירדת לרמה "+userLevel+". אל דאגה, השקעתך לא תתבזבז, בהצלחה בבוחן הבא!");
                     }
                 }
             }

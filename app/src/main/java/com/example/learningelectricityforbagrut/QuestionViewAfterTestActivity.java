@@ -80,7 +80,7 @@ public class QuestionViewAfterTestActivity extends baseActivity {
                     else{
                         Toast.makeText(QuestionViewAfterTestActivity.this, "מחזיר למסך נתוני הבוחן...", Toast.LENGTH_SHORT).show();
                         Intent quizzStats=new Intent(getApplicationContext(), quizzStatsActivity.class);
-                        getApplicationContext().startActivity(quizzStats);
+                        startActivity(quizzStats);
                     }
 
                 }
