@@ -29,6 +29,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
+import java.util.ArrayList;
+
 public class quizzStatsActivity extends AppCompatActivity {
 
     TextView titleView, gradeView, levelView, timeTakenView;
@@ -56,16 +58,16 @@ public class quizzStatsActivity extends AppCompatActivity {
         double grade=test.getGrade();
         gradeView.setText("ציונך הוא"+grade);
 
-        int[] times=test.getTimers();
+        ArrayList<Integer> times=test.getTimers();
         int questionAmount=1;
         int totalTime=0;
-        while(questionAmount<=times.length){
-            totalTime+=times[questionAmount-1];
+        while(questionAmount<=times.size()){
+            totalTime+=times.get(questionAmount-1);
             questionAmount++;
         }
         int avgTime=totalTime/questionAmount;
-        double totalTimeMinutes=totalTime/60;
-        double avgTimeMinutes=avgTime/60;
+        double totalTimeMinutes= (double) totalTime /60;
+        double avgTimeMinutes= (double) avgTime /60;
         timeTakenView.setText("הבוחן לקח לך"+totalTime+"שניות, כלומר"+totalTimeMinutes+"דקות. זה אומר שבממוצע, שאלה לוקחת לך"+avgTime+"שניות, כלומר"+avgTimeMinutes+"דקות.");
 
         viewQuestions.setOnClickListener(new View.OnClickListener() {

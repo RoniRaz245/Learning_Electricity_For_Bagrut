@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
@@ -67,8 +68,8 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         Intent testIntent = getIntent();
         Test currTest=testIntent.getSerializableExtra("test", Test.class);
         assert currTest != null;
-        int questionAmount=currTest.getQuestions().length;
-        int[] currAnswers= currTest.getAnswerGiven();
+        int questionAmount=currTest.getQuestions().size();
+        ArrayList<Integer> currAnswers= currTest.getAnswerGiven();
         final int[] currQuestion = {0};
 
         chronoIsRunning=true;
@@ -101,12 +102,13 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                         chronoView.stop();
                         menuItem.setTitle("המשך טיימר");
                         chronoIsRunning = false;
-                        int[] timers= currTest.getTimers();
-                        timers[currQuestion[0]]=getTimeFromChronometer();
+                        ArrayList<Integer> timers= currTest.getTimers();
+                        int currTime=getTimeFromChronometer();
+                        timers.set(currQuestion[0], currTime);
                         currTest.setTimers(timers);
                     }
                     else{
-                        chronoView.setBase(SystemClock.elapsedRealtime() - currTest.getTimers()[currQuestion[0]]* 1000L);
+                        chronoView.setBase(SystemClock.elapsedRealtime() - currTest.getTimers().get(currQuestion[0])* 1000L);
                         chronoIsRunning=true;
                         chronoView.start();
                         }
@@ -128,12 +130,12 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
             }
         });*/
     }
-    private void saveQuestionState(int[] currQuestion, int[] currAnswers, Test test){
+    private void saveQuestionState(int[] currQuestion, ArrayList<Integer> currAnswers, Test test){
         //save state of timer
         chronoView.stop();
         int currTime=getTimeFromChronometer();
-        int[] timers=test.getTimers();
-        timers[currQuestion[0]]=currTime;
+        ArrayList<Integer> timers=test.getTimers();
+        timers.set(currQuestion[0],currTime);
         test.setTimers(timers);
         //save currently checked answer
         int currAnswerID=answers.getCheckedRadioButtonId();
@@ -149,18 +151,18 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         else
             currAnswer=-1;
         answers.clearCheck();
-        currAnswers[currQuestion[0]]=currAnswer;
+        currAnswers.set(currQuestion[0], currAnswer);
     }
 
-    private void setUpQuestion(int[] questionNum, Test test, int[] currAnswers){
-        Question question=test.getQuestions()[questionNum[0]];
+    private void setUpQuestion(int[] questionNum, Test test, ArrayList<Integer> currAnswers){
+        Question question=test.getQuestions().get(questionNum[0]);
         questionBody.setText(question.getQuestionBody());
         firstAnswer.setText(question.getAnswers().get(0));
         secondAnswer.setText(question.getAnswers().get(1));
         thirdAnswer.setText(question.getAnswers().get(2));
         fourthAnswer.setText(question.getAnswers().get(3));
 
-        switch (currAnswers[questionNum[0]]){
+        switch (currAnswers.get(questionNum[0])){
             case(-1): //means this question hasn't gotten an answer yet
                 break;
             case(0):
@@ -177,7 +179,7 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                 break;
         }
         //start fitting timer
-        chronoView.setBase(SystemClock.elapsedRealtime() - test.getTimers()[questionNum[0]]* 1000L);
+        chronoView.setBase(SystemClock.elapsedRealtime() - test.getTimers().get(questionNum[0])* 1000L);
         chronoView.start();
         chronoIsRunning=true;
 
@@ -226,15 +228,15 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         Intent testIntent = getIntent();
         Test test=testIntent.getSerializableExtra("test", Test.class);
         assert test != null;
-        int questionAmount=test.getQuestions().length;
-        int[] answers= test.getAnswerGiven();
-        boolean[] correctAnswer=test.getCorrectAnswerGiven();
-        Question[] questions=test.getQuestions();
+        int questionAmount=test.getQuestions().size();
+        ArrayList<Integer> answers= test.getAnswerGiven();
+        ArrayList<Boolean> correctAnswer=test.getCorrectAnswerGiven();
+        ArrayList<Question> questions=test.getQuestions();
         final int[] currQuestion = {questionAmount-1};
         saveQuestionState(currQuestion,answers,test);
 
         for(int i=0;i<questionAmount;i++){
-            correctAnswer[i] = answers[i]==questions[i].getCorrectAnswer();
+            correctAnswer.set(i, answers.get(i)==questions.get(i).getCorrectAnswer());
         }
         test.setCorrectAnswerGiven(correctAnswer);
 

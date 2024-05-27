@@ -63,7 +63,7 @@ public class QuestionViewAfterTestActivity extends baseActivity {
         Intent testIntent = getIntent();
         Test currTest=testIntent.getSerializableExtra("test", Test.class);
         assert currTest != null;
-        int questionAmount=currTest.getQuestions().length;
+        int questionAmount=currTest.getQuestions().size();
         final int[] currQuestion = {0};
 
         setUpQuestion(currQuestion, currTest);
@@ -99,7 +99,7 @@ public class QuestionViewAfterTestActivity extends baseActivity {
     }
 
     private void setUpQuestion(int[] questionNum, Test test){
-        Question question=test.getQuestions()[questionNum[0]];
+        Question question=test.getQuestions().get(questionNum[0]);
         questionBody.setText(question.getQuestionBody());
         firstAnswer.setText(question.getAnswers().get(0));
         secondAnswer.setText(question.getAnswers().get(1));
@@ -107,9 +107,9 @@ public class QuestionViewAfterTestActivity extends baseActivity {
         fourthAnswer.setText(question.getAnswers().get(3));
 
 
-        int correctAnswer=test.getQuestions()[questionNum[0]].getCorrectAnswer()+1;
-        boolean correctAnswerGiven=test.getCorrectAnswerGiven()[questionNum[0]];
-        switch (test.getAnswerGiven()[questionNum[0]]){
+        int correctAnswer=test.getQuestions().get(questionNum[0]).getCorrectAnswer()+1;
+        boolean correctAnswerGiven=test.getCorrectAnswerGiven().get(questionNum[0]);
+        switch (test.getAnswerGiven().get(questionNum[0])){
             case(-1): //means this question hadn't gotten an answer
                 break;
             case(0):
@@ -146,7 +146,7 @@ public class QuestionViewAfterTestActivity extends baseActivity {
             case(3):
                 fourthAnswer.setBackgroundColor(Color.GREEN);
         }
-        chronoView.setBase(SystemClock.elapsedRealtime() - test.getTimers()[questionNum[0]]* 1000L);
+        chronoView.setBase(SystemClock.elapsedRealtime() - test.getTimers().get(questionNum[0])* 1000L);
 
         String imageURL=question.getImageUrl();
         if(!Objects.equals(imageURL, "0")){

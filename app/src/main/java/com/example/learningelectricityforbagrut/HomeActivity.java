@@ -135,21 +135,21 @@ public class HomeActivity extends baseActivity
                                     List keys = new ArrayList(questions.keySet());
                                     Collections.shuffle(keys);
                                     keys=keys.subList(0, questionAmount);
-                                    Question[] questionsForTest=new Question[questionAmount];
+                                    ArrayList<Question> questionsForTest=new ArrayList<>(questionAmount);
                                     for (int i=0; i<questionAmount; i++)
-                                        questionsForTest[i]=questions.get(keys.get(i));
+                                        questionsForTest.set(i, questions.get(keys.get(i)));
 
                                     //make array for timers
-                                    int[] timers=new int[questionAmount];
+                                    ArrayList<Integer> timers=new ArrayList<>(questionAmount);
 
                                     //get time test was taken to save test with
                                     String timeTaken= String.valueOf(System.currentTimeMillis());
 
                                     //array to put if answers were correct in
-                                    boolean[] correctAnswers=new boolean[questionAmount];
+                                    ArrayList<Boolean> correctAnswers=new ArrayList<>(questionAmount);
 
                                     //array to put answers in
-                                    int[] answers=new int[questionAmount];
+                                    ArrayList<Integer> answers=new ArrayList<>(questionAmount);
 
                                     Test test=new Test(level, UID, questionsForTest, correctAnswers, answers, timers, timeTaken);
                                     Intent startTest = new Intent(getApplicationContext(), QuestionViewActivity.class);

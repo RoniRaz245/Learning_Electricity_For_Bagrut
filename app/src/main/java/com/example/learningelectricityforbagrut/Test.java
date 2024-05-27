@@ -1,14 +1,15 @@
 package com.example.learningelectricityforbagrut;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Test implements Serializable  { //serializable so it can be passed as an extra on the intent used to start quizz
     private int level;
     private String UID;
-    private Question[] questions;
-    private boolean[] correctAnswerGiven;
-    private int[] answerGiven;
-    private int[] timers;
+    private ArrayList<Question> questions;
+    private ArrayList<Boolean> correctAnswerGiven;
+    private ArrayList<Integer> answerGiven;
+    private ArrayList<Integer> timers;
     private String timeTaken;
 
     //constructors
@@ -21,7 +22,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.timers=null;
         this.timeTaken=null;
     }
-    public Test(int _level, String _UID, Question[] _questions, boolean[] _correctAnswerGiven, int[] _answerGiven, int[] _timers, String _timeTaken){
+    public Test(int _level, String _UID, ArrayList<Question> _questions, ArrayList<Boolean> _correctAnswerGiven, ArrayList<Integer> _answerGiven, ArrayList<Integer> _timers, String _timeTaken){
         this.level=_level;
         this.UID=_UID;
         this.questions=_questions;
@@ -37,19 +38,19 @@ public class Test implements Serializable  { //serializable so it can be passed 
         return level;
     }
 
-    public boolean[] getCorrectAnswerGiven() {
+    public ArrayList<Boolean> getCorrectAnswerGiven() {
         return correctAnswerGiven;
     }
 
-    public int[] getAnswerGiven() {
+    public ArrayList<Integer> getAnswerGiven() {
         return answerGiven;
     }
 
-    public int[] getTimers() {
+    public ArrayList<Integer> getTimers() {
         return timers;
     }
 
-    public Question[] getQuestions() {
+    public ArrayList<Question> getQuestions() {
         return questions;
     }
 
@@ -65,19 +66,19 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.level = level;
     }
 
-    public void setCorrectAnswerGiven(boolean[] correctAnswerGiven) {
+    public void setCorrectAnswerGiven(ArrayList<Boolean> correctAnswerGiven) {
         this.correctAnswerGiven = correctAnswerGiven;
     }
 
-    public void setAnswerGiven(int[] answerGiven) {
+    public void setAnswerGiven(ArrayList<Integer> answerGiven) {
         this.answerGiven = answerGiven;
     }
 
-    public void setQuestions(Question[] questions) {
+    public void setQuestions(ArrayList<Question> questions) {
         this.questions = questions;
     }
 
-    public void setTimers(int[] timers) {
+    public void setTimers(ArrayList<Integer> timers) {
         this.timers = timers;
     }
 
@@ -90,12 +91,12 @@ public class Test implements Serializable  { //serializable so it can be passed 
     }
     public double getGrade(){
         int trueCount = 0;
-        boolean[] rightAnswer=this.getCorrectAnswerGiven();
-        for (int i = 0; i < rightAnswer.length; i++) {
-            if (rightAnswer[i])
+        ArrayList<Boolean> rightAnswer=this.getCorrectAnswerGiven();
+        for (int i = 0; i < rightAnswer.size(); i++) {
+            if (rightAnswer.get(i))
                 trueCount++;
         }
-        return ((double) trueCount /rightAnswer.length)*100;
+        return ((double) trueCount /rightAnswer.size())*100;
     }
 
 }
