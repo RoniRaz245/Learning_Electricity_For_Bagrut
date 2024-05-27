@@ -37,7 +37,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class QuestionViewActivity extends baseActivity  implements endQuizFragment.endQuizListener/*implements TextToSpeech.OnInitListener*/ {
-    TextView questionBody;
+    TextView questionBody, chronometerExplanation;
     RadioGroup answers;
     RadioButton firstAnswer, secondAnswer, thirdAnswer, fourthAnswer;
     ImageView imageView;
@@ -60,6 +60,9 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         imageView=findViewById(R.id.imageView);
         chronoView=findViewById(R.id.chronometer);
         questionNav=findViewById(R.id.bottom_navigation);
+
+        chronometerExplanation=findViewById(R.id.chronoExplanation);
+        chronometerExplanation.setVisibility(View.INVISIBLE);
 
         Intent testIntent = getIntent();
         Test currTest=testIntent.getSerializableExtra("test", Test.class);
@@ -136,13 +139,13 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         int currAnswerID=answers.getCheckedRadioButtonId();
         int currAnswer;
         if (currAnswerID == R.id.firstAnswer)
-            currAnswer = 1;
+            currAnswer = 0;
         else if(currAnswerID==R.id.secondAnswer)
-            currAnswer=2;
+            currAnswer=1;
         else if (currAnswerID == R.id.thirdAnswer)
-            currAnswer = 3;
+            currAnswer = 2;
         else if(currAnswerID==R.id.fourthAnswer)
-            currAnswer=4;
+            currAnswer=3;
         else
             currAnswer=-1;
         answers.clearCheck();
@@ -158,18 +161,18 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         fourthAnswer.setText(question.getAnswers().get(3));
 
         switch (currAnswers[questionNum[0]]){
-            case(0): //means this question hasn't gotten an answer yet
+            case(-1): //means this question hasn't gotten an answer yet
                 break;
-            case(1):
+            case(0):
                 firstAnswer.setChecked(true);
                 break;
-            case(2):
+            case(1):
                 secondAnswer.setChecked(true);
                 break;
-            case(3):
+            case(2):
                 thirdAnswer.setChecked(true);
                 break;
-            case(4):
+            case(3):
                 fourthAnswer.setChecked(true);
                 break;
         }
@@ -218,16 +221,22 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         dialog.show(getSupportFragmentManager(), "questionAmountFragment");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     public void endQuiz() {
         Intent testIntent = getIntent();
         Test test=testIntent.getSerializableExtra("test", Test.class);
         assert test != null;
         int questionAmount=test.getQuestions().length;
-        int[] answers= test.getAnswerGiven(); //to save what answers user gives
+        int[] answers= test.getAnswerGiven();
+        boolean[] correctAnswer=test.getCorrectAnswerGiven();
+        Question[] questions=test.getQuestions();
         final int[] currQuestion = {questionAmount-1};
         saveQuestionState(currQuestion,answers,test);
+
+        for(int i=0;i<questionAmount;i++){
+            correctAnswer[i] = answers[i]==questions[i].getCorrectAnswer();
+        }
+        test.setCorrectAnswerGiven(correctAnswer);
 
         //save finished test to database
         FirebaseFirestore db = FirebaseFirestore.getInstance();

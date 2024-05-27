@@ -68,6 +68,15 @@ public class quizzStatsActivity extends AppCompatActivity {
         double avgTimeMinutes=avgTime/60;
         timeTakenView.setText("הבוחן לקח לך"+totalTime+"שניות, כלומר"+totalTimeMinutes+"דקות. זה אומר שבממוצע, שאלה לוקחת לך"+avgTime+"שניות, כלומר"+avgTimeMinutes+"דקות.");
 
+        viewQuestions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent viewQuestionsAgain=new Intent(getApplicationContext(), QuestionViewAfterTestActivity.class);
+                viewQuestionsAgain.putExtra("test", test);
+                startActivity(viewQuestionsAgain);
+            }
+        });
+
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         database.child("users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -83,7 +92,7 @@ public class quizzStatsActivity extends AppCompatActivity {
                         case 0: //stayed in same level
                             levelView.setText("נשארת ברמה"+userLevel);
                         case -1:
-                            levelView.setText("ירדת לרמה"+userLevel+". אל דאגה, השקעה לא תתבזבז, בהצלחה בבוחן הבא!");
+                            levelView.setText("ירדת לרמה"+userLevel+". אל דאגה, השקעתך לא תתבזבז, בהצלחה בבוחן הבא!");
                     }
                 }
             }
