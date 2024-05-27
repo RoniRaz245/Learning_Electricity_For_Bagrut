@@ -58,29 +58,43 @@ public class User {
     public long getLicense() { return license; }
     public int getPhoneNum() { return phoneNum; }
 
-    public void updateLevel(){
+    public int updateLevel(){
         //if user consistently gets low grades take him down levels, if consistently gets high grades take up levels
-        //TODO: decide on grade ranges later
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        db.collection("tests").whereEqualTo("UID", this.getUID()).whereEqualTo("level", this.level).orderBy("timeTaken", Query.Direction.DESCENDING).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        User user=this;
+        int prevLevel=user.getLevel();
+        db.collection("tests").whereEqualTo("UID", this.getUID()).whereEqualTo("level", this.level).orderBy("timeTaken", Query.Direction.DESCENDING).limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
                     int amount=0;
-                    double sumLatest=0;
-                    double sumEarlierTests=0;
+                    double sumLastThree=0;
+                    double sumLastFive=0;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         amount++;
+                        double thisGrade=document.toObject(Test.class).getGrade();
+                        if(amount<=3)
+                            sumLastThree+=thisGrade;
                         if(amount<=5)
-                            sumLatest+=document.toObject(Test.class).getGrade();
-                        else
-                            sumEarlierTests+=document.toObject(Test.class).getGrade();
+                            sumLastFive+=thisGrade;
+
                     }
-                    double latestAvg=sumLatest/5;
-                    double totalAvg=(sumLatest+sumEarlierTests)/(amount+5);
+                    double lastThreeAvg=sumLastThree/3;
+                    double lastFiveAvg=sumLastFive/5;
+
+                    if((lastThreeAvg>=90||lastFiveAvg>=80)&&user.getLevel()<5)
+                        user.setLevel(prevLevel + 1);
+
+                    else if(lastThreeAvg<=30||lastFiveAvg<=55)
+                        user.setLevel(prevLevel-1);
                 }
             }
         });
+        if(user.getLevel()>prevLevel)
+            return 1;
+        if(user.getLevel()<prevLevel)
+            return -1;
+        else
+            return 0;
     }
 }
