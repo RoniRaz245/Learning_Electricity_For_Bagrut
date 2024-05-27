@@ -13,11 +13,6 @@
         app:title="ווליום- עבור המשתמשים ב-TTS"/>
 
     <SwitchPreference
-        app:key="compressImage"
-        app:defaultValue="false"
-        app:title="דחוס תמונות לתצוגה" />
-
-    <SwitchPreference
         app:key="keepLoggedIn"
         app:defaultValue="false"
         app:title="הישאר מחובר/ת" />
