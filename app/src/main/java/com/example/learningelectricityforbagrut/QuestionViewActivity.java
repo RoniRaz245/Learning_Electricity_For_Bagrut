@@ -47,7 +47,6 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
     /*private TextToSpeech tts;
     private Button ttsButton;*/
     //TTS not in use till further notice
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -236,6 +235,7 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Intent stats=new Intent(getApplicationContext(), quizzStatsActivity.class);
+                        stats.putExtra("test", test);
                         getApplicationContext().startActivity(stats);
                     }
                 })
