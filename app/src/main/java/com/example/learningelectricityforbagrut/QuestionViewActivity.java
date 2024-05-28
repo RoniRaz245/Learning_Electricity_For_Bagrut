@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -232,6 +234,16 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         ArrayList<Integer> answers= test.getAnswerGiven();
         ArrayList<Boolean> correctAnswer=test.getCorrectAnswerGiven();
         ArrayList<Question> questions=test.getQuestions();
+        ArrayList<Integer> timers=test.getTimers();
+
+        //update times list for all questions
+        for(int i=0; i<questionAmount; i++){
+            ArrayList<Double> questionTimers=questions.get(i).getTimes();
+            questionTimers.add((double) ((int)timers.get(i)/60));
+            DatabaseReference timesRef= FirebaseDatabase.getInstance().getReference()
+                    .child("questions").child("level_"+test.getLevel()).child(String.valueOf(questions.get(i).getSerialNumber())).child("times");
+            timesRef.setValue(questionTimers);
+        }
         final int[] currQuestion = {questionAmount-1};
         saveQuestionState(currQuestion,answers,test);
 

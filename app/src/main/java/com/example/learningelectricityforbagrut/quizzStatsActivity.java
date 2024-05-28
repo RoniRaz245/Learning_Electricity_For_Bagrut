@@ -94,7 +94,7 @@ public class quizzStatsActivity extends baseActivity {
                             levelView.setText("בזאת, עלית לרמה " + userLevel + ", יפה מאוד!");
                     else if(levelUpdated==0) //stayed in same level
                             levelView.setText("נשארת ברמה "+userLevel);
-                    else
+                    else //went down a level
                             levelView.setText("ירדת לרמה "+userLevel+". אל דאגה, השקעתך לא תתבזבז, בהצלחה בבוחן הבא!");
 
                 }
