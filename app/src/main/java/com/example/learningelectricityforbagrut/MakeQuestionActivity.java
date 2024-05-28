@@ -120,6 +120,9 @@ public class MakeQuestionActivity extends baseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_makequestion);
 
+        setSupportActionBar(findViewById(R.id.my_toolbar));
+        getSupportActionBar().show();
+
         bodyTextView=findViewById(R.id.questionBody);
         option1TextView=findViewById(R.id.firstAnswer);
         option2TextView=findViewById(R.id.secondAnswer);

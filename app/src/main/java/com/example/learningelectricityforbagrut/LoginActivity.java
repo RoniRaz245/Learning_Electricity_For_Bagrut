@@ -28,10 +28,8 @@ public class LoginActivity extends baseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar bar=getSupportActionBar();
-        if(bar!=null)
-            bar.hide();
         setContentView(R.layout.activity_login);
+
         login = findViewById(R.id.login);
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.password);

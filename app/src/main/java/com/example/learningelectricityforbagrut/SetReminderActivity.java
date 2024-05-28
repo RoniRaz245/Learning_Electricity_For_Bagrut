@@ -28,6 +28,10 @@ public class SetReminderActivity extends baseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_reminder);
+
+        setSupportActionBar(findViewById(R.id.my_toolbar));
+        getSupportActionBar().show();
+
         timePicker = findViewById(R.id.timePicker);
         textForNotif = findViewById(R.id.textForNotif);
         makeNotif = findViewById(R.id.makeNotif);

@@ -34,6 +34,8 @@ public class HomeActivity extends baseActivity
         super.onCreate(savedInstanceState);
         //setting all buttons
         setContentView(R.layout.activity_home);
+        setSupportActionBar(findViewById(R.id.my_toolbar));
+        getSupportActionBar().show();
         addReminder = findViewById(R.id.addReminder);
         uploadQuestion = findViewById(R.id.makeQuestion);
         startQuiz = findViewById(R.id.startQuiz);

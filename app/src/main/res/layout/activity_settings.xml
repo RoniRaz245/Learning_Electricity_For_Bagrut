@@ -8,6 +8,8 @@
     android:padding="15dp"
     tools:context=".SettingsActivity">
 
+    <include layout="@layout/toolbar"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/settings_container"
         android:layout_width="match_parent"

@@ -9,6 +9,8 @@
     android:padding="15dp"
     tools:context=".quizzStatsActivity">
 
+    <include layout="@layout/toolbar"/>
+
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"

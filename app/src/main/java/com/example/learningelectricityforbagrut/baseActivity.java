@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".QuestionViewActivity">
 
+
     <TextView
         android:id="@+id/questionBody"
         android:layout_width="wrap_content"

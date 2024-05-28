@@ -40,6 +40,10 @@ public class quizzStatsActivity extends baseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quizz_stats);
+
+        setSupportActionBar(findViewById(R.id.my_toolbar));
+        getSupportActionBar().show();
+
         titleView=findViewById(R.id.title);
         gradeView=findViewById(R.id.grade);
         levelView=findViewById(R.id.updateOnLevel);

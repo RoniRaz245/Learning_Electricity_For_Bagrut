@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".SetReminderActivity">
 
+    <include layout="@layout/toolbar"/>
+
     <TimePicker
         android:id="@+id/timePicker"
         android:layout_width="wrap_content"

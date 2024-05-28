@@ -6,6 +6,8 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
 
+    <include layout="@layout/toolbar"/>
+
     <EditText
         android:id="@+id/questionBody"
         android:layout_width="297dp"
