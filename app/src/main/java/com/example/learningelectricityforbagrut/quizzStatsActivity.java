@@ -59,10 +59,10 @@ public class quizzStatsActivity extends baseActivity {
 
 
         int testLevel= test.getLevel();
-        titleView.setText("כל הכבוד על בוחן ברמה "+testLevel+"!");
+        titleView.setText(getString(R.string.congrats)+testLevel+"!");
 
         double grade=test.getGrade();
-        gradeView.setText("ציונך הוא "+grade);
+        gradeView.setText(getString(R.string.grade)+grade);
 
         ArrayList<Integer> times=test.getTimers();
         int questionAmount=1;
@@ -74,7 +74,7 @@ public class quizzStatsActivity extends baseActivity {
         int avgTime=totalTime/questionAmount;
         double totalTimeMinutes= (double) totalTime /60;
         double avgTimeMinutes= (double) avgTime /60;
-        timeTakenView.setText("הבוחן לקח לך "+totalTime+" שניות, כלומר "+totalTimeMinutes+" דקות. זה אומר שבממוצע, שאלה לוקחת לך "+avgTime+" שניות, כלומר "+avgTimeMinutes+" דקות.");
+        timeTakenView.setText(getString(R.string.time_one)+totalTimeMinutes+getString(R.string.time_two)+avgTimeMinutes+getString(R.string.time_three));
 
         viewQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
