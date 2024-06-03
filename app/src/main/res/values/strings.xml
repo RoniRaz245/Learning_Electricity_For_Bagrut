@@ -15,6 +15,13 @@
     <string name="too_little_questions">שאלות ברמה שלך, סליחה על חוסר הנוחות</string>
     <string name="test">test</string>
     <string name="hebrew_locale">iw</string>
+    <string name="image_source">"מקור התמונה"</string>
+    <string name="source">source</string>
+    <string name="gallery">גלריה</string>
+    <string name="gallery_english">gallery</string>
+    <string name="image_source_english">image source</string>
+    <string name="camera">מצלמה</string>
+    <string name="camera_english">camera</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dark_mode">"מצב כהה"</string>
