@@ -27,6 +27,9 @@
         android:theme="@style/light_mode"
         tools:targetApi="33">
         <activity
+            android:name=".userStatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".QuestionViewAfterTestActivity"
             android:exported="false"
             android:label="שאלות הבוחן שנעשה" />

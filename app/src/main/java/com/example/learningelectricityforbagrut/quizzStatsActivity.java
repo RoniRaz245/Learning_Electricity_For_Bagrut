@@ -59,7 +59,7 @@ public class quizzStatsActivity extends baseActivity {
 
 
         int testLevel= test.getLevel();
-        titleView.setText("כל הכבוד על השלמת בוחן ברמה "+testLevel+"!");
+        titleView.setText("כל הכבוד על בוחן ברמה "+testLevel+"!");
 
         double grade=test.getGrade();
         gradeView.setText("ציונך הוא "+grade);
