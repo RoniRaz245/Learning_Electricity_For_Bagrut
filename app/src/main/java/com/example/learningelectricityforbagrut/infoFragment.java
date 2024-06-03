@@ -19,8 +19,8 @@ public class infoFragment extends DialogFragment {
         final View dialogView = inflater.inflate(R.layout.level_info, null);
         builder.setView(dialogView);
 
-        builder.setTitle("רמות קושי")
-                .setNegativeButton("הבנתי", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.diff_levels))
+                .setNegativeButton(getString(R.string.understood), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

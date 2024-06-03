@@ -49,7 +49,7 @@ public class LoginActivity extends baseActivity {
             }
             else{
                 Toast.makeText(login.getContext(),
-                                "הייתה שגיאה, אנא היכנס ידנית",
+                                getString(R.string.error),
                                 Toast.LENGTH_LONG)
                         .show();
             }
@@ -67,7 +67,7 @@ public class LoginActivity extends baseActivity {
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(login.getContext(),
-                            "מייל בבקשה!",
+                            getString(R.string.email_req),
                             Toast.LENGTH_LONG)
                     .show();
             return;
@@ -75,7 +75,7 @@ public class LoginActivity extends baseActivity {
 
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(login.getContext(),
-                            "סיסמה בבקשה!",
+                            getString(R.string.pswrd_req),
                             Toast.LENGTH_LONG)
                     .show();
             return;
@@ -99,7 +99,7 @@ public class LoginActivity extends baseActivity {
                                 else {
                                     //generic error message
                                     Toast.makeText(login.getContext(),
-                                                    "ההתחברות נכשלה, אנא נסו שוב",
+                                                    getString(R.string.error),
                                                     Toast.LENGTH_LONG)
                                             .show();
 
