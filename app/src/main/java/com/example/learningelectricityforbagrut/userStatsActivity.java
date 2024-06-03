@@ -7,12 +7,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,43 +44,42 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         database.child("users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    User user=task.getResult().getValue(User.class);
-                    int userLevel=user.getLevel();
-                    String level="רמתך היא"+ String.valueOf(userLevel);
+        @Override
+        public void onComplete(@NonNull Task<DataSnapshot> task) {
+        if (task.isSuccessful()) {
+                User user = task.getResult().getValue(User.class);
+                int userLevel = user.getLevel();
+                String level = "רמתך היא" + String.valueOf(userLevel);
+                levelView.setText(level);
                 }
             }
+        });
 
-        //get tests
-        ArrayList<Test> tests=new ArrayList<>();
+            //get tests
+        ArrayList<Test> tests = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("tests")
-                .whereEqualTo("UID", mAuth.getCurrentUser().getUid()).orderBy("timeTaken", Query.Direction.DESCENDING)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Test currTest=document.toObject(Test.class);
-                                tests.add(currTest);
-                            }
-                        } else {
-                            //generic error message
-                            Toast.makeText(getApplicationContext(), "הייתה שגיאה, נסה שוב מאוחר יותר", Toast.LENGTH_LONG).show();
+        db.collection("tests").whereEqualTo("UID",mAuth.getCurrentUser().getUid()).orderBy("timeTaken",Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete (@NonNull Task < QuerySnapshot > task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Test currTest = document.toObject(Test.class);
+                            tests.add(currTest);
                         }
+                    } else {
+                        //generic error message
+                        Toast.makeText(getApplicationContext(), "הייתה שגיאה, נסה שוב מאוחר יותר", Toast.LENGTH_LONG).show();
                     }
-                });
+                }
+            });
 
-        // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.viewTests);
+            // set up the RecyclerView
+            RecyclerView recyclerView = findViewById(R.id.viewTests);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TestViewAdapter(this, tests);
+        adapter =new TestViewAdapter(this,tests);
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
-    }
+        }
 
     @Override
     public void onItemClick(View view, int position) {
