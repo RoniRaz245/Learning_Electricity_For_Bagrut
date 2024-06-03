@@ -95,11 +95,11 @@ public class quizzStatsActivity extends baseActivity {
                     int userLevel=user.getLevel();
                     int levelUpdated = user.updateLevel();
                     if(levelUpdated>0) //went up a level
-                            levelView.setText("בזאת, עלית לרמה " + userLevel + ", יפה מאוד!");
+                            levelView.setText(getString(R.string.lvl_up) + userLevel + getString(R.string.v_nice));
                     else if(levelUpdated==0) //stayed in same level
-                            levelView.setText("נשארת ברמה "+userLevel);
+                            levelView.setText(getString(R.string.stayed_in_level)+userLevel);
                     else //went down a level
-                            levelView.setText("ירדת לרמה "+userLevel+". אל דאגה, השקעתך לא תתבזבז, בהצלחה בבוחן הבא!");
+                            levelView.setText(getString(R.string.lvl_down)+userLevel+getString(R.string.cope));
 
                 }
             }

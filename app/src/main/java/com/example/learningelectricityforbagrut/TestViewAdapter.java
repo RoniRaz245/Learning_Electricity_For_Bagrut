@@ -1,6 +1,7 @@
 package com.example.learningelectricityforbagrut;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,8 @@ public class TestViewAdapter extends RecyclerView.Adapter<TestViewAdapter.ViewHo
         //get date from timeTaken
         String timeTaken=mData.get(position).getTimeTaken();
         String[] array = timeTaken.split(".");
-        String date = "מבחן שנלקח בתאריך ";
+        Resources res = holder.itemView.getContext().getResources();
+        String date = res.getString(R.string.test_date);
         for(int i=2;i>=0;i--)
             date.concat(array[i]+".");
         holder.testTitle.setText(date);

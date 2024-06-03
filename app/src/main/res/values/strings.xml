@@ -45,6 +45,17 @@
     <string name="time_one">הבוחן לקח לך </string>
     <string name="time_two"> דקות. זה אומר שבממוצע, שאלה לוקחת לך </string>
     <string name="time_three"> דקות.</string>
+    <string name="lvl_up">בזאת, עלית לרמה </string>
+    <string name="v_nice">, יפה מאוד!</string>
+    <string name="stayed_in_level">נשארת ברמה </string>
+    <string name="lvl_down">נשארת ברמה </string>
+    <string name="cope">. אל דאגה, השקעתך לא תתבזבז, בהצלחה בבוחן הבא!</string>
+    <string name="license_as_num">מספר רישוי כרצף מספרים בבקשה!</string>
+    <string name="phone_as_num">טלפון כרצף מספרים בבקשה!</string>
+    <string name="notif_req">בבקשה תן לאפליקציה הרשאות להתראות בהגדרות!</string>
+    <string name="notif_success">ההתראה נקבעה!</string>
+    <string name="test_date">מבחן שנלקח בתאריך </string>
+    <string name="ur_level">רמתך היא</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dark_mode">"מצב כהה"</string>

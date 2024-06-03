@@ -87,7 +87,7 @@ public class RegistrationActivity extends baseActivity {
                     ID = Long.parseLong(enterId.getText().toString());
                 } catch (Exception e) {
                     Toast.makeText(enterId.getContext(),
-                                    "מספר רישוי כרצף מספרים בבקשה!",
+                                    getString(R.string.license_as_num),
                                     Toast.LENGTH_LONG)
                             .show();
                     return;
@@ -96,7 +96,7 @@ public class RegistrationActivity extends baseActivity {
                 phoneNumber = Integer.parseInt(enterId.getText().toString());
             } catch (Exception e) {
                 Toast.makeText(enterId.getContext(),
-                                "טלפון כרצף מספרים בבקשה!",
+                                getString(R.string.phone_as_num),
                                 Toast.LENGTH_LONG)
                         .show();
                 return;
@@ -107,14 +107,14 @@ public class RegistrationActivity extends baseActivity {
         //make sure user put in parameters
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(Btn.getContext(),
-                            "מייל בבקשה!",
+                            getString(R.string.email_req),
                             Toast.LENGTH_LONG)
                     .show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(Btn.getContext(),
-                            "סיסמה בבקשה!",
+                            getString(R.string.pswrd_req),
                             Toast.LENGTH_LONG)
                     .show();
             return;
@@ -152,7 +152,7 @@ public class RegistrationActivity extends baseActivity {
 
                             Toast.makeText(
                                             Btn.getContext(),
-                                            "ההרשמה נכשלה. אנא נסה שוב מאוחר יותר",
+                                            getString(R.string.error),
                                             Toast.LENGTH_LONG)
                                     .show();
 

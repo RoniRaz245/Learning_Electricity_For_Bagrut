@@ -49,7 +49,7 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
         if (task.isSuccessful()) {
                 User user = task.getResult().getValue(User.class);
                 int userLevel = user.getLevel();
-                String level = "רמתך היא" + String.valueOf(userLevel);
+                String level = getString(R.string.ur_level) + String.valueOf(userLevel);
                 levelView.setText(level);
                 }
             }
@@ -68,7 +68,7 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
                         }
                     } else {
                         //generic error message
-                        Toast.makeText(getApplicationContext(), "הייתה שגיאה, נסה שוב מאוחר יותר", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                     }
                 }
             });
