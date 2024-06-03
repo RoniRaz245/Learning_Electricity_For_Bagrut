@@ -78,7 +78,7 @@ public class QuestionViewAfterTestActivity extends baseActivity {
                         setUpQuestion(currQuestion, currTest);
                     }
                     else{
-                        Toast.makeText(QuestionViewAfterTestActivity.this, "מחזיר למסך נתוני הבוחן...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionViewAfterTestActivity.this, getString(R.string.ret_stats), Toast.LENGTH_SHORT).show();
                         Intent quizzStats=new Intent(getApplicationContext(), quizzStatsActivity.class);
                         startActivity(quizzStats);
                     }
@@ -90,7 +90,7 @@ public class QuestionViewAfterTestActivity extends baseActivity {
                         setUpQuestion(currQuestion, currTest);
                     }
                     else
-                        Toast.makeText(getApplicationContext(), "זוהי השאלה הראשונה!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.first_question), Toast.LENGTH_LONG).show();
                 }
                 return true;
             }
@@ -166,7 +166,7 @@ public class QuestionViewAfterTestActivity extends baseActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    Toast.makeText(getApplicationContext(), "הייתה שגיאה בהעלאת התמונה, אנא עבור שאלה וחזור מאוחר יותר", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                 }
             });
         }

@@ -97,12 +97,12 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                         setUpQuestion(currQuestion, currTest, currAnswers);
                     }
                     else
-                        Toast.makeText(getApplicationContext(), "זוהי השאלה הראשונה!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.first_question), Toast.LENGTH_LONG).show();
                 }
                 else if(id==R.id.pause) {
                     if(chronoIsRunning) {
                         chronoView.stop();
-                        menuItem.setTitle("המשך טיימר");
+                        menuItem.setTitle(getString(R.string.timer_cont));
                         chronoIsRunning = false;
                         ArrayList<Integer> timers= currTest.getTimers();
                         int currTime=getTimeFromChronometer();
@@ -198,7 +198,7 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    Toast.makeText(getApplicationContext(), "הייתה שגיאה בהעלאת התמונה, אנא עבור שאלה וחזור מאוחר יותר", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -265,7 +265,7 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(QuestionViewActivity.this, "הייתה שגיאה, אנא נסו שוב", Toast.LENGTH_LONG).show();
+                        Toast.makeText(QuestionViewActivity.this, getString(R.string.error), Toast.LENGTH_LONG).show();
                     }
                 });
     }
