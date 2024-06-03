@@ -27,7 +27,7 @@ import com.google.android.gms.tasks.Task;
 
 public class RegistrationActivity extends baseActivity {
 
-    private EditText emailTextView, passwordTextView, nameTextView, enterId, enterPhoneNum;
+    private EditText emailTextView, passwordTextView, enterId, enterPhoneNum;
     private FirebaseAuth mAuth;
     private Button Btn;
     private RadioButton isTeacherCheck, keepLoggedIn;
@@ -43,7 +43,6 @@ public class RegistrationActivity extends baseActivity {
         mAuth = FirebaseAuth.getInstance();
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.passwd);
-        nameTextView=findViewById(R.id.name);
         isTeacherCheck=findViewById(R.id.isTeacherCheck);
         enterId=findViewById(R.id.teacherLicense);
         enterPhoneNum=findViewById(R.id.phoneNumber);
@@ -81,7 +80,6 @@ public class RegistrationActivity extends baseActivity {
         String email, password, name;
         email = emailTextView.getText().toString();
         password = passwordTextView.getText().toString();
-        name= nameTextView.getText().toString();
         long ID=0;
         int phoneNumber=0;
             if (isTeacherCheck.isChecked()){
@@ -121,13 +119,6 @@ public class RegistrationActivity extends baseActivity {
                     .show();
             return;
         }
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(Btn.getContext(),
-                            "שם בבקשה!",
-                            Toast.LENGTH_LONG)
-                    .show();
-            return;
-        }
 
         long finalID = ID;
         int finalPhoneNumber = phoneNumber;
@@ -141,7 +132,7 @@ public class RegistrationActivity extends baseActivity {
                         if (task.isSuccessful()) {
                             //make a user with given+default parameters and upload to firebase
                             String UID=mAuth.getCurrentUser().getUid();
-                            User user = new User(isTeacherCheck.isChecked(),name, UID, finalID, finalPhoneNumber);
+                            User user = new User(isTeacherCheck.isChecked(), UID, finalID, finalPhoneNumber);
                             FirebaseDatabase.getInstance().getReference().child("users").child(UID).setValue(user);
 
                             //save user prefs to sharedPreferences
