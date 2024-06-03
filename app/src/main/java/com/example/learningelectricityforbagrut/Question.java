@@ -102,4 +102,8 @@ public class Question implements Serializable {
     public void setTimes(ArrayList<Double> times) {
         this.times = times;
     }
+
+    public void checkQuestionLevel() {
+
+    }
 }
