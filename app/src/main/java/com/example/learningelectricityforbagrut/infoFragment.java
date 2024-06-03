@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 public class infoFragment extends DialogFragment {
+    static String TAG= "info";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -44,7 +44,7 @@ public class baseActivity extends AppCompatActivity {
     }
     protected void giveInfo(){
         DialogFragment info = new infoFragment();
-        info.show(getSupportFragmentManager(), "info");
+        info.show(getSupportFragmentManager(), infoFragment.TAG);
     }
 }
 

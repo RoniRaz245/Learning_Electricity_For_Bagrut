@@ -40,13 +40,13 @@ public class endQuizFragment extends DialogFragment {
         final View dialogView = inflater.inflate(R.layout.fragment_end_quiz, null);
         builder.setView(dialogView);
 
-        builder.setTitle("האם ברצונכם לסיים את הבוחן?")
-                .setNegativeButton("לא", new DialogInterface.OnClickListener() {
+        builder.setTitle(getResources().getString(R.string.end_quiz))
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
-                }).setPositiveButton("כן", new DialogInterface.OnClickListener() {
+                }).setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 listener.endQuiz();

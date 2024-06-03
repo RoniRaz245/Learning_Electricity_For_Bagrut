@@ -57,12 +57,12 @@ public class HomeActivity extends baseActivity
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        database.child("users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        database.child(getString(R.string.users)).child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful())
                     Toast.makeText(uploadQuestion.getContext(),
-                                    "הייתה שגיאה, נסה שוב מאוחר יותר",
+                                    getString(R.string.error),
                                     Toast.LENGTH_LONG)
                             .show();
                 else {
@@ -76,7 +76,7 @@ public class HomeActivity extends baseActivity
                             @Override
                             public void onClick(View v) {
                                 Toast.makeText(uploadQuestion.getContext(),
-                                                "אין לך את ההרשאות להעלות שאלה!",
+                                                getString(R.string.no_access),
                                                 Toast.LENGTH_LONG)
                                         .show();
                             }
@@ -98,12 +98,12 @@ public class HomeActivity extends baseActivity
 
             DatabaseReference database = FirebaseDatabase.getInstance().getReference();
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
-            database.child("users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(
+            database.child(getString(R.string.users)).child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(
                     new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if (!task.isSuccessful())
-                                Toast.makeText(startQuiz.getContext(), "הייתה שגיאה, נסה שוב מאוחר יותר", Toast.LENGTH_LONG).show();
+                                Toast.makeText(startQuiz.getContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                             else {
                                 User currentUser = task.getResult().getValue(User.class);
                                 assert currentUser != null;
@@ -115,13 +115,13 @@ public class HomeActivity extends baseActivity
                     });
             }
         public void makeTest (String UID, int level, int questionAmount, DatabaseReference database){
-            String levelName="level_"+level;
-            database.child("questions").child(levelName).get().addOnCompleteListener(
+            String levelName=getString(R.string.level_)+level;
+            database.child(getString(R.string.questions)).child(levelName).get().addOnCompleteListener(
                     new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if(!task.isSuccessful())
-                                Toast.makeText(startQuiz.getContext(), "הייתה שגיאה, נסה שוב מאוחר יותר", Toast.LENGTH_LONG).show();
+                                Toast.makeText(startQuiz.getContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
 
                             else {
                                 HashMap<String, Question> questions = new HashMap<String,Question>();
@@ -129,10 +129,10 @@ public class HomeActivity extends baseActivity
                                     questions.put(question.getKey(), question.getValue(Question.class));
                                 }
                                 if(questions==null)
-                                    Toast.makeText(startQuiz.getContext(),  "אין שאלות ברמתך כרגע, סליחה על חוסר הנוחות", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(startQuiz.getContext(),  getString(R.string.no_questions), Toast.LENGTH_LONG).show();
 
                                 else if(questions.size()<questionAmount)
-                                    Toast.makeText(startQuiz.getContext(), "יש רק" +questions.size() + "שאלות ברמה שלך, סליחה על חוסר הנוחות", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(startQuiz.getContext(), getString(R.string.only) +questions.size() + getString(R.string.too_little_questions), Toast.LENGTH_LONG).show();
 
                                 else{
                                     //access questions in random order to run
@@ -149,7 +149,7 @@ public class HomeActivity extends baseActivity
                                         timers.add(0);
 
                                     //get time test was taken to save test with
-                                    Locale locale= new Locale("iw");
+                                    Locale locale= new Locale(getString(R.string.hebrew_locale));
                                     Date date = new Date();
                                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", locale);
                                     String timeTaken= dateFormat.format(date);
@@ -166,7 +166,7 @@ public class HomeActivity extends baseActivity
 
                                     Test test=new Test(level, UID, questionsForTest, correctAnswers, answers, timers, timeTaken);
                                     Intent startTest = new Intent(getApplicationContext(), QuestionViewActivity.class);
-                                    startTest.putExtra("test", test);
+                                    startTest.putExtra(getString(R.string.test), test);
                                     startActivity(startTest);
                                 }
                             }
