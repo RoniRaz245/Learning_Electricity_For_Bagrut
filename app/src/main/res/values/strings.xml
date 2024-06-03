@@ -26,6 +26,14 @@
     <string name="understood">הבנתי</string>
     <string name="email_req">מייל בבקשה!</string>
     <string name="pswrd_req">סיסמה בבקשה!</string>
+    <string name="image_success">התמונה הועלתה!</string>
+    <string name="no_image_chosen">לא נבחרה תמונה</string>
+    <string name="loading">מעלה, אנא חכו רגע…</string>
+    <string name="level_needed">דרושה רמה לשאלה!</string>
+    <string name="correctnum_needed">נדרש מספר תשובה נכונה!</string>
+    <string name="body_needed">נדרש גוף לשאלה!</string>
+    <string name="options_needed">דרושות ארבע תשובות לשאלה!</string>
+    <string name="question_success">השאלה הועלתה!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dark_mode">"מצב כהה"</string>

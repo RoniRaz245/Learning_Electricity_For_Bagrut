@@ -71,17 +71,17 @@ public class MakeQuestionActivity extends baseActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             imageUploaded=true;
-                            Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(uploadImage.getContext(), getString(R.string.image_success),Toast.LENGTH_LONG).show();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
+                            Toast.makeText(uploadImage.getContext(), getString(R.string.error),Toast.LENGTH_LONG).show();
                         }
                     });
                 }
                 else{
-                    Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
+                    Toast.makeText(uploadImage.getContext(), getString(R.string.no_image_chosen),Toast.LENGTH_LONG).show();
                 }
             });
     protected ActivityResultLauncher<Uri> startCamera= registerForActivityResult(
@@ -97,17 +97,17 @@ public class MakeQuestionActivity extends baseActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         imageUploaded=true;
-                        Toast.makeText(uploadImage.getContext(), "התמונה הועלתה!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(uploadImage.getContext(), R.string.image_success,Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(uploadImage.getContext(), "הייתה שגיאה בהעלאת התמונה, אנא נסה שוב",Toast.LENGTH_LONG).show();
+                        Toast.makeText(uploadImage.getContext(), getString(R.string.error),Toast.LENGTH_LONG).show();
                     }
                 });
             }
             else{
-                Toast.makeText(uploadImage.getContext(), "לא נבחרה תמונה",Toast.LENGTH_LONG).show();
+                Toast.makeText(uploadImage.getContext(), getString(R.string.no_image_chosen),Toast.LENGTH_LONG).show();
 
             }
         }
@@ -153,7 +153,7 @@ public class MakeQuestionActivity extends baseActivity {
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
          }
     private void uploadGivenQuestion(){
-        Toast.makeText(this, "מעלה שאלה...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.loading), Toast.LENGTH_SHORT).show();
         //get details of question
         String body=bodyTextView.getText().toString();
         String option1= option1TextView.getText().toString();
@@ -170,19 +170,19 @@ public class MakeQuestionActivity extends baseActivity {
 
         //fail cases in case part of given question is invalid
         if(level==0) {
-            Toast.makeText(this.getApplicationContext(),"דרושה רמה לשאלה", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),getString(R.string.level_needed), Toast.LENGTH_LONG).show();
             return;
         }
         if(correctAnswer==0) {
-            Toast.makeText(this.getApplicationContext(),"דרוש מספר התשובה הנכונה", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),getString(R.string.correctnum_needed), Toast.LENGTH_LONG).show();
             return;
         }
         if(body.isEmpty()){
-            Toast.makeText(this.getApplicationContext(),"דרוש גוף לשאלה", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),getString(R.string.body_needed), Toast.LENGTH_LONG).show();
             return;
         }
         if(option1.isEmpty()||option2.isEmpty()||option3.isEmpty()||option4.isEmpty()){
-            Toast.makeText(this.getApplicationContext(),"דרושות ארבע אפשרויות לתשובות", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),R.string.options_needed, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -195,7 +195,7 @@ public class MakeQuestionActivity extends baseActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(!task.isSuccessful())
-                    Toast.makeText(MakeQuestionActivity.this, "הייתה שגיאה, אנא נסו שוב", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MakeQuestionActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();
                 else{
                     long serialNum = task.getResult().child("level_1").getChildrenCount() + task.getResult().child("level_2").getChildrenCount() + task.getResult().child("level_3").getChildrenCount() + task.getResult().child("level_4").getChildrenCount()+task.getResult().child("level_5").getChildrenCount()+task.getResult().child("deleted_questions").getChildrenCount()-4;
                     String UID = mAuth.getCurrentUser().getUid();
@@ -204,7 +204,7 @@ public class MakeQuestionActivity extends baseActivity {
                         image = imageUrl;
                     Question newQuestion = new Question(body, image, options, answerIndex, level, UID, serialNum);
                     database.child("questions").child(levelChild).child(String.valueOf(serialNum)).setValue(newQuestion);
-                    Toast.makeText(getApplicationContext(),"השאלה הועלתה!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),getString(R.string.question_success), Toast.LENGTH_LONG).show();
                     imageUploaded = false; //rest check for next time question is uploaded
                 }
             }
@@ -237,7 +237,7 @@ public class MakeQuestionActivity extends baseActivity {
                         if(pathCreated)
                             startCamera.launch(uri);
                         else
-                            Toast.makeText(getApplicationContext(),"אנא נסו שוב מאוחר יותר", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),getString(R.string.error), Toast.LENGTH_LONG).show();
                     }
                     }
                 }
