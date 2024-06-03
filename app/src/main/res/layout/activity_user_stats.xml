@@ -25,7 +25,7 @@
             app:srcCompat="@android:drawable/ic_menu_help" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"

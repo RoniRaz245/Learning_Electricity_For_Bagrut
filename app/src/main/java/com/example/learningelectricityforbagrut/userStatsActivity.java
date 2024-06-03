@@ -3,6 +3,8 @@ package com.example.learningelectricityforbagrut;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,6 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -26,6 +31,8 @@ import java.util.ArrayList;
 
 public class userStatsActivity extends baseActivity implements TestViewAdapter.ItemClickListener {
     TestViewAdapter adapter;
+    TextView levelView, gradeAvg;
+    ImageButton levelInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +41,26 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
         setSupportActionBar(findViewById(R.id.my_toolbar));
         getSupportActionBar().show();
 
+        levelView=findViewById(R.id.level);
+        gradeAvg=findViewById(R.id.gradeAvg);
+        levelInfo=findViewById(R.id.levelInfo);
+
+        levelInfo.setOnClickListener(v->giveInfo());
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        database.child("users").child(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    User user=task.getResult().getValue(User.class);
+                    int userLevel=user.getLevel();
+                    String level="רמתך היא"+ String.valueOf(userLevel);
+                }
+            }
+
         //get tests
         ArrayList<Test> tests=new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         db.collection("tests")
                 .whereEqualTo("UID", mAuth.getCurrentUser().getUid()).orderBy("timeTaken", Query.Direction.DESCENDING)
                 .get()
