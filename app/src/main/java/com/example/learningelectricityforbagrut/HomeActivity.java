@@ -1,6 +1,7 @@
 package com.example.learningelectricityforbagrut;
 
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class HomeActivity extends baseActivity
@@ -147,7 +149,10 @@ public class HomeActivity extends baseActivity
                                         timers.add(0);
 
                                     //get time test was taken to save test with
-                                    String timeTaken= String.valueOf(System.currentTimeMillis());
+                                    Locale locale= new Locale("Hebrew");
+                                    Date date = new Date();
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss", locale);
+                                    String timeTaken= dateFormat.format(date);
 
                                     //array to put if answers were correct in
                                     ArrayList<Boolean> correctAnswers=new ArrayList<>(questionAmount);
