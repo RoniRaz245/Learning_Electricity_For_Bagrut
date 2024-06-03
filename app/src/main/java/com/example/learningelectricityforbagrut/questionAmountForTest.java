@@ -51,14 +51,14 @@ public class questionAmountForTest extends DialogFragment {
             answers[i]= String.valueOf(i+1);
         questionAmount.setDisplayedValues(answers);
 
-        builder.setTitle("כמות שאלות")
-                .setNegativeButton("בטל", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.question_amount))
+                .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 })
-        .setPositiveButton("החל מבחן", new DialogInterface.OnClickListener() {
+        .setPositiveButton(getString(R.string.start_test), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 listener.onDialogPositiveClick(questionAmount.getValue());
