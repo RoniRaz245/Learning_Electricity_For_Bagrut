@@ -27,14 +27,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             }
         });
-        findPreference("volume").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-                assert prefs != null;
-                prefs.edit().putInt("volume",(int)newValue).apply();
-                return true;
-            }
-        });
 
         findPreference("keepLoggedIn").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override

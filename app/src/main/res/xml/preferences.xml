@@ -6,12 +6,6 @@
         app:defaultValue="false"
         app:title="הפעל מצב כהה לאפליקציה" />
 
-    <SeekBarPreference
-        app:key="volume"
-        app:defaultValue="5"
-        android:max="10"
-        app:title="ווליום- עבור המשתמשים ב-TTS"/>
-
     <SwitchPreference
         app:key="keepLoggedIn"
         app:defaultValue="false"
