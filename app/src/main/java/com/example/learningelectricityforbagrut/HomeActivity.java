@@ -149,9 +149,9 @@ public class HomeActivity extends baseActivity
                                         timers.add(0);
 
                                     //get time test was taken to save test with
-                                    Locale locale= new Locale("Hebrew");
+                                    Locale locale= new Locale("iw");
                                     Date date = new Date();
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss", locale);
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", locale);
                                     String timeTaken= dateFormat.format(date);
 
                                     //array to put if answers were correct in
