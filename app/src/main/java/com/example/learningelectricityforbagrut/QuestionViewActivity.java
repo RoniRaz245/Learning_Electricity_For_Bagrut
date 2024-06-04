@@ -236,9 +236,14 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         final int[] currQuestion = {questionAmount-1};
         saveQuestionState(currQuestion,answers,test);
 
+        double amountRight=0;
         for(int i=0;i<questionAmount;i++){
             correctAnswer.set(i, answers.get(i)==questions.get(i).getCorrectAnswer());
+            if(answers.get(i)==questions.get(i).getCorrectAnswer())
+                amountRight++;
         }
+        double grade= (amountRight*100)/questionAmount;
+        test.setGrade(grade);
         test.setCorrectAnswerGiven(correctAnswer);
 
         //save finished test to database

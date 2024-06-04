@@ -166,7 +166,9 @@ public class HomeActivity extends baseActivity
                                     for(int i=0;i<questionAmount;i++)
                                         answers.add(-1);
 
-                                    Test test=new Test(level, UID, questionsForTest, correctAnswers, answers, timers, timeTaken);
+                                    double grade=0;
+
+                                    Test test=new Test(level, UID, questionsForTest, correctAnswers, answers, timers, timeTaken,grade);
                                     Intent startTest = new Intent(getApplicationContext(), QuestionViewActivity.class);
                                     startTest.putExtra(getString(R.string.test), test);
                                     startActivity(startTest);

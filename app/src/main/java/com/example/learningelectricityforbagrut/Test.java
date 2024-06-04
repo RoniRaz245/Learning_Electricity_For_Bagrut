@@ -23,7 +23,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.timers=null;
         this.timeTaken=null;
     }
-    public Test(int _level, String _UID, ArrayList<Question> _questions, ArrayList<Boolean> _correctAnswerGiven, ArrayList<Integer> _answerGiven, ArrayList<Integer> _timers, String _timeTaken){
+    public Test(int _level, String _UID, ArrayList<Question> _questions, ArrayList<Boolean> _correctAnswerGiven, ArrayList<Integer> _answerGiven, ArrayList<Integer> _timers, String _timeTaken, double _grade){
         this.level=_level;
         this.UID=_UID;
         this.questions=_questions;
@@ -31,13 +31,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.answerGiven=_answerGiven;
         this.timers=_timers;
         this.timeTaken=_timeTaken;
-
-        int trueCount = 0;
-        for (int i = 0; i < correctAnswerGiven.size(); i++) {
-            if (correctAnswerGiven.get(i))
-                ++trueCount;
-        }
-        this.grade= ((double) trueCount /(correctAnswerGiven.size()))*100;
+        this.grade= _grade;
     }
     //getting and setting functions
 
@@ -95,14 +89,13 @@ public class Test implements Serializable  { //serializable so it can be passed 
 
     public void setUID(String UID) {
         this.UID = UID;
+
+    }
+    public double getGrade(){
+        return this.grade;
     }
 
     public void setGrade(double grade) {
         this.grade = grade;
     }
-
-    public double getGrade(){
-       return this.grade;
-    }
-
 }
