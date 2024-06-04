@@ -47,9 +47,6 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
     BottomNavigationView questionNav;
     Chronometer chronoView;
     boolean chronoIsRunning;
-    /*private TextToSpeech tts;
-    private Button ttsButton;*/
-    //TTS not in use till further notice
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,17 +117,6 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                 return true;
             }
         });
-
-
-        /* ttsButton=findViewById(R.id.ttsButton);
-        tts= new TextToSpeech(this,this);;
-
-        ttsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                textToSpeak(); //calls function that reads out text
-            }
-        });*/
     }
     private void saveQuestionState(int[] currQuestion, ArrayList<Integer> currAnswers, Test test){
         //save state of timer
@@ -242,7 +228,7 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
             if(questionTimers==null) {
                 questionTimers = new ArrayList<Double>();
             }
-            questionTimers.add((double) ((int)timers.get(i)/60));
+            questionTimers.add((double) (timers.get(i)/60));
             DatabaseReference timesRef= FirebaseDatabase.getInstance().getReference()
                     .child("questions").child("level_"+test.getLevel()).child(String.valueOf(questions.get(i).getSerialNumber())).child("times");
             timesRef.setValue(questionTimers);
@@ -272,27 +258,4 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                     }
                 });
     }
-    /* private void textToSpeak(){
-        text=textView.getText().toString();
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
-    }
-
-    @Override
-    public void onInit(int status) {
-        if (status == TextToSpeech.SUCCESS) {
-            Locale Hebrew= new Locale("he");
-            int result= tts.setLanguage(Hebrew);
-
-            if (result == TextToSpeech.LANG_MISSING_DATA ) {
-                Log.e("error", "download info");
-            }
-            else if(result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                //if tts is initialized but hebrew isn't supported
-                Log.e("error", "This Language is not supported");
-            }
-        }
-        else {
-            Log.e("error", "Failed to Initialize");
-        }
-    }*/
 }
