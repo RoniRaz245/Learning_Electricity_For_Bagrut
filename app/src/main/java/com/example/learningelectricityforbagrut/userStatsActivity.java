@@ -91,6 +91,7 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
     public void onItemClick(View view, int position) {
         Intent testStats=new Intent(getApplicationContext(), quizzStatsActivity.class);
         testStats.putExtra("test", adapter.getItem(position));
+        testStats.putExtra("generalStats", true);
         userStatsActivity.this.startActivity(testStats);
     }
 }

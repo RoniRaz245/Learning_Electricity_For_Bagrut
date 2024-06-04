@@ -63,4 +63,12 @@
         android:layout_marginTop="50dp"
         android:text="צפייה בשאלות ובתשובות הנכונות להן" />
 
+    <Button
+        android:id="@+id/goBackToStats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="חזור לנתוני משתמש"
+        android:visibility="gone"/>
+
 </LinearLayout>

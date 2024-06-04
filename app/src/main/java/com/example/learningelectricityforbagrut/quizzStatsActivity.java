@@ -23,7 +23,7 @@ public class quizzStatsActivity extends baseActivity {
 
     TextView titleView, gradeView, levelView, timeTakenView;
     ImageButton levelInfo;
-    Button viewQuestions;
+    Button viewQuestions, backToUserStats;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +38,19 @@ public class quizzStatsActivity extends baseActivity {
         timeTakenView=findViewById(R.id.timeTaken);
         levelInfo=findViewById(R.id.levelInfo);
         viewQuestions=findViewById(R.id.viewQuestions);
+        backToUserStats=findViewById(R.id.goBackToStats);
+
+        backToUserStats.setVisibility(View.GONE);
 
         levelInfo.setOnClickListener(v->giveInfo());
 
         Intent intent = getIntent();
+
+        boolean fromUserStats=intent.getBooleanExtra("generalStats", false);
+        if(fromUserStats){
+            backToUserStats.setVisibility(View.VISIBLE);
+            backToUserStats.setOnClickListener(v -> backToUserStats.getContext().startActivity(new Intent(backToUserStats.getContext(), userStatsActivity.class)));
+        }
         Test test=intent.getSerializableExtra("test", Test.class);
         assert test!=null;
 
@@ -59,9 +68,8 @@ public class quizzStatsActivity extends baseActivity {
             totalTime+=times.get(questionAmount-1);
             questionAmount++;
         }
-        int avgTime=totalTime/questionAmount;
         double totalTimeMinutes= (double) totalTime /60;
-        double avgTimeMinutes= (double) avgTime /60;
+        double avgTimeMinutes= totalTimeMinutes/questionAmount;
         timeTakenView.setText(getString(R.string.time_one)+" " +totalTimeMinutes+ " " +getString(R.string.time_two)+" " +avgTimeMinutes+" " +getString(R.string.time_three));
 
         viewQuestions.setOnClickListener(new View.OnClickListener() {

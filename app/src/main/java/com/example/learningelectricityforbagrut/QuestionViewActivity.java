@@ -254,6 +254,7 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                     public void onSuccess(DocumentReference documentReference) {
                         Intent stats=new Intent(getApplicationContext(), quizzStatsActivity.class);
                         stats.putExtra("test", test);
+                        stats.putExtra("generalStats", false); //means activity wasn't started from userStats
                         QuestionViewActivity.this.startActivity(stats);
                     }
                 })
