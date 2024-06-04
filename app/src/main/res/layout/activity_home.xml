@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:text="ברוכים הבאים! מה תרצו לעשות?"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/addReminder"
