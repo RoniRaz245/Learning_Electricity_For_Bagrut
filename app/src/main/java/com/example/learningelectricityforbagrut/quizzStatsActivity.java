@@ -62,7 +62,7 @@ public class quizzStatsActivity extends baseActivity {
         int avgTime=totalTime/questionAmount;
         double totalTimeMinutes= (double) totalTime /60;
         double avgTimeMinutes= (double) avgTime /60;
-        timeTakenView.setText(getString(R.string.time_one)+" " +totalTimeMinutes+getString(R.string.time_two)+" " +avgTimeMinutes+" " +getString(R.string.time_three));
+        timeTakenView.setText(getString(R.string.time_one)+" " +totalTimeMinutes+ " " +getString(R.string.time_two)+" " +avgTimeMinutes+" " +getString(R.string.time_three));
 
         viewQuestions.setOnClickListener(new View.OnClickListener() {
             @Override

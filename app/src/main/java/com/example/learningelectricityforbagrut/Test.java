@@ -31,13 +31,13 @@ public class Test implements Serializable  { //serializable so it can be passed 
         this.answerGiven=_answerGiven;
         this.timers=_timers;
         this.timeTaken=_timeTaken;
+
         int trueCount = 0;
-        ArrayList<Boolean> rightAnswer=this.getCorrectAnswerGiven();
-        for (int i = 0; i < rightAnswer.size(); i++) {
-            if (rightAnswer.get(i))
-                trueCount++;
+        for (int i = 0; i < correctAnswerGiven.size(); i++) {
+            if (correctAnswerGiven.get(i))
+                ++trueCount;
         }
-        this.grade= ((double) trueCount /rightAnswer.size())*100;
+        this.grade= ((double) trueCount /(correctAnswerGiven.size()))*100;
     }
     //getting and setting functions
 

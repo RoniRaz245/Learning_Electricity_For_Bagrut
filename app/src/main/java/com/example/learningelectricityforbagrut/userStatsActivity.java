@@ -54,6 +54,12 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
                 }
             }
         });
+        //set up recycler view
+        RecyclerView recyclerView = findViewById(R.id.viewTests);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new TestViewAdapter(this, new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+        adapter.setClickListener(this);
 
             //get tests
         ArrayList<Test> tests = new ArrayList<>();
@@ -72,18 +78,13 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
                         }
                         double avg=sum/amount;
                         gradeAvg.setText(getString(R.string.ur_avg)+" "+ avg);
+
+                        adapter.setData(tests);
                     } else {
                         Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                     }
                 }
             });
-
-            // set up the RecyclerView
-            RecyclerView recyclerView = findViewById(R.id.viewTests);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =new TestViewAdapter(this, tests);
-        recyclerView.setAdapter(adapter);
-        adapter.setClickListener(this);
         }
 
     @Override

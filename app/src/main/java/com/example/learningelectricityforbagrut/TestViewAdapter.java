@@ -1,5 +1,6 @@
 package com.example.learningelectricityforbagrut;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -77,6 +78,13 @@ public class TestViewAdapter extends RecyclerView.Adapter<TestViewAdapter.ViewHo
     // convenience method for getting data at click position
     public Test getItem(int id) {
         return mData.get(id);
+    }
+
+    // method to update the data
+    @SuppressLint("NotifyDataSetChanged")
+    public void setData(List<Test> newData) {
+        this.mData = newData;
+        notifyDataSetChanged();
     }
 
     // parent activity will implement this method to respond to click events
