@@ -39,11 +39,12 @@ public class TestViewAdapter extends RecyclerView.Adapter<TestViewAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //get date from timeTaken
         String timeTaken=mData.get(position).getTimeTaken();
-        String[] array = timeTaken.split(".");
+        String[] array = timeTaken.split("\\.");
         Resources res = holder.itemView.getContext().getResources();
         String date = res.getString(R.string.test_date);
+        date=date.concat(" ");
         for(int i=2;i>=0;i--)
-            date.concat(array[i]+".");
+            date= date.concat(array[i]+".");
         holder.testTitle.setText(date);
     }
 

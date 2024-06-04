@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -71,16 +73,19 @@ public class User {
                             sumLastThree+=thisGrade;
                         if(amount<=5)
                             sumLastFive+=thisGrade;
-
+                        if(amount>5)
+                            break;
                     }
                     double lastThreeAvg=sumLastThree/3;
                     double lastFiveAvg=sumLastFive/5;
 
                     if((lastThreeAvg>=90||lastFiveAvg>=80)&&user.getLevel()<5)
                         user.setLevel(prevLevel + 1);
-
                     else if(lastThreeAvg<=30||lastFiveAvg<=55)
                         user.setLevel(prevLevel-1);
+
+                    FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
+
                 }
             }
         });
