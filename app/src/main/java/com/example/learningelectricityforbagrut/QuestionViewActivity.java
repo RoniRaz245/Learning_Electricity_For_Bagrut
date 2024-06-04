@@ -239,6 +239,9 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         //update times list for all questions
         for(int i=0; i<questionAmount; i++){
             ArrayList<Double> questionTimers=questions.get(i).getTimes();
+            if(questionTimers==null) {
+                questionTimers = new ArrayList<Double>();
+            }
             questionTimers.add((double) ((int)timers.get(i)/60));
             DatabaseReference timesRef= FirebaseDatabase.getInstance().getReference()
                     .child("questions").child("level_"+test.getLevel()).child(String.valueOf(questions.get(i).getSerialNumber())).child("times");

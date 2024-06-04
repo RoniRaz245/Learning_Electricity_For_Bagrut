@@ -46,7 +46,7 @@ public class HomeActivity extends baseActivity
 
         //set intents for buttons that open other activities
         addReminder.setOnClickListener(v -> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
-        openStats.setOnClickListener(v -> getApplicationContext().startActivity(new Intent(getApplicationContext(), userStatsActivity.class)));
+        openStats.setOnClickListener(v -> openStats.getContext().startActivity(new Intent(openStats.getContext(), userStatsActivity.class)));
         startQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
