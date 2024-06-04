@@ -49,7 +49,7 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
         if (task.isSuccessful()) {
                 User user = task.getResult().getValue(User.class);
                 int userLevel = user.getLevel();
-                String level = getString(R.string.ur_level) + String.valueOf(userLevel);
+                String level = getString(R.string.ur_level) + " " + String.valueOf(userLevel);
                 levelView.setText(level);
                 }
             }
@@ -58,7 +58,7 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
             //get tests
         ArrayList<Test> tests = new ArrayList<>();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("tests").whereEqualTo("UID",mAuth.getCurrentUser().getUid()).orderBy("timeTaken",Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("tests").whereEqualTo("uid",mAuth.getCurrentUser().getUid()).orderBy("timeTaken",Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete (@NonNull Task < QuerySnapshot > task) {
                     if (task.isSuccessful()) {

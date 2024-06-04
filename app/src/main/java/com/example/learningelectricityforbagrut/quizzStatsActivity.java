@@ -59,10 +59,10 @@ public class quizzStatsActivity extends baseActivity {
 
 
         int testLevel= test.getLevel();
-        titleView.setText(getString(R.string.congrats)+testLevel+"!");
+        titleView.setText(getString(R.string.congrats)+" " +testLevel+"!");
 
         double grade=test.getGrade();
-        gradeView.setText(getString(R.string.grade)+grade);
+        gradeView.setText(getString(R.string.grade)+" " +grade);
 
         ArrayList<Integer> times=test.getTimers();
         int questionAmount=1;
@@ -74,7 +74,7 @@ public class quizzStatsActivity extends baseActivity {
         int avgTime=totalTime/questionAmount;
         double totalTimeMinutes= (double) totalTime /60;
         double avgTimeMinutes= (double) avgTime /60;
-        timeTakenView.setText(getString(R.string.time_one)+totalTimeMinutes+getString(R.string.time_two)+avgTimeMinutes+getString(R.string.time_three));
+        timeTakenView.setText(getString(R.string.time_one)+" " +totalTimeMinutes+getString(R.string.time_two)+" " +avgTimeMinutes+" " +getString(R.string.time_three));
 
         viewQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,11 +95,11 @@ public class quizzStatsActivity extends baseActivity {
                     int userLevel=user.getLevel();
                     int levelUpdated = user.updateLevel();
                     if(levelUpdated>0) //went up a level
-                            levelView.setText(getString(R.string.lvl_up) + userLevel + getString(R.string.v_nice));
+                            levelView.setText(getString(R.string.lvl_up) + " " + userLevel + getString(R.string.v_nice));
                     else if(levelUpdated==0) //stayed in same level
-                            levelView.setText(getString(R.string.stayed_in_level)+userLevel);
+                            levelView.setText(getString(R.string.stayed_in_level)+" " +userLevel);
                     else //went down a level
-                            levelView.setText(getString(R.string.lvl_down)+userLevel+getString(R.string.cope));
+                            levelView.setText(getString(R.string.lvl_down)+ " " +userLevel+" " +getString(R.string.cope));
 
                 }
             }
