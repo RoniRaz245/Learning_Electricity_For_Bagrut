@@ -3,12 +3,14 @@ package com.example.learningelectricityforbagrut;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.Button;
@@ -25,6 +27,7 @@ public class LoginActivity extends baseActivity {
     private EditText passwordTextView ;
     private Button login ;
     private FirebaseAuth mAuth;
+    private TextView resetPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +37,19 @@ public class LoginActivity extends baseActivity {
         emailTextView = findViewById(R.id.email);
         passwordTextView = findViewById(R.id.password);
         TakeToSignUp = findViewById(R.id.TakeToSignUp);
+        resetPassword=findViewById(R.id.resetPassword);
+
+        //take user to registration screen if asked
         TakeToSignUp.setOnClickListener(v -> TakeToSignUp.getContext().startActivity(new Intent(TakeToSignUp.getContext(), RegistrationActivity.class)));
+
+        resetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment dialog = new getEmail();
+                dialog.show(getSupportFragmentManager(), "getEmail");
+            }
+        });
+
         mAuth = FirebaseAuth.getInstance();
         login.setOnClickListener(v -> loginUserAccount());
 

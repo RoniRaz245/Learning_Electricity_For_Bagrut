@@ -51,6 +51,16 @@
         android:id="@+id/TakeToSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="הרשמה"
+        android:text="הרשמה למשתמשים חדשים"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <TextView
+        android:id="@+id/resetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="שכחת סיסמה?"
+        android:textStyle="italic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/purple"/>
 </LinearLayout>
