@@ -67,7 +67,7 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Test currTest = document.toObject(Test.class);
                             tests.add(currTest);
-                            sum+=currTest.calculateGrade();
+                            sum+=currTest.getGrade();
                             amount++;
                         }
                         double avg=sum/amount;

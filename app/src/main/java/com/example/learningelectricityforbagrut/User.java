@@ -66,7 +66,7 @@ public class User {
                     double sumLastFive=0;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         amount++;
-                        double thisGrade=document.toObject(Test.class).calculateGrade();
+                        double thisGrade=document.toObject(Test.class).getGrade();
                         if(amount<=3)
                             sumLastThree+=thisGrade;
                         if(amount<=5)

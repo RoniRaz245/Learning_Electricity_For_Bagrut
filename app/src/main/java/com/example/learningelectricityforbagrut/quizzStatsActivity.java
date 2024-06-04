@@ -49,7 +49,7 @@ public class quizzStatsActivity extends baseActivity {
         int testLevel= test.getLevel();
         titleView.setText(getString(R.string.congrats)+" " +testLevel+"!");
 
-        double grade=test.calculateGrade();
+        double grade=test.getGrade();
         gradeView.setText(getString(R.string.grade)+" " +grade);
 
         ArrayList<Integer> times=test.getTimers();
