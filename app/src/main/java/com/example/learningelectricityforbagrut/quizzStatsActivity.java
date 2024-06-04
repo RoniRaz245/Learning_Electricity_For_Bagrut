@@ -3,30 +3,18 @@ package com.example.learningelectricityforbagrut;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageButton;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.learningelectricityforbagrut.databinding.ActivityQuizzStatsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
@@ -61,7 +49,7 @@ public class quizzStatsActivity extends baseActivity {
         int testLevel= test.getLevel();
         titleView.setText(getString(R.string.congrats)+" " +testLevel+"!");
 
-        double grade=test.getGrade();
+        double grade=test.calculateGrade();
         gradeView.setText(getString(R.string.grade)+" " +grade);
 
         ArrayList<Integer> times=test.getTimers();

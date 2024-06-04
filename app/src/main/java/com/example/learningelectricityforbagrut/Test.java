@@ -89,7 +89,7 @@ public class Test implements Serializable  { //serializable so it can be passed 
     public void setUID(String UID) {
         this.UID = UID;
     }
-    public double getGrade(){
+    public double calculateGrade(){
         int trueCount = 0;
         ArrayList<Boolean> rightAnswer=this.getCorrectAnswerGiven();
         for (int i = 0; i < rightAnswer.size(); i++) {

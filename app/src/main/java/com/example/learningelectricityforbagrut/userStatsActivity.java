@@ -2,7 +2,6 @@ package com.example.learningelectricityforbagrut;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -68,7 +67,7 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Test currTest = document.toObject(Test.class);
                             tests.add(currTest);
-                            sum+=currTest.getGrade();
+                            sum+=currTest.calculateGrade();
                             amount++;
                         }
                         double avg=sum/amount;
@@ -82,9 +81,9 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
             // set up the RecyclerView
             RecyclerView recyclerView = findViewById(R.id.viewTests);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =new TestViewAdapter(this,tests);
-        adapter.setClickListener(this);
+        adapter =new TestViewAdapter(this, tests);
         recyclerView.setAdapter(adapter);
+        adapter.setClickListener(this);
         }
 
     @Override

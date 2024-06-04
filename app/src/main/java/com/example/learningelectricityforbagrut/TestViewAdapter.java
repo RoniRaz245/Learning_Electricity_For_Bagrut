@@ -60,13 +60,13 @@ public class TestViewAdapter extends RecyclerView.Adapter<TestViewAdapter.ViewHo
         ViewHolder(View itemView) {
             super(itemView);
             testTitle = itemView.findViewById(R.id.testTitle);
-            
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (mClickListener != null)
+                mClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 
