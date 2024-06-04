@@ -2,6 +2,7 @@ package com.example.learningelectricityforbagrut;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -62,12 +63,17 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
                 @Override
                 public void onComplete (@NonNull Task < QuerySnapshot > task) {
                     if (task.isSuccessful()) {
+                        double sum=0;
+                        int amount=0;
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Test currTest = document.toObject(Test.class);
                             tests.add(currTest);
+                            sum+=currTest.getGrade();
+                            amount++;
                         }
+                        double avg=sum/amount;
+                        gradeAvg.setText(getString(R.string.ur_avg)+" "+ avg);
                     } else {
-                        //generic error message
                         Toast.makeText(getApplicationContext(), getString(R.string.error), Toast.LENGTH_LONG).show();
                     }
                 }
