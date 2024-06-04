@@ -229,10 +229,14 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
                 questionTimers = new ArrayList<Double>();
             }
             questionTimers.add((double)(timers.get(i))/60);
+            questions.get(i).setTimes(questionTimers);
 
             DatabaseReference timesRef= FirebaseDatabase.getInstance().getReference()
                     .child("questions").child("level_"+test.getLevel()).child(String.valueOf(questions.get(i).getSerialNumber())).child("times");
             timesRef.setValue(questionTimers);
+
+            //check if question level needs change
+            questions.get(i).checkQuestionLevel();
         }
         final int[] currQuestion = {questionAmount-1};
         saveQuestionState(currQuestion,answers,test);

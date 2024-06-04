@@ -2,6 +2,9 @@ package com.example.learningelectricityforbagrut;
 
 import android.graphics.Bitmap;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.lang.Double;
@@ -104,6 +107,48 @@ public class Question implements Serializable {
     }
 
     public void checkQuestionLevel() {
+        ArrayList<Double> timesForCalc= new ArrayList<>(this.getTimes());
+        if(timesForCalc.size()<10)
+            return;
+        int size= timesForCalc.size();
+        double timeSum=0;
+        for(int i=0;i<size;i++){
+            if(timesForCalc.get(i)<0.3) //to account for people who skip question because they gave up
+                timeSum+=timesForCalc.get(i);
+            else
+                size--;
+        }
+        double avg=timeSum/size;
 
+        int level=getQuestionLevel();
+        switch (level) {
+            case 1:
+                if(avg>5)
+                    this.setQuestionLevel(level+1);
+            case 2:
+                if(avg<0.7)
+                    this.setQuestionLevel(level-1);
+                if(avg>7)
+                    this.setQuestionLevel(level+1);
+            case 3:
+                if(avg<5)
+                    this.setQuestionLevel(level-1);
+                if(avg>15)
+                    this.setQuestionLevel(level+1);
+            case 4:
+                if(avg<10)
+                    this.setQuestionLevel(level-1);
+                if(avg>20)
+                    this.setQuestionLevel(level+1);
+            case 5:
+                if(avg<15)
+                    this.setQuestionLevel(level-1);
+        }
+        if(level==this.getQuestionLevel())
+            return;
+        this.setTimes(null);
+        DatabaseReference questionRef=FirebaseDatabase.getInstance().getReference("questions").child("level_"+level).child(String.valueOf(this.getSerialNumber()));
+        questionRef.child("questionLevel").setValue(this.getQuestionLevel());
+        questionRef.child("times").setValue(null);
     }
 }
