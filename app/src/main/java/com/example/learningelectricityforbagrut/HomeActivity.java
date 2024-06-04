@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class HomeActivity extends baseActivity
         implements questionAmountForTest.NoticeDialogListener {
-    private Button addReminder, uploadQuestion, startQuiz, openSettings;
+    private Button addReminder, uploadQuestion, startQuiz, openStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,12 @@ public class HomeActivity extends baseActivity
         addReminder = findViewById(R.id.addReminder);
         uploadQuestion = findViewById(R.id.makeQuestion);
         startQuiz = findViewById(R.id.startQuiz);
+        openStats=findViewById(R.id.viewStats);
 
 
         //set intents for buttons that open other activities
         addReminder.setOnClickListener(v -> addReminder.getContext().startActivity(new Intent(addReminder.getContext(), SetReminderActivity.class)));
+        openStats.setOnClickListener(v -> getApplicationContext().startActivity(new Intent(getApplicationContext(), userStatsActivity.class)));
         startQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

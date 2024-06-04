@@ -6,4 +6,5 @@
     <color name="lightBlue">#697DAF</color>
     <color name="darkBlue">#3D4276</color>
     <color name="darkPurple">#544187</color>
+    <color name="activityBackground">#B0BFE3</color>
 </resources>
