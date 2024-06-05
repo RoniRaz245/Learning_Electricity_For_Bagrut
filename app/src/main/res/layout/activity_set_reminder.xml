@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SetReminderActivity"
+    android:orientation="vertical"
     android:gravity="center_horizontal">
 
     <include layout="@layout/toolbar"/>
@@ -13,9 +14,6 @@
         android:id="@+id/timePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="1dp"
         android:timePickerMode="clock"/>
 
     <EditText
@@ -23,8 +21,6 @@
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/timePicker"
-        android:layout_centerInParent="true"
         android:hint="בחר טקסט שיופיע בהתראה"
         android:inputType="text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
@@ -33,10 +29,8 @@
         android:id="@+id/makeNotif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textForNotif"
-        android:layout_marginTop="46dp"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
         android:text="צור התראה"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-</RelativeLayout>
+</LinearLayout>
