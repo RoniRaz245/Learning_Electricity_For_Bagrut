@@ -61,8 +61,6 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         chronoView=findViewById(R.id.chronometer);
         questionNav=findViewById(R.id.bottom_navigation);
 
-        chronometerExplanation=findViewById(R.id.chronoExplanation);
-        chronometerExplanation.setVisibility(View.INVISIBLE);
 
         Intent testIntent = getIntent();
         Test currTest=testIntent.getSerializableExtra("test", Test.class);

@@ -32,14 +32,6 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/chronoExplanation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chronometer"
-        android:layout_alignStart="@+id/chronometer"
-        android:text="הזמן שנלקח לשאלה זו" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
