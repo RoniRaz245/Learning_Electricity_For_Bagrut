@@ -11,14 +11,13 @@
 
     <EditText
         android:id="@+id/questionBody"
-        android:layout_width="300dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/firstAnswer"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="64dp"
-        android:layout_marginEnd="34dp"
         android:layout_marginBottom="1dp"
         android:hint="question body"
         android:text="הכניסו את גוף השאלה"
@@ -27,7 +26,7 @@
     <EditText
         android:id="@+id/firstAnswer"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/secondAnswer"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="3dp"
@@ -40,7 +39,7 @@
     <EditText
         android:id="@+id/secondAnswer"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/thirdAnswer"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="3dp"
@@ -52,7 +51,7 @@
     <EditText
         android:id="@+id/thirdAnswer"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/fourthAnswer"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="3dp"
@@ -64,7 +63,7 @@
     <EditText
         android:id="@+id/fourthAnswer"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/levelTitle"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="3dp"
@@ -102,6 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/correctAnswerPicker"
+        android:layout_toStartOf="@+id/secondAnswer"
         android:layout_alignParentStart="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="0dp"
@@ -126,6 +126,8 @@
         android:min="1"
         android:textAlignment="center" />
 
+
+
     <Button
         android:id="@+id/uploadImage"
         android:layout_width="166dp"
@@ -138,7 +140,7 @@
         android:layout_marginEnd="135dp"
         android:layout_marginBottom="132dp"
         android:layout_toStartOf="@+id/levelPicker"
-        android:text="בחר תמונה שתופיע על יד השאלה"
+        android:text="בחר תמונה"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <Button
