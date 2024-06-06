@@ -134,7 +134,7 @@ public class HomeActivity extends baseActivity
                                     Toast.makeText(startQuiz.getContext(),  getString(R.string.no_questions), Toast.LENGTH_LONG).show();
 
                                 else if(questions.size()<questionAmount)
-                                    Toast.makeText(startQuiz.getContext(), getString(R.string.only) +questions.size() + getString(R.string.too_little_questions), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(startQuiz.getContext(), getString(R.string.only) + " " + questions.size() + " " + getString(R.string.too_little_questions), Toast.LENGTH_LONG).show();
 
                                 else{
                                     //access questions in random order to run

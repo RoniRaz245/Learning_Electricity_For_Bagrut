@@ -54,7 +54,7 @@
     <string name="phone_as_num">טלפון כרצף מספרים בבקשה!</string>
     <string name="notif_req">בבקשה תן לאפליקציה הרשאות להתראות בהגדרות!</string>
     <string name="notif_success">ההתראה נקבעה!</string>
-    <string name="test_date">מבחן שנלקח בתאריך </string>
+    <string name="test_date">מבחן שנעשה בתאריך </string>
     <string name="ur_level">רמתך היא </string>
     <string name="ur_avg">ממוצע הציונים שלך הוא</string>
     <string name="sendPswrdReset">שלח אימייל לשינוי סיסמה</string>
