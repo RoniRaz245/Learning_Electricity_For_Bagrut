@@ -77,6 +77,7 @@ public class quizzStatsActivity extends baseActivity {
             public void onClick(View v) {
                 Intent viewQuestionsAgain=new Intent(getApplicationContext(), QuestionViewAfterTestActivity.class);
                 viewQuestionsAgain.putExtra("test", test);
+                viewQuestionsAgain.putExtra("generalStats", fromUserStats);
                 startActivity(viewQuestionsAgain);
             }
         });

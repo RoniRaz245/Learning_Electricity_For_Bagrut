@@ -61,6 +61,8 @@ public class QuestionViewAfterTestActivity extends baseActivity {
         questionNav.getMenu().findItem(R.id.pause).setCheckable(false);
 
         Intent testIntent = getIntent();
+
+        boolean fromUserStats=testIntent.getBooleanExtra("generalStats",false);
         Test currTest=testIntent.getSerializableExtra("test", Test.class);
         assert currTest != null;
         int questionAmount=currTest.getQuestions().size();
@@ -81,6 +83,7 @@ public class QuestionViewAfterTestActivity extends baseActivity {
                         Toast.makeText(QuestionViewAfterTestActivity.this, getString(R.string.ret_stats), Toast.LENGTH_SHORT).show();
                         Intent quizzStats=new Intent(getApplicationContext(), quizzStatsActivity.class);
                         quizzStats.putExtra("test", currTest);
+                        quizzStats.putExtra("generalStats", fromUserStats);
                         startActivity(quizzStats);
                     }
 
