@@ -23,10 +23,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -220,6 +223,10 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
         ArrayList<Question> questions=test.getQuestions();
         ArrayList<Integer> timers=test.getTimers();
 
+        //save state of last question
+        final int[] currQuestion = {questionAmount-1};
+        saveQuestionState(currQuestion,answers,test);
+
         //update times list for all questions
         for(int i=0; i<questionAmount; i++){
             ArrayList<Double> questionTimers=questions.get(i).getTimes();
@@ -236,8 +243,6 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
             //check if question level needs change
             questions.get(i).checkQuestionLevel();
         }
-        final int[] currQuestion = {questionAmount-1};
-        saveQuestionState(currQuestion,answers,test);
 
         double amountRight=0;
         for(int i=0;i<questionAmount;i++){
