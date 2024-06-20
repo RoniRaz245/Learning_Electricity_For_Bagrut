@@ -147,8 +147,11 @@ public class Question implements Serializable {
         if(level==this.getQuestionLevel())
             return;
         this.setTimes(null);
+        //move question to branch for new level
         DatabaseReference questionRef=FirebaseDatabase.getInstance().getReference("questions").child("level_"+level).child(String.valueOf(this.getSerialNumber()));
-        questionRef.child("questionLevel").setValue(this.getQuestionLevel());
-        questionRef.child("times").setValue(null);
+        DatabaseReference newQuestionRef=FirebaseDatabase.getInstance().getReference("questions").child("level_"+getQuestionLevel()).child(String.valueOf(this.getSerialNumber()));
+
+        newQuestionRef.setValue(this);
+        questionRef.removeValue();
     }
 }

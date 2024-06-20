@@ -233,7 +233,7 @@ public class QuestionViewActivity extends baseActivity  implements endQuizFragme
             if(questionTimers==null) {
                 questionTimers = new ArrayList<Double>();
             }
-            questionTimers.add((double)(timers.get(i))/60);
+            questionTimers.add(((double)(timers.get(i)))/60);
             questions.get(i).setTimes(questionTimers);
 
             DatabaseReference timesRef= FirebaseDatabase.getInstance().getReference()
