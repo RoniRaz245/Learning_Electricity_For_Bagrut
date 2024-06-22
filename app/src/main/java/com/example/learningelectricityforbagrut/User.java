@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -81,11 +82,11 @@ public class User {
 
                     if((lastThreeAvg>=90||lastFiveAvg>=80)&&user.getLevel()<5)
                         user.setLevel(prevLevel + 1);
-                    else if(lastThreeAvg<=30||lastFiveAvg<=55)
+                    else if((lastThreeAvg<=30||lastFiveAvg<=55)&&user.getLevel()>1)
                         user.setLevel(prevLevel-1);
-
-                    FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
-
+                    //update level in firebase
+                    DatabaseReference userRef= FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    userRef.child("level").setValue(user.getLevel());
                 }
             }
         });
