@@ -32,5 +32,5 @@ public class imageSourceFragment extends DialogFragment {
 
         return builder.create();
     }
-    public static String TAG = "source for image";
+    public static String TAG = "ImageSourceDialog";
 }

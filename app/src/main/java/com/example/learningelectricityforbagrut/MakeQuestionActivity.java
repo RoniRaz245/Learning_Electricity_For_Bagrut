@@ -113,8 +113,6 @@ public class MakeQuestionActivity extends baseActivity {
         }
     }
                         );
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,7 +149,34 @@ public class MakeQuestionActivity extends baseActivity {
 
         uploadImage.setOnClickListener(v -> getImageFromUser());
         upload.setOnClickListener(v -> uploadGivenQuestion()); //calls function that takes info from fields and uploads question based on them
-         }
+
+        // Register FragmentResultListener for image source fragment
+        getSupportFragmentManager().setFragmentResultListener("image source", this, (requestKey, result) -> { // **Change: Registered FragmentResultListener before showing the dialog**
+            CharSequence source = result.getCharSequence("source");
+            if (source != null) {
+                if (source.equals(getString(R.string.gallery_english))) {
+                    pickMedia.launch(new PickVisualMediaRequest.Builder()
+                            .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                            .build());
+                } else if (source.equals(getString(R.string.camera_english))) {
+                    //make a uri to store photo that will be taken in
+                    File imagePath = new File(getApplicationContext().getFilesDir(), "camera_images");
+                    File newFile = new File(imagePath, imageUrl = UUID.randomUUID().toString() + ".jpg");
+                    uri = getUriForFile(getApplicationContext(), "com.example.learningelectricityforbagrut.fileprovider", newFile);
+                    //make sure image directory exists- create it if not
+                    boolean pathCreated=true;
+                    if(!imagePath.exists())
+                        pathCreated=imagePath.mkdirs();
+                    if(pathCreated)
+                        startCamera.launch(uri);
+                    else
+                        Toast.makeText(getApplicationContext(),getString(R.string.error), Toast.LENGTH_LONG).show();
+
+                    startCamera.launch(uri);
+                }
+            }
+        });
+    }
     private void uploadGivenQuestion(){
         Toast.makeText(this, getString(R.string.loading), Toast.LENGTH_SHORT).show();
         //get details of question
@@ -213,36 +238,5 @@ public class MakeQuestionActivity extends baseActivity {
     private void getImageFromUser() {
         DialogFragment imageSource = new imageSourceFragment();
         imageSource.show(getSupportFragmentManager(), imageSourceFragment.TAG);
-
-        FragmentResultListener listener=new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                CharSequence source = result.getCharSequence("source");
-                if (source != null) {
-                    if (source == "gallery") {
-                        pickMedia.launch(new PickVisualMediaRequest.Builder()
-                                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                                .build());
-                    }
-                    else if(source == "camera"){
-                        //make a uri to store photo that will be taken in
-                        File imagePath = new File(getApplicationContext().getFilesDir(), "camera_images");
-                        File newFile = new File(imagePath, imageUrl=UUID.randomUUID().toString()+".jpg");
-                        uri = getUriForFile(getApplicationContext(), "com.example.learningelectricityforbagrut.fileprovider", newFile);
-                        //make sure image directory exists- create it if not
-                        boolean pathCreated=true;
-                        if(!imagePath.exists())
-                            pathCreated=imagePath.mkdirs();
-                        
-                        if(pathCreated)
-                            startCamera.launch(uri);
-                        else
-                            Toast.makeText(getApplicationContext(),getString(R.string.error), Toast.LENGTH_LONG).show();
-                    }
-                    }
-                }
-            };
-
-        getSupportFragmentManager().setFragmentResultListener("image source", imageSource, listener);
     }
 }
