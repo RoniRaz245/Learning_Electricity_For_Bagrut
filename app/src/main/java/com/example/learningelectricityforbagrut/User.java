@@ -79,25 +79,27 @@ public class User {
                         if (amount > 5)
                             break;
                     }
-                    if(amount<3)
-                        callback.onLevelUpdated(0); //don't change level based on just one or two tests
-                    double lastThreeAvg = sumLastThree / 3;
-                    double lastFiveAvg = sumLastFive / 5;
+                    if(amount>=3) { //don't change level based on just one or two tests
+                        double lastThreeAvg = sumLastThree / 3;
+                        double lastFiveAvg = sumLastFive / 5;
 
-                    if ((lastThreeAvg >= 90 || lastFiveAvg >= 80) && user.getLevel() < 5) {
-                        user.setLevel(prevLevel + 1);
-                    } else if ((lastThreeAvg <= 30 || lastFiveAvg <= 55) && user.getLevel() > 1)
-                        user.setLevel(prevLevel - 1);
+                        if ((lastThreeAvg >= 90 || lastFiveAvg >= 80) && user.getLevel() < 5) {
+                            user.setLevel(prevLevel + 1);
+                        } else if ((lastThreeAvg <= 30 || lastFiveAvg <= 55) && user.getLevel() > 1)
+                            user.setLevel(prevLevel - 1);
 
-                    // Update level in Firebase
-                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    userRef.child("level").setValue(user.getLevel()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            callback.onLevelUpdated(Integer.compare(user.getLevel(), prevLevel));
-                        }
-                    });
+                        // Update level in Firebase
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        userRef.child("level").setValue(user.getLevel()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                callback.onLevelUpdated(Integer.compare(user.getLevel(), prevLevel));
+                            }
+                        });
+                    } else {
+                            callback.onLevelUpdated(0); // No change
+                    }
                 } else {
                     callback.onLevelUpdated(0); // No change
                 }
