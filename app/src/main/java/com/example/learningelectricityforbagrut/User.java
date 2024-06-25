@@ -1,5 +1,7 @@
 package com.example.learningelectricityforbagrut;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,41 +57,54 @@ public class User {
     public long getLicense() { return license; }
     public int getPhoneNum() { return phoneNum; }
 
-    public int updateLevel(){
+    public void updateLevel(UpdateLevelCallback callback){
         //if user consistently gets low grades take him down levels, if consistently gets high grades take up levels
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         User user=this;
         int prevLevel=user.getLevel();
-        db.collection("tests").whereEqualTo("UID", this.getUID()).whereEqualTo("level", this.level).orderBy("timeTaken", Query.Direction.DESCENDING).limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("tests").whereEqualTo("uid", this.getUID()).whereEqualTo("level", this.level).orderBy("timeTaken", Query.Direction.DESCENDING).limit(5).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    int amount=0;
-                    double sumLastThree=0;
-                    double sumLastFive=0;
+                if (task.isSuccessful()) {
+                    int amount = 0;
+                    double sumLastThree = 0;
+                    double sumLastFive = 0;
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         amount++;
-                        double thisGrade=document.toObject(Test.class).getGrade();
-                        if(amount<=3)
-                            sumLastThree+=thisGrade;
-                        if(amount<=5)
-                            sumLastFive+=thisGrade;
-                        if(amount>5)
+                        double thisGrade = document.toObject(Test.class).getGrade();
+                        if (amount <= 3)
+                            sumLastThree += thisGrade;
+                        if (amount <= 5)
+                            sumLastFive += thisGrade;
+                        if (amount > 5)
                             break;
                     }
-                    double lastThreeAvg=sumLastThree/3;
-                    double lastFiveAvg=sumLastFive/5;
+                    if(amount<3)
+                        callback.onLevelUpdated(0); //don't change level based on just one or two tests
+                    double lastThreeAvg = sumLastThree / 3;
+                    double lastFiveAvg = sumLastFive / 5;
 
-                    if((lastThreeAvg>=90||lastFiveAvg>=80)&&user.getLevel()<5)
+                    if ((lastThreeAvg >= 90 || lastFiveAvg >= 80) && user.getLevel() < 5) {
                         user.setLevel(prevLevel + 1);
-                    else if((lastThreeAvg<=30||lastFiveAvg<=55)&&user.getLevel()>1)
-                        user.setLevel(prevLevel-1);
-                    //update level in firebase
-                    DatabaseReference userRef= FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    userRef.child("level").setValue(user.getLevel());
+                    } else if ((lastThreeAvg <= 30 || lastFiveAvg <= 55) && user.getLevel() > 1)
+                        user.setLevel(prevLevel - 1);
+
+                    // Update level in Firebase
+                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    userRef.child("level").setValue(user.getLevel()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            callback.onLevelUpdated(Integer.compare(user.getLevel(), prevLevel));
+                        }
+                    });
+                } else {
+                    callback.onLevelUpdated(0); // No change
                 }
             }
         });
-        return Integer.compare(user.getLevel(), prevLevel);
+    }
+    public interface UpdateLevelCallback { //interface for handling user level changes live
+        void onLevelUpdated(int levelChange);
     }
 }

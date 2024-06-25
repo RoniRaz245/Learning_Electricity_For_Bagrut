@@ -89,15 +89,19 @@ public class quizzStatsActivity extends baseActivity {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if(task.isSuccessful()){
                     User user=task.getResult().getValue(User.class);
-                    int userLevel=user.getLevel();
-                    int levelUpdated = user.updateLevel();
-                    if(levelUpdated>0) //went up a level
-                            levelView.setText(getString(R.string.lvl_up) + " " + userLevel + getString(R.string.v_nice));
-                    else if(levelUpdated==0) //stayed in same level
-                            levelView.setText(getString(R.string.stayed_in_level)+" " +userLevel);
-                    else //went down a level
-                            levelView.setText(getString(R.string.lvl_down)+ " " +userLevel+" " +getString(R.string.cope));
-
+                    user.updateLevel(new User.UpdateLevelCallback() {
+                        @Override
+                        public void onLevelUpdated(int levelUpdated) {
+                            int userLevel = user.getLevel();
+                            if (levelUpdated > 0) { // Went up a level
+                                levelView.setText(getString(R.string.lvl_up) + " " + userLevel + getString(R.string.v_nice));
+                            } else if (levelUpdated == 0) { // Stayed at the same level
+                                levelView.setText(getString(R.string.stayed_in_level) + " " + userLevel);
+                            } else { // Went down a level
+                                levelView.setText(getString(R.string.lvl_down) + " " + userLevel + " " + getString(R.string.cope));
+                            }
+                        }
+                    });
                 }
             }
         });
