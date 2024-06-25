@@ -64,8 +64,8 @@ public class quizzStatsActivity extends baseActivity {
         ArrayList<Integer> times=test.getTimers();
         int questionAmount=0;
         int totalTime=0;
-        while(questionAmount<=times.size()){
-            totalTime+=times.get(questionAmount-1);
+        while(questionAmount<times.size()){
+            totalTime+=times.get(questionAmount);
             questionAmount++;
         }
         double totalTimeMinutes= (double) totalTime /60;
