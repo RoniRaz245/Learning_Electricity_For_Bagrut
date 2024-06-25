@@ -62,7 +62,7 @@ public class quizzStatsActivity extends baseActivity {
         gradeView.setText(getString(R.string.grade)+" " +grade);
 
         ArrayList<Integer> times=test.getTimers();
-        int questionAmount=1;
+        int questionAmount=0;
         int totalTime=0;
         while(questionAmount<=times.size()){
             totalTime+=times.get(questionAmount-1);
