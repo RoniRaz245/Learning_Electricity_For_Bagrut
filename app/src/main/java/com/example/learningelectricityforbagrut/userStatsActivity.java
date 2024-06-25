@@ -77,7 +77,10 @@ public class userStatsActivity extends baseActivity implements TestViewAdapter.I
                             amount++;
                         }
                         double avg=sum/amount;
-                        gradeAvg.setText(getString(R.string.ur_avg)+" "+ avg);
+                        if(sum!=0)
+                            gradeAvg.setText(getString(R.string.ur_avg)+" "+ avg);
+                        else
+                            gradeAvg.setText("תוכלו לבדוק נתונים לאחר שתבצעו בחנים");
 
                         adapter.setData(tests);
                     } else {
