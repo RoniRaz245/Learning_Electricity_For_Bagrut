@@ -222,7 +222,7 @@ public class MakeQuestionActivity extends baseActivity {
                 if(!task.isSuccessful())
                     Toast.makeText(MakeQuestionActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();
                 else{
-                    long serialNum = task.getResult().child("level_1").getChildrenCount() + task.getResult().child("level_2").getChildrenCount() + task.getResult().child("level_3").getChildrenCount() + task.getResult().child("level_4").getChildrenCount()+task.getResult().child("level_5").getChildrenCount()+task.getResult().child("deleted_questions").getChildrenCount()-4;
+                    long serialNum = task.getResult().child("level_1").getChildrenCount() + task.getResult().child("level_2").getChildrenCount() + task.getResult().child("level_3").getChildrenCount() + task.getResult().child("level_4").getChildrenCount()+task.getResult().child("level_5").getChildrenCount();
                     String UID = mAuth.getCurrentUser().getUid();
                     String image = "0";
                     if (imageUploaded)
